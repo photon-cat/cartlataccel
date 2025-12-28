@@ -16,13 +16,16 @@ class MLPGaussian(nn.Module):
     self.register_buffer('std', self.log_std.exp())
 
   def forward(self, x: torch.Tensor):
-    x = x.unsqueeze(0)
+    if x.dim() == 1:
+      x = x.unsqueeze(0)
     return self.mlp(x)
 
   def get_action(self, obs: torch.Tensor, deterministic=False):
     mean = self.forward(obs)
     mean = torch.tanh(mean) # action is between -1,1
-    action = mean[0] if deterministic else torch.normal(mean, self.std)[0]
+    action = mean if deterministic else torch.normal(mean, self.std)
+    if action.dim() > 1:
+      return action.detach().cpu().numpy()
     return action.detach().cpu().numpy()
 
   def get_logprob(self, obs: torch.Tensor, act: torch.Tensor):
