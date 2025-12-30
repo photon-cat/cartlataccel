@@ -1,0 +1,3025 @@
+P OLYCHROMIC O BJECTIVES FOR R EINFORCEMENT
+L EARNING
+Jubayer Ibn Hamid∗ , Ifdita Hasan Orney∗ , Ellen Xu, Chelsea Finn, Dorsa Sadigh
+Stanford University
+
+arXiv:2509.25424v1 [cs.LG] 29 Sep 2025
+
+A BSTRACT
+Reinforcement learning fine-tuning (RLFT) is a dominant paradigm for improving pretrained policies for downstream tasks. These pretrained policies, trained
+on large datasets, produce generations with a broad range of promising but unrefined behaviors. Often, a critical failure mode of RLFT arises when policies
+lose this diversity and collapse into a handful of easily exploitable outputs. This
+convergence hinders exploration, which is essential for expanding the capabilities
+of the pretrained policy and for amplifying the benefits of test-time compute scaling. To address this, we introduce an objective for policy gradient methods that
+explicitly enforces the exploration and refinement of diverse generations, which
+we call a polychromic objective. We then show how proximal policy optimization
+(PPO) can be adapted to optimize this objective. Our method (1) employs vine
+sampling to collect on-policy rollouts and (2) modifies the advantage function to
+reflect the advantage under our new objective. Experiments on BabyAI, Minigrid, and Algorithmic Creativity show that our method improves success rates by
+reliably solving a larger set of environment configurations and generalizes better
+under large perturbations. Moreover, when given multiple attempts in pass@k
+experiments, the policy achieves substantially higher coverage, demonstrating its
+ability to maintain and exploit a diverse repertoire of strategies.
+
+1
+
+I NTRODUCTION
+
+Reinforcement learning fine-tuning (RLFT) is widely used to enhance the performance of pretrained
+models across diverse downstream domains. For instance, RLFT has been applied to steer large
+language models (LLMs) toward instruction following and complex reasoning [24, 7, 23, 26]. A
+common thread across these settings is the availability of expressive generative models (i.e., pretrained distributions), trained on large and diverse datasets, that already exhibit a broad repertoire
+of strategies. RLFT then refines these distributions by reinforcing the strategies that yield higher
+reliability and performance.
+However, exploration during RLFT remains a central challenge. Prior work [6, 45] has documented
+entropy collapse: instead of expanding their repertoire, fine-tuned policies concentrate probability
+mass on a narrow set of high-reward behaviors already present in the pretrained distribution, effectively sacrificing entropy and diversity. This limits exploration and prevents the discovery of
+alternative strategies that could expand the base model’s capabilities. Empirically, this effect is captured by the pass@k metric, which measures the probability that at least one out of k independently
+sampled rollouts succeeds. When k is large, RL-fine-tuned models often underperform their pretrained counterparts because the latter retain greater diversity [43, 40]. Such diversity is practically
+important; it supports generalization to new tasks [17] and amplifies test-time compute scaling [33].
+The goal of this paper is to study how to induce policies to explore and refine a diverse repertoire
+of generations through RLFT. Our key insight is that algorithms should optimize objectives that
+explicitly encourage exploration and refinement of the diverse generations already embedded in the
+pretrained distribution. Standard regularization techniques, such as entropy bonuses, often induce
+local or token-level variation but fail to promote semantic or trajectory-level exploration and can
+be overshadowed by the RL objective. In contrast, we propose a unified formulation that directly
+∗
+
+Equal contribution. Correspondence to {jubayer, ifdi1101}@stanford.edu.
+
+1
+
+optimizes for a diverse set of successful behaviors, encouraging the policy to generate broad, varied
+trajectories rather than collapsing onto a few high-reward ones.
+To this end, we propose set reinforcement learning, where the objective is defined over a set of trajectories sampled independently and evaluated by a multi-sample objective [37]. Unlike standard RL,
+which maximizes the likelihood of a single optimal trajectory, set RL maximizes the likelihood of
+an optimal set of trajectories under a set-level objective. Within this framework, we introduce polychromic objectives which combine reward and diversity by scoring sets highly only if they contain
+both successful and diverse trajectories. Optimizing a policy with respect to this objective is a principled approach towards encouraging the policy to explore and search for a diverse set of generations
+that also maximize reward. We then instantiate one such objective and show how proximal policy
+optimization (PPO) [29] can be adapted to optimize it effectively, yielding a practical algorithm
+we call polychromic PPO. We evaluate our method on BabyAI [3], Minigrid [4], and Algorithmic
+Creativity [22]. Our results show that polychromic PPO achieves higher rewards and success rates,
+generates diverse trajectories that substantially improve pass@k coverage, and generalizes more
+robustly to perturbations in the initial state.
+
+2
+
+P RELIMINARIES
+
+We consider a Markov decision process defined by state space S, action space A, transition dynamics
+distribution p(st+1 | st , at ), reward function r : S ×A → R, initial state distribution ρ0 and discount
+factor γ ∈ (0, 1). In reinforcement
+learning (RL), the goal is to learn a policy that maximizes the
+P∞
+value V (πθ ) = Eτ ∼πθ [ t=0 γ t r(st , at )] = Eτ ∼πθ [R(τ )] where R(τ ) is the (discounted) sum of
+rewards in trajectory τ . The following, known as the performance difference lemma, is a useful
+result [15]:
+Vπθ (s0 ) − Vπβ (s0 ) =
+
+1
+Es∼dπ (·|s0 ),a∼π(·|s) [Aπβ (s, a)] .
+1−γ
+
+(1)
+
+This shows that any update from policy πβ to policy πθ such that, at all states visited by πθ , the
+actions taken by πθ yield positive advantage Aπβ (s, a) > 0 will ensure that πθ achieves strictly
+better performance i.e. V (πθ ) > V (πβ ). One widely used RL algorithm is proximal policy optimization (PPO) [29] which, iteratively, collects rollouts under a behavior policy πβ and updates a
+policy πθ by constraining the divergence between the two policies from growing too large: letting
+rt = πθ (at | st )/πβ (at | st ), PPO optimizes
+h
+
+i
+Est ∼dπβ (·),at ∼πβ (·|st ) min rt Â(st , at ), clip(rt , 1 − ϵ, 1 + ϵ)Â(st , at )
+(2)
+where dπβ (s) is the stationary state-visitation distribution under policy πβ . Here, we use importance
+sampling to use actions sampled from πβ . To use states from the visitation distribution of πβ , we
+clip the ratios to keep the divergence small [28].
+
+3
+
+R EINFORCING E XPLORATION D URING RLFT
+
+We aim to address the problem of entropy collapse during RLFT through a method that explicitly
+induces exploration by encouraging the generation of diverse trajectories. In §3.1, we introduce
+a variant of RL that allows for objectives beyond reward maximization and observe its various
+properties. This framework will provide us with a way to optimize objectives that are beyond return
+maximization, such as objectives that also encourage exploration. In §3.2, we specify the objective
+used within this framework for that purpose, which we call a polychromic objective. In §3.3, we
+propose our practical algorithm for optimizing the objective.
+3.1
+
+S ET R EINFORCEMENT L EARNING
+
+We introduce a variant of the standard RL setup in which, given an objective function, we optimize
+over a set of trajectories. We call this framework set reinforcement learning (set RL), where the
+goal is to solve:
+
+max Eτ1:n ∼πθ (·|s0 ) [f (s0 , τ1 , · · · , τn )] .
+θ
+
+2
+
+(3)
+
+Here f (s0 , τ1 , · · · , τn ) is some objective function over trajectories τ1:n = {τ1 , · · · , τn } sampled independently from the policy. This is in contrast to standard RL where the problem,
+maxθ Eτ ∼πθ (·|s0 ) [R(τ )], uses an objective function, R(τ ), defined over a single trajectory. Intuitively, algorithms optimizing eq. (3) are optimizing for a set of trajectories. The generality of set
+RL makes it a powerful tool for objectives beyond sum of rewards. The defining feature of this setup
+is that, when optimizing eq. (3) using policy gradient methods, all trajectories in the set τ1:n must
+receive the same learning signal. Note that the objective can be optimized using policy gradient:
+
+∇θ Eτ1:n ∼πθ (·|s0 ) [f (s0 , τ1:n )]
+n X
+T
+h
+i
+X
+(i)
+(i)
+= Eτ1:n ∼πθ (·|s0 ) (f (s0 , τ1:n ) − fˆ(s0 ))
+∇θ log πθ (at | st )
+
+(4)
+
+i=1 t=0
+
+where fˆ(s0 ) is a baseline for variance reduction. By definition, fˆ(s0 ) must be independent of
+the particular trajectories τ1:n sampled inside the expectation. In this paper, we use the baseline
+fˆ(s0 ) = Eτ1:n ∼πθ (·|s0 ) [f (s0 , τ1:n )]. The key feature of this estimator is that the advantage term
+f (s0 , τ1:n ) − fˆ(s0 ) is shared across all trajectories in the set τ1:n . Therefore, the log-probability
+gradient of all trajectories in a set must be multiplied by the same factor, ensuring that all trajectories
+in the set receive the same learning signal.
+This setup contrasts with Tang et al. [37], which employs trajectory-specific baselines leading to
+leave-one-out advantages of the form f (s0 , τ1:n ) − f (s0 , τ1:i−1 , τi+1:n ); the update for trajectory
+τi depends on a baseline computed from the remaining trajectories, yielding individualized credit
+assignment. In our case, a uniform baseline provides a common update signal to all trajectories
+in the set, enabling optimization with respect to the quality of the entire set of trajectories. In
+other words, by definition, set RL does not distinguish between trajectories within a set, but instead
+optimizes the policy by comparing across sets as a whole. Note that the set RL
+Pnframework can still
+be used to optimize the standard RL objective by choosing f (s0 , τ1:n ) = n1 i=1 R(τi ). However,
+the framework allows for a broader class of objectives, such as inference-time objectives [37] and
+objectives that induce exploration as we will show in §3.2.
+Before we move on to our proposed algorithm, it is helpful to construct a notion of value functions
+in the framework of set reinforcement learning i.e., the expected sum of rewards as specified by
+the objective. We do so in a simplified (but impractical) setting. Suppose that at every state s
+encountered during an on-policy rollout, we can sample a set of n actions, a1:n ∼ πθ (· | s), which
+lead to n trajectories stemming out of every state that branch out at every timestep. Then, given this
+set of actions, a1:n , taken from the state s, the policy gets the set reward f (s, a1:n ) with respect to
+the objective function f . Although such a setup is impractical for long-horizon tasks, analyzing it
+will help us better understand what set RL algorithms should aim to achieve.
+Under this assumption, the data collection process naturally generates a state-visitation tree. Beginning at the root state s0 , each visited state s branches into n children, one for each sampled action.
+(1)
+(nt )
+(i)
+At depth t, the tree therefore contains nt states, denoted by st , . . . , st . For each state st , the
+(i)
+corresponding set of n sampled actions is written as (at )1:n . Given this tree-structured rollout and
+assuming an infinite-horizon discounted return, we define the value functions associated with set
+reinforcement learning as follows:
+Definition 3.1 Given a policy π generating a state-visitation tree and a set objective f : S × An →
+R, the set value function Vπ♯ (s; f ) and the set Q-function Q♯π (s, a1:n ; f ) are defined as
+
+
+∞ X
+nt
+X
+(i)
+(i)
+γ t f (st , (at )1:n ) s0 = s ,
+(5)
+Vπ♯ (s; f ) = Eπ 
+t=0 i=1
+
+
+
+∞ X
+nt
+X
+s0 =s,
+(i)
+(i)
+
+Q♯π (s, a1:n ; f ) = Eπ 
+γ t f (st , (at )1:n ) (a0 )1:n
+=a1:n
+t=0 i=1
+
+3
+
+(6)
+
+We use the notation V ♯ and Q♯ to distinguish it from the value
+function and Q-function in standard RL. Here, we assume that
+the discount factor γ ∈ (0, n1 ) to ensure values remain bounded
+- the range is smaller since we add the expected sum of rewards
+from n actions stemming out of each state. Intuitively, Vπ♯ (s) is
+the expected discounted return of the entire state tree rooted at
+s (illustrated in fig. 1), where the reward at each node is given
+by the set objective. In contrast, Q♯π (s, a1:n ) evaluates the expected return of the tree that begins at s with the specific action
+set a1:n . Note that, although we assumed sets at the action-level
+instead of at the trajectory-level, this setting is equivalent to the
+trajectory-level set RL as in eq. (3) under the objective function
+PT Pnt
+(i)
+(i)
+F (s, τ1:nT ) := t=0 i=1 γ t f (st , (at )1:n ) in the finite-horizon
+setting (in the infinite horizon setting, we would have to take the
+limit T → ∞).
+
+Figure 1:
+
+The set value of
+a state (circled) is the expected
+discounted return of the subtree
+(highlighted) rooted in this state.
+
+These definitions help us better understand the objective of set reinforcement learning. In standard
+reinforcement learning, we want to learn the policy such that the expected return from a trajectory is maximized. In set reinforcement learning, we want to learn the policy that maximizes the
+expected return from a tree generated using our policy is maximized. Given these definitions, we
+have the following result which is an extension of the performance difference lemma [15] to the set
+reinforcement learning setting (see section C.1 for proof):
+Lemma 3.2 Given any two policies πθ and πβ and a fixed initial state s0 , under any set objective
+function f ,
+h
+i
+1
+Vπ♯θ (s0 ; f ) − Vπ♯β (s0 ; f ) =
+Es∼d♯π (·),a1:n ∼πθ (·|s) A♯πβ (s, a1:n ; f ) .
+θ
+1 − γn
+Here d♯π (s) is the stationary state-visitation distribution induced by πθ . Similar to the standard
+reinforcement learning setting, this result says that if we update the policy πβ to πθ such that, at all
+states visited by πθ , the advantage A♯πβ (s, a1:n ; f ) = Q♯πβ (s, a1:n ; f ) − Vπ♯β (s) of a set of actions
+taken by our new policy πθ is positive, then we will get a policy that has strictly higher performance
+(as measured by its value). This suggests that many of the principles underlying methods like PPO
+can be extended to the set reinforcement learning paradigm as well for policy improvement.
+Having seen the generality of set reinforcement learning, we now construct an objective function to
+be used within this framework that will allow us to induce exploration.
+3.2
+
+A P RACTICAL P OLYCHROMIC O BJECTIVE
+
+Our central construction is the notion of polychromic objectives that are aimed towards training a
+policy to explore and learn a diverse set of behaviors. Intuitively, these are set objective functions
+fpoly : S × T n → R that jointly capture (1) the success of a set of trajectories in terms of reward
+and (2) the degree to which the set exhibits exploration or diversity. While we later generalize
+this construction in §5, in this section we focus on the specific instance used in our algorithm and
+experiments:
+n
+
+1X
+R(τi )d(s, τ1:n ),
+fpoly (s, τ1:n ) :=
+n i=1
+
+(7)
+
+where R(τi ) is the discounted sum of rewards in trajectory τi , and d(s, τ1:n ) is a function that
+quantifies the diversity of trajectories within the set. We require that both R(τi ) and d(s, τ1:n ) are
+normalized between 0 and 1.
+Because the set-RL gradient uses a shared advantage for all trajectories in a set, this objective increases the likelihood of successful behaviors and diverse exploratory trajectories. Unlike prior
+approaches, the shared advantage term amplifies exploratory trajectories that do not (yet) yield high
+rewards, pushing the policy to discover diverse strategies.
+Various diversity metrics have been studied and incorporated in reward functions in prior works;
+examples include the Vendi Score [9] and classifier-guided diversity [44, 19]. Our algorithm is
+4
+
+designed to be agnostic to the choice of metric: given any diversity function, we evaluate the success
+and diversity of a set of trajectories and optimize the policy to maximize both in sets.
+3.3
+
+P OLYCHROMIC PPO
+
+In this section, we present an algorithm for optimizing eq. (7) by modifying PPO, which is motivated
+by the extension of the performance difference lemma to the set reinforcement learning framework
+(as shown in Lemma 3.2). Our approach differs from standard PPO in two key respects: the method
+using which we sample on-policy rollouts and the advantage function used in the update.
+A direct implementation of the definition of set advantage functions as in Lemma 3.2 would require
+sampling n actions from every visited state, leading to exponential data requirements. To avoid this,
+we instead rely on vine sampling [28, 16] for on-policy data collection. In vine sampling, after
+collecting an initial set of rollouts, we select a subset {s1 , . . . , sp } of the states visited, called rollout
+states. At each rollout state si , we generate N additional rollouts starting from si . This procedure
+ensures that we obtain multiple states with independently sampled trajectory sets stemming out of
+them. The particular scheme we use is closely related to vine TRPO [28]; details are deferred
+to §A.1.1. Our algorithm, however, is compatible with any vine-sampling method that guarantees
+sufficient vine coverage. Note that, since vine sampling requires the ability to reset the environment,
+our algorithm is only applicable to environments where such resets are possible.
+Given access to sets of trajectories from each rollout state, we can estimate the polychromic value
+functions and, in turn, construct a practical polychromic advantage estimator. At a rollout state st
+from which we generated N > n trajectories, we estimate the polychromic advantage as
+n
+
+A♯ (st , at ; fpoly ) =
+
+1X
+R(τi )d(st , τ1:n ) − V̂ ♯ (st ; fpoly )
+n i=1
+
+where at ∈ τi for some i ∈ 1, . . . , n. Since PPO requires an advantage defined for individual
+actions, we assign to each action at the advantage of the set τ1:n that contains it. In other words,
+given a set of trajectories τ1:n , all actions taken from st in this set receive the same update signal
+as desired in set reinforcement learning. We use the following Monte Carlo estimate of the value
+PM
+(i)
+(i)
+1
+baseline: V ♯ (st ; fpoly ) = M
+i=1 fpoly (st , τ1:n ), where τ1:n , i ∈ {1, · · · , M } denotes the M
+independently sampled sets of n trajectories starting from st . This unbiased estimate was sufficient
+for our experiments, but one can trade off variance further by using biased estimates which we leave
+to future work.
+For non-rollout states, the update remains the same as standard PPO, using generalized advantage
+estimation (GAE) [30]. As is often used in practical implementations of PPO, we also include a
+per-state KL penalty DKL πβ (· | s)|πθ (· | s) at every state visited, which we found helpful for stability. The pseudocode is presented in algorithm 1, with modifications relative to PPO highlighted;
+extended pseudocode and implementation details are given in section A. We report all hyperparameters in §A.1.2. Note that the size of sets n used in set RL and the number of trajectories N generated
+from rollout states are fixed hyperparameters (in all our experiments, we used n = 4 and N = 8).
+Algorithm 1 Polychromic PPO
+1: for iteration = 1, 2, . . . do
+2:
+Collect trajectories under πβ ; rollout vines τ1:N from rollout states
+3:
+if st rollout state then
+4:
+Form sets, g1 , . . . , gM of n trajectories
+from st
+P
+5:
+Set Â(st , at ) = fpoly (st , gi ) − M1 M
+f
+j=1 poly (st , gj ) for (st , at ) ∈ gi
+6:
+else
+7:
+Compute Â(st , at ) via GAE
+8:
+end if
+9:
+Update πθ for K epochs on minibatches B by maximizing the PPO objective in eq. (2)
+10:
+Set πβ ← πθ
+11: end for
+
+5
+
+4
+
+E XPERIMENTAL E VALUATION
+
+Our experiments aim to answer two questions: (1) How does polychromic PPO, a set RL algorithm
+that explicitly encourages diverse trajectory generation, affect performance? More specifically, does
+improving diversity come at a significant cost in accuracy and success rate? (2) Does polychromic
+PPO encourage the policy to explore and learn diverse behaviors? In particular, learning to solve
+a task through diverse generations should, ideally, increase the pass@k performance i.e., the probability of succeeding at least once when given multiple attempts. (3) Does encouraging the policy
+to explore and maximize the diversity of generated trajectories help the policy to be more robust to
+perturbations in the state-visitation distribution? To address these questions, we evaluate on Minigrid [4], BabyAI [3], and Algorithmic Creativity [22].
+Minigrid and BabyAI are grid-world platforms with multiple rooms connected by locked doors and
+populated with keys, balls, and distractors. Agents receive natural language goals ranging from
+simple (for example, go to the red ball) to highly compositional (for example, open a red door and
+then go to the ball on your left after placing the grey ball next to a door). We use a languageconditioned convolutional neural network (CNN) policy that is pretrained on expert demonstrations
+provided in the official datasets [4, 3]. We then fine-tune and evaluate on 50 fixed configurations
+(each configuration specifies a grid layout and mission pair).
+Algorithmic Creativity is a set of tasks for quantifying model creativity [22]. In the triangle discovery task, an agent must autoregressively output sequences of triangles from undirected graphs
+that contain many triangles. Solving the task in each graph requires recall and combinations of past
+knowledge, as the graph is not revealed in-context, but learned during pretraining and through interactions in RLFT. We pretrain on data drawn from 10 graphs and fine-tune on 3 graphs. Here, the
+verifiable reward is whether the generated sequence is a valid triangle in the graph.
+
+Normalized Score
+
+We compare polychromic PPO (Poly-PPO) with REINFORCE
+Validity 84
+76 3.5
+with baseline [39] and standard PPO [29]. Furthermore, we
+1.00
+Diversity
+77
+Creativity
+compare with a UCB-style regularization [1] where we add
+59
+1
+0.75 57 57
+60
+λUCB · min{1, N (s, a)− 2 } to every advantage Â(s, a). Here,
+48
+N (s, a) is the number of times that action a was sampled
+0.50
+1.6
+from state s and λUCB is a hyperparameter we tune for each
+1.2
+1.1
+method. For polychromic PPO, we define the diversity func0.25
+tion d(s, τ1:n ) to be the fraction of semantically distinct trajec0.00
+tories in τ1:n ; in Minigrid/BabyAI, two trajectories are called
+Pretrained
+PPO REINFORCE Poly-PPO
+distinct if they visit different sets of rooms and, in Algorithmic
+Creativity, two trajectories are distinct if they visit different Figure 2: Results on Algorithmic
+sets of nodes. In both cases, d = 0 if all trajectories visit the Creativity. Bars show normalized valsame set of rooms or nodes. More details on the environment ues for each metric, with raw values
+and our implementation can be found in §A. Throughout all above each bar.
+settings, we generate N = 8 trajectories at rollouts states for vine sampling and use sets of size
+n = 4 for poly-PPO (see algorithm 1).
+All environments we evaluate on test on tasks that are long-horizon, often requiring sequential plans
+that change, and sparse reward. Consequently, fine-tuning requires an RL method that can both
+explore and exploit. Since the pretrained policy struggles to solve several tasks, the policy must
+strategically explore during RL fine-tuning, and to succeed across all evaluation tasks, the policy
+must avoid collapsing onto behaviors that solve only a subset while failing to generalize to the rest.
+4.1
+
+H OW D OES P OLYCHROMIC PPO A FFECT P ERFORMANCE ?
+
+The results summarizing performance, in terms of average reward and success rate, on Minigrid
+and BabyAI are provided in table 1. Pretrained policies are noisy, achieving low success rates;
+policies that explore effectively end up maximizing both success rate and coverage of environments
+it can solve. We find that polychromic PPO consistently matches or outperforms the best baseline in
+reward and success. Adding the UCB bonus helps the baselines, REINFORCE and PPO, improve
+performance in some environments. However, UCB is complementary to polychromic PPO as well
+- the bonus enables the agent to achieve higher performance in Pickup and Bosslevel.
+Results for Algorithmic Creativity are summarized in fig. 2. We rollout 100 times across the 3 graphs
+seen during RLFT. The creativity metric is defined as the percentage of generations that are unique,
+6
+
+Environment
+
+Pretrained
+policy
+
+REINFORCE
+
+REINFORCE w/
+UCB
+
+PPO
+
+PPO w/
+UCB
+
+Poly-PPO
+(ours)
+
+Poly-PPO
+w/ UCB (ours)
+
+Goto
+Pickup
+Synthseq
+Bosslevel
+
+(0.246, 34.2)
+(0.141, 21.4)
+(0.157, 20.2)
+(0.212, 20.6)
+
+(0.533, 73.0)
+(0.259, 39.8)
+(0.325, 45.4)
+(0.266, 33.4)
+
+(0.538, 73.4)
+(0.391, 56.0)
+(0.361, 47.8)
+(0.286, 36.4)
+
+(0.406, 46.2)
+(0.283, 33.4)
+(0.277, 32.2)
+(0.336, 38.8)
+
+(0.428, 47.4)
+(0.243, 27.8)
+(0.224, 26.2)
+(0.310, 35.8)
+
+(0.575, 80.2)
+(0.452, 63.2)
+(0.341, 47.0)
+(0.378, 45.2)
+
+(0.561, 76.2)
+(0.486, 65.6)
+(0.317, 43.2)
+(0.379, 46.8)
+
+Four Rooms
+
+(0.469, 70.4)
+
+(0.639, 89.6)
+
+(0.672, 92.6)
+
+(0.618, 89.2)
+
+(0.502, 78.6)
+
+(0.666, 92.4)
+
+(0.653, 91.8)
+
+Table 1: Average reward and success rate (%) on BabyAI tasks. Each value is averaged over 100
+rollouts across 50 configurations and 3 random seeds.
+90%
+
+90%
+
+80%
+
+80%
+
+Pass Rate
+
+50%
+
+60%
+
+30%
+
+40%
+10
+
+20
+
+40
+
+k (Pass@k)
+
+80
+
+160
+
+30%
+
+30%
+
+20%
+5
+
+40%
+
+40%
+
+40%
+
+50%
+
+50%
+
+50%
+
+60%
+
+70%
+
+30% 1
+
+60%
+
+60%
+
+70%
+
+10% 1
+
+5
+
+10
+
+20
+
+40
+
+k (Pass@k)
+
+80
+
+20% 1
+
+160
+
+5
+
+10
+
+20
+
+40
+
+k (Pass@k)
+
+80
+
+160
+
+90%
+
+90%
+
+80%
+
+80%
+
+Pass Rate
+
+50%
+
+60%
+
+30%
+20%
+
+30% 1
+
+10% 1
+
+5
+
+10
+
+20
+
+40
+
+k (Pass@k)
+
+80
+
+Pretrained
+
+160
+
+5
+
+10
+
+20
+
+40
+
+k (Pass@k)
+
+80
+
+20% 1
+
+160
+
+20
+
+40
+
+80
+
+160
+
+5
+
+10
+
+20
+
+40
+
+80
+
+160
+
+30%
+
+30%
+
+40%
+
+k (Pass@k)
+
+40%
+
+40%
+
+40%
+
+50%
+
+10
+
+50%
+
+50%
+
+60%
+
+5
+
+60%
+
+60%
+
+70%
+
+70%
+
+20% 1
+
+5
+
+10
+
+20
+
+40
+
+k (Pass@k)
+
+REINFORCE
+REINFORCE w/ UCB
+Poly-PPO
+Poly-PPO w/ UCB
+
+80
+
+160
+
+20% 1
+
+PPO
+
+k (Pass@k)
+
+PPO w/ UCB
+
+Figure 3: Pass@k on BabyAI tasks. Top: methods without UCB. Bottom: methods with UCB.
+Columns show Goto, Pickup, Synthseq, and Bosslevel. Each curve is pass rate vs. number of
+attempts.
+
+valid triangles that were not seen in the pretraining data [22]. We also report validity (number of
+valid triangles constructed), and diversity (unique number of valid triangles). PPO substantially
+increase validity compared to the pretrained policy, but lower creativity and diversity. On the other
+hand, polychromic PPO achieves slightly lower validity than standard PPO, but the gap is modest
+and highlights the trade-off it strikes between success and exploration which we discuss in the next
+subsection.
+4.2
+
+D OES P OLYCHROMIC PPO E NCOURAGE D IVERSE G ENERATIONS ?
+
+Success rates do not adequately represent the coverage of tasks that the policy can solve. Since
+success rates are averaged across all configurations, a policy that overfits to a subset may achieve
+high reward there while failing elsewhere. To probe this, we examine pass@k curves - for each
+configuration, we provide the policy k attempts and find the fraction of configurations the policy can
+solve, which is called the pass rate. As k increases, methods that generate diverse (but effective)
+trajectories should achieve higher coverage. Moreover, because all configurations were seen during
+training, every method should ideally surpass the pretrained policy at all k. When this fails to
+occur, it suggests that RL fine-tuning has caused the policy to forget behaviors useful for some
+configurations, overfitting instead to others.
+Pass@k results on the BabyAI environments are shown in fig. 3. We first discuss all methods
+without the UCB bonus. We observe that REINFORCE does not improve pass rate sufficiently
+fast as the number of attempts increases: despite higher success rates overall, its coverage is lower
+than the pretrained policy at large k. PPO, on the other hand, starts off from a much lower pass
+rate than other methods at small k but the pass rate increases as k grows; however, it is still lower
+than the pretrained policy and significantly lower than Poly-PPO. This indicates that these baseline
+methods suffer from an inherent trade-off between diversity and accuracy in the generations. In
+7
+
+100%
+90%
+80%
+70%
+60%
+50%
+40%
+30%
+20%
+10%
+0% 1
+
+5
+
+10
+
+20
+
+40
+
+k (Validity Pass@k)
+
+80
+
+160
+
+Pretrained
+
+100%
+90%
+80%
+70%
+60%
+50%
+40%
+30%
+20%
+10%
+0% 1
+
+5
+
+10
+
+20
+
+40
+
+k (Creativity Pass@k)
+
+REINFORCE
+
+80
+
+160
+
+PPO
+
+110.0
+100.0
+90.0
+80.0
+70.0
+60.0
+50.0
+40.0
+30.0
+20.0
+10.0
+0.0 1
+
+5
+
+10
+
+20
+
+40
+
+k (Diff@k)
+
+80
+
+160
+
+Poly-PPO
+
+Figure 4: Pass@k results on Algorithmic Creativity. For validity pass@k and creativity pass@k,
+the agent gets a pass if at least one of the k attempts was a valid and creative triangle, respectively.
+In diff@k evaluation, we evaluate the number of generations that were unique given k attempts.
+
+comparison, Poly-PPO achieves substantially higher pass rate than all baselines. It also achieves
+equal or higher pass rate than the pretrained policy at almost all values of k. Another indicator for
+the higher diversity in generations is that the pass rate for Poly-PPO continues to rise until about
+k = 80, whereas the baselines saturate much earlier (around k = 20). The effect is pronounced,
+especially, in Bosslevel where Poly-PPO achieves around 15% higher pass rate as k grows to 160
+whereas baselines see modest increase.
+We next examine the effect of adding the UCB bonus. For REINFORCE, the bonus improves
+pass rate at small k in Pickup and Synthseq, but the gain saturates around k = 10 and UCB has
+no effect in Bosslevel or Goto. For PPO, the bonus reduces pass rate at small k, and although
+it improves performance at larger k, the gap to the pretrained policy and Poly-PPO remains. By
+contrast, combining UCB with Poly-PPO yields equal or higher coverage across most k (except
+small k in Synthseq), showing that Poly-PPO preserves and refines pretrained diversity rather than
+collapsing onto narrow behaviors.
+In the Triangle Discovery task, we find that polychromic PPO achieves substantially higher diversity
+and creativity. In particular, Poly-PPO outperforms all baselines, including the pretrained policy, on
+both diversity and creativity metrics, as shown in fig. 2. Although it achieves slightly lower validity
+than PPO (significantly larger than REINFORCE though), Poly-PPO encourages broad exploration
+and the discovery of novel solutions. This trend is further reflected in the pass@k evaluation (see
+fig. 4). Specifically, validity pass@k evaluates pass rate in k attempts where the agent passes if it
+generates a valid triangle in k attempts. On the other hand, creativity pass@k evaluates pass rate
+where the agent passes if it generates at least one creative triangle (unique triangle not seen in pretraining data) in k attempts. Finally, diff@k quantifies the number of unique triangles obtained in
+k attempts. We find that Poly-PPO outperforms baselines in both creativity and diversity metrics,
+while attaining greater validity performance than the pretrained policy. Notably, even though REINFORCE achieves high diversity, it comes at the significant cost in validity@1 where it is even below
+the pretrained policy.
+4.3
+
+D OES POLYCHROMIC PPO GENERALIZE TO STATE PERTURBATIONS ?
+
+We evaluate generalization under perturbed initial states in Minigrid and BabyAI. For each
+grid–mission configuration, we first find all the rooms visited by the pretrained policy under hightemperature sampling over 100 rollouts. Then, we select 10 states randomly from inside each room
+as our initial states. Effectively, this changes the initial state to a completely different room in such
+a manner that the task remains solvable from the new initial state. Note that this randomization
+substantially changes the task; as shown in fig. 6, with respect to the new initial state, a successful
+trajectory would require very different strategies. From the new start state, we evaluate using pass@1
+for all states in each layout. As shown in table 2, consistently, polychromic PPO generalizes more
+reliably than the baselines under these perturbations.
+8
+
+Environment
+
+Pretrained
+policy
+
+REINFORCE
+w/ Baseline
+
+REINFORCE
+w/ UCB
+
+PPO
+
+PPO
+w/ UCB
+
+Polychromic
+PPO
+
+Poly-PPO
+w/ UCB
+
+Goto
+Pickup
+Synthseq
+Bosslevel
+
+30.2
+15.2
+20.0
+23.8
+
+41.3
+22.0
+19.3
+22.5
+
+37.1
+20.5
+26.2
+27.6
+
+21.1
+12.5
+16.6
+26.6
+
+18.4
+8.87
+11.5
+28.2
+
+60.6
+33.4
+30.6
+34.3
+
+54.3
+28.0
+32.1
+32.8
+
+Four Rooms
+
+65.0
+
+82.7
+
+81.5
+
+15.3
+
+14.2
+
+88.7
+
+87.2
+
+Table 2: Average pass rate (%) in one attempt on BabyAI tasks under large initial-state perturbations.
+
+5
+
+E NTROPY A NALYSIS
+
+In this section, we analyze how the entropy of a policy evolves when trained to optimize the polychromic objective in eq. (7). Our guiding question is: Under the polychromic objective, on which
+actions is a policy most likely to collapse its probability mass? In our analysis, we restrict our attention to the setting with time horizon H = 1, with binary rewards. We assume a discrete action
+space and that the diversity function d(s, a1:n ) equals the fraction of actions in a1:n that are distinct
+(d = 0 if the set is a singleton). We assume that our policy has a softmax parameterization. Before
+turning to the polychromic objective itself, we extend the entropy analysis of Cui et al. [6] to the set
+RL setting. Given any set objective f : S × An → R, we ask: how does the entropy of the policy
+change after one-step update (from πθk to πθk+1 ) when learning under this set-RL framework? The
+following proposition characterizes the first-order change:
+Proposition 5.1 Considerthe set RL setup
+ in state s. After one update to the policy, the change in
+entropy, ∆ = H πθk+1 | s − H πθk | s , is given by
+
+
+
+n
+n
+X
+X
+1
+∆ ≈ −αCova1:n 
+log πθk (ai | s), Cova′1:n f (s, a′1:n ),
+1{ai = a′j } ,
+n i=1
+i,j=1
+where both covariances are taken with respect to πθk (· | s) and α is the learning rate.
+The proof can be found in §C. This result provides a lens for understanding when and where entropy
+collapse occurs. Intuitively, suppose that for some reference set a1:n there is a strong covariance
+between (i) the overlap of a1:n with the sampled sets and (ii) the value of the objective f . As the
+policy concentrates more probability mass on such sets a1:n , the entropy decreases. Conversely,
+when the covariance is strongly negative, the policy reallocates probability mass to sets with higher
+value under f , which increases entropy. Importantly, although set RL evaluates entire sets without
+attributing credit to individual trajectories, entropy collapse around a particular set still requires that
+its constituent trajectories, in expectation, contribute to raising the value of sampled sets overall.
+Thus, the central question becomes: Which sets a1:n are most prone to entropy collapse under the
+polychromic objective? Our analysis proceeds by introducing and studying the following key object:
+Definition 5.2 The scaffold value of a set of actions, a1:n , under a policy π and a set-RL objective
+f : S × An → R is defined to be
+n
+X
+1
+Λf (a1:n ; π) := Cova′1:n ∼π(·|s) (f (s, a′1:n ),
+1{a′i = aj })
+I(a1:n ) i,j=1
+where I(a1:n ) is the maximum size of the intersection of a1:n with any other set a′1:n . We refer to the
+space Λf (π) = {(a1:n , Λf (a1:n ; π) | a1:n ∈ An } as the scaffold of the policy π.
+The scaffold represents, for every action set a1:n , a measure of the policy’s propensity to collapse its
+entropy around that set. With this apparatus in hand, we next show that the polychromic objective
+rules out collapse onto homogeneous sets of actions (proof in §C.3):
+Proposition 5.3 Consider the polychromic objective in eq. (7). For any homogeneous set a1:n =
+{a} where r(s, a) = 1, there exists ϵ ∈ (0, 1) such that Λfpoly (a) < 0 when πθ (a | s) > ϵ.
+q
+Furthermore, the scaffold values of these homogeneous sets satisfy the bound Λfpoly (a) ≤ p(1−p)
+.
+n
+9
+
+This result shows that once a successful action a accumulates sufficient probability mass, the polychromic objective automatically prevents further entropy collapse onto sets that only contain this
+action and, when we use larger sets in the set RL framework, the upper bound on the scaffold value
+of a homogeneous set decreases. This is desirable since it suggests that our policy learns to generate
+this action without incessantly collapsing probability mass on such homogeneous sets.
+Next, we establish that the scaffold values of heterogeneous sets with successful actions are attractors
+of probability mass (proof in §C.4):
+Proposition 5.4 Suppose a1:n is heterogeneous where each ai is unique with probability p ∈ (0, n1 ).
+Suppose exactly q of the n actions satisfy r(s, ai ) = 1, and that any other action a′ ∈
+/ a1:n with
+n
+πθ (a′ | s) > 0 yields r(s, a′ ) = 0. Then, the scaffold value of a1:n satisfies Λfpoly (a1:n ) > qp (1−p)
+.
+n
+Note that the set in this proposition includes unsuccessful actions as well that contribute diversity.
+As such, there are, likely, several such heterogeneous sets (provided that the size of sets n is large
+enough) with positive scaffold values that attract more probability mass than homogeneous sets.
+Furthermore, the lower bound guarantee increases as the number of successful actions in the set
+increases. The polychromic objective therefore channels entropy collapse toward those sets that
+balance success and exploration, rather than permitting collapse onto homogeneous behaviors.
+These results motivate our general construction of polychromic objectives. Broadly, such objectives
+reward both (i) the returns achieved by a set of trajectories and (ii) the diversity of trajectories in the
+set.
+Definition 5.5 A polychromic objective is a function
+φ:S ×Tn →R
+that factors as
+φ(s, τ1:n ) = φ(R) (s, τ1:n )φ(d) (s, τ1:n ),
+where φ(R) and φ(d) are scalar-valued functions satisfying:
+Pn
+1. Covτ1:n ∼πθ (·|s) (φ(R) (s, τ1:n ), i=1 R(τi )) > 0,
+
+
+Pn
+2. Covτ1:n ∼πθ (·|s) φ(d) (s, τ1:n ), i=1 1{τi = τ } < 0 for any τ , and
+3. φ(R) (s, ·) and φ(d) (s, ·) share the same range, i.e.,
+inf φ(R) (s, ·) = inf φ(d) (s, ·),
+
+sup φ(R) (s, ·) = sup φ(d) (s, ·),
+
+where the infimum and supremum are taken over all sets τ1:n .
+In other words, a polychromic objective factors into a reward component with positive covariance
+to return and a diversity component with negative covariance to homogeneity such that both components have equal range. Their product enforces that both success and diversity are indispensable:
+entropy collapse is guided away from trivial memorization and toward exploratory policies.
+
+6
+
+R ELATED W ORK
+
+Policy gradient methods [36, 35, 14] are a widely used family of algorithms for online reinforcement
+learning. Numerous variants have been developed to reduce variance and improve sample efficiency
+[2, 8, 32, 20, 38, 28, 29, 27]. More recently, in the context of LLM fine-tuning, several works have
+replaced the learned critic with empirical estimates [7, 42, 46, 21]. The availability of test-time
+compute has motivated training objectives aligned with inference-time metrics [37, 5].
+RL fine-tuning often suffers from entropy collapse, where policies concentrate on a few high-reward
+behaviors and lose coverage of the pretrained distribution [6, 40, 43]. Entropy bonuses [10, 11,
+29, 31, 13] mitigate this locally but may struggle to induce semantic or trajectory-level exploration.
+In contrast, UCB-style bonus [12, 18] can be very effective in encouraging exploration especially
+earlier on during RLFT; however, the objective does not explicitly encourage preserving this exploratory behavior or diversity throughout training as the UCB bonus decays over time. Covariance
+10
+
+controls [6] can slow down entropy collapse but it is not clear that these methods necessarily encourage the policy to explore diverse generations. Our analysis builds on top of the insights Cui
+et al. [6] propose and we show that our method also exercises covariance controls on homogeneous
+behaviors. Intrinsic curiosity [25] also encourage exploration but it is not clear that these methods either scale to high-dimensional spaces or solve the local versus semantic exploration problem. Other
+approaches, more similar to our work, explicitly reward diversity, e.g., diversity-weighted objectives [19] or batch-level exploration rewards [34]. The crucial distinction our work makes is the set
+reinforcement learning framework that enables learning a set of behaviors wherein some trajectories
+receive positive gradient updates for exploration despite not contributing rewards to the set.
+
+7
+
+C ONCLUSION
+
+We framed the problem of learning a diverse set of successful behaviors in terms of set reinforcement
+learning and proposed optimizing the polychromic objective, which evaluates sets of actions using
+both reward and diversity. We then designed our algorithm polychromic PPO, a variant of PPO that
+incorporates vine sampling and a modified advantage estimator to optimize this objective. There are
+several limitations of our approach. Our approach requires the ability to reset the environment to any
+set to enable vine sampling. Otherwise, we require the MDP to have sufficiently deterministic transitions such that replaying actions can lead us approximately to the reset state. Moreover, ensuring
+sufficient vine coverage can be challenging, especially for very long-horizon tasks. The experiments
+in this paper are in settings where we could easily design a diversity function; however, designing or
+learning diversity functions can be difficult in various settings like for continuous control. Throughout this paper, we relied on Monte Carlo estimates to compute the advantage which could be high
+variance in other settings. Future work could develop more efficient estimators, or adopt curriculum
+and annealing schemes that balance exploration early in training with exploitation later.
+
+8
+
+ACKNOWLEDGMENTS
+
+We would like to thank Amber Xie, Joey Hejna, Suvir Mirchandani, Hung-Chieh Fang and
+Andy Tang for feedback on an earlier version of the paper. We thank Anikait Singh and Ayush
+Chakravarthy for helpful comments on the experimental evaluations. We thank Yoonho Lee for several valuable comments on formalizing diversity. We thank Hamidur Rahman and Pervin Akhter
+for helpful guidance on the formalization of the problem and feedback on the project in general.
+We thank Zabed Hasan and Fazilat Afreen for their insightful feedback on experimental evaluations.
+This work is supported by an NSF CAREER award, NSF award # 1941722, ONR YIP, DARPA YFA
+award # W911NF2210214 and Schmidt Sciences.
+
+R EFERENCES
+[1] Mohammad Gheshlaghi Azar, Ian Osband, and Rémi Munos. Minimax regret bounds for
+reinforcement learning, 2017. URL https://arxiv.org/abs/1703.05449.
+[2] Shalabh Bhatnagar, Richard S. Sutton, Mohammad Ghavamzadeh, and Mark Lee. Natural
+actor–critic algorithms. Automatica, 45(11):2471–2482, 2009. ISSN 0005-1098. doi: https://
+doi.org/10.1016/j.automatica.2009.07.008. URL https://www.sciencedirect.com/
+science/article/pii/S0005109809003549.
+[3] Maxime Chevalier-Boisvert, Dzmitry Bahdanau, Salem Lahlou, Lucas Willems, Chitwan Saharia, Thien Huu Nguyen, and Yoshua Bengio. Babyai: A platform to study the sample efficiency of grounded language learning, 2019. URL https://arxiv.org/abs/1810.
+08272.
+[4] Maxime Chevalier-Boisvert, Bolun Dai, Mark Towers, Rodrigo de Lazcano, Lucas Willems,
+Salem Lahlou, Suman Pal, Pablo Samuel Castro, and Jordan Terry. Minigrid and miniworld:
+Modular and customizable reinforcement learning environments for goal-oriented tasks, 2023.
+URL https://arxiv.org/abs/2306.13831.
+[5] Yinlam Chow, Guy Tennenholtz, Izzeddin Gur, Vincent Zhuang, Bo Dai, Sridhar Thiagarajan,
+Craig Boutilier, Rishabh Agarwal, Aviral Kumar, and Aleksandra Faust. Inference-aware fine11
+
+tuning for best-of-n sampling in large language models, 2024. URL https://arxiv.org/
+abs/2412.15287.
+[6] Ganqu Cui, Yuchen Zhang, Jiacheng Chen, Lifan Yuan, Zhi Wang, Yuxin Zuo, Haozhan Li,
+Yuchen Fan, Huayu Chen, Weize Chen, Zhiyuan Liu, Hao Peng, Lei Bai, Wanli Ouyang,
+Yu Cheng, Bowen Zhou, and Ning Ding. The entropy mechanism of reinforcement learning
+for reasoning language models, 2025. URL https://arxiv.org/abs/2505.22617.
+[7] DeepSeek-AI, Daya Guo, Dejian Yang, Haowei Zhang, Junxiao Song, Ruoyu Zhang, Runxin
+Xu, Qihao Zhu, Shirong Ma, Peiyi Wang, Xiao Bi, Xiaokang Zhang, Xingkai Yu, Yu Wu,
+Z. F. Wu, Zhibin Gou, Zhihong Shao, Zhuoshu Li, Ziyi Gao, Aixin Liu, Bing Xue, Bingxuan
+Wang, Bochao Wu, Bei Feng, Chengda Lu, Chenggang Zhao, Chengqi Deng, Chenyu Zhang,
+Chong Ruan, Damai Dai, Deli Chen, Dongjie Ji, Erhang Li, Fangyun Lin, Fucong Dai, Fuli
+Luo, Guangbo Hao, Guanting Chen, Guowei Li, H. Zhang, Han Bao, Hanwei Xu, Haocheng
+Wang, Honghui Ding, Huajian Xin, Huazuo Gao, Hui Qu, Hui Li, Jianzhong Guo, Jiashi Li,
+Jiawei Wang, Jingchang Chen, Jingyang Yuan, Junjie Qiu, Junlong Li, J. L. Cai, Jiaqi Ni, Jian
+Liang, Jin Chen, Kai Dong, Kai Hu, Kaige Gao, Kang Guan, Kexin Huang, Kuai Yu, Lean
+Wang, Lecong Zhang, Liang Zhao, Litong Wang, Liyue Zhang, Lei Xu, Leyi Xia, Mingchuan
+Zhang, Minghua Zhang, Minghui Tang, Meng Li, Miaojun Wang, Mingming Li, Ning Tian,
+Panpan Huang, Peng Zhang, Qiancheng Wang, Qinyu Chen, Qiushi Du, Ruiqi Ge, Ruisong
+Zhang, Ruizhe Pan, Runji Wang, R. J. Chen, R. L. Jin, Ruyi Chen, Shanghao Lu, Shangyan
+Zhou, Shanhuang Chen, Shengfeng Ye, Shiyu Wang, Shuiping Yu, Shunfeng Zhou, Shuting
+Pan, S. S. Li, Shuang Zhou, Shaoqing Wu, Shengfeng Ye, Tao Yun, Tian Pei, Tianyu Sun,
+T. Wang, Wangding Zeng, Wanjia Zhao, Wen Liu, Wenfeng Liang, Wenjun Gao, Wenqin Yu,
+Wentao Zhang, W. L. Xiao, Wei An, Xiaodong Liu, Xiaohan Wang, Xiaokang Chen, Xiaotao
+Nie, Xin Cheng, Xin Liu, Xin Xie, Xingchao Liu, Xinyu Yang, Xinyuan Li, Xuecheng Su,
+Xuheng Lin, X. Q. Li, Xiangyue Jin, Xiaojin Shen, Xiaosha Chen, Xiaowen Sun, Xiaoxiang
+Wang, Xinnan Song, Xinyi Zhou, Xianzu Wang, Xinxia Shan, Y. K. Li, Y. Q. Wang, Y. X.
+Wei, Yang Zhang, Yanhong Xu, Yao Li, Yao Zhao, Yaofeng Sun, Yaohui Wang, Yi Yu, Yichao
+Zhang, Yifan Shi, Yiliang Xiong, Ying He, Yishi Piao, Yisong Wang, Yixuan Tan, Yiyang
+Ma, Yiyuan Liu, Yongqiang Guo, Yuan Ou, Yuduan Wang, Yue Gong, Yuheng Zou, Yujia He,
+Yunfan Xiong, Yuxiang Luo, Yuxiang You, Yuxuan Liu, Yuyang Zhou, Y. X. Zhu, Yanhong
+Xu, Yanping Huang, Yaohui Li, Yi Zheng, Yuchen Zhu, Yunxian Ma, Ying Tang, Yukun Zha,
+Yuting Yan, Z. Z. Ren, Zehui Ren, Zhangli Sha, Zhe Fu, Zhean Xu, Zhenda Xie, Zhengyan
+Zhang, Zhewen Hao, Zhicheng Ma, Zhigang Yan, Zhiyu Wu, Zihui Gu, Zijia Zhu, Zijun Liu,
+Zilin Li, Ziwei Xie, Ziyang Song, Zizheng Pan, Zhen Huang, Zhipeng Xu, Zhongyu Zhang,
+and Zhen Zhang. Deepseek-r1: Incentivizing reasoning capability in llms via reinforcement
+learning, 2025. URL https://arxiv.org/abs/2501.12948.
+[8] Thomas Degris, Martha White, and Richard S. Sutton. Off-policy actor-critic, 2013. URL
+https://arxiv.org/abs/1205.4839.
+[9] Dan Friedman and Adji Bousso Dieng. The vendi score: A diversity evaluation metric for
+machine learning, 2023. URL https://arxiv.org/abs/2210.02410.
+[10] Tuomas Haarnoja, Haoran Tang, Pieter Abbeel, and Sergey Levine. Reinforcement learning
+with deep energy-based policies, 2017. URL https://arxiv.org/abs/1702.08165.
+[11] Tuomas Haarnoja, Aurick Zhou, Pieter Abbeel, and Sergey Levine. Soft actor-critic: Offpolicy maximum entropy deep reinforcement learning with a stochastic actor, 2018. URL
+https://arxiv.org/abs/1801.01290.
+[12] Andre He, Daniel Fried, and Sean Welleck. Rewarding the unlikely: Lifting grpo beyond
+distribution sharpening, 2025. URL https://arxiv.org/abs/2506.02355.
+[13] Riashat Islam, Zafarali Ahmed, and Doina Precup. Marginalized state distribution entropy
+regularization in policy optimization, 2019. URL https://arxiv.org/abs/1912.
+05128.
+[14] Sham M Kakade. A natural policy gradient. In T. Dietterich, S. Becker, and Z. Ghahramani (eds.), Advances in Neural Information Processing Systems, volume 14. MIT Press,
+12
+
+2001. URL https://proceedings.neurips.cc/paper_files/paper/2001/
+file/4b86abe48d358ecf194c56c69108433e-Paper.pdf.
+[15] Sham M. Kakade and John Langford. Approximately optimal approximate reinforcement
+learning. In International Conference on Machine Learning, 2002. URL https://api.
+semanticscholar.org/CorpusID:31442909.
+[16] Amirhossein Kazemnejad, Milad Aghajohari, Eva Portelance, Alessandro Sordoni, Siva
+Reddy, Aaron Courville, and Nicolas Le Roux. Vineppo: Refining credit assignment in rl
+training of llms, 2025. URL https://arxiv.org/abs/2410.01679.
+[17] Saurabh Kumar, Aviral Kumar, Sergey Levine, and Chelsea Finn. One solution is not all you
+need: Few-shot extrapolation via structured maxent rl, 2020. URL https://arxiv.org/
+abs/2010.14484.
+[18] Jack Lanchantin, Angelica Chen, Shehzaad Dhuliawala, Ping Yu, Jason Weston, Sainbayar Sukhbaatar, and Ilia Kulikov. Diverse preference optimization, 2025. URL https:
+//arxiv.org/abs/2501.18101.
+[19] Tianjian Li, Yiming Zhang, Ping Yu, Swarnadeep Saha, Daniel Khashabi, Jason Weston, Jack
+Lanchantin, and Tianlu Wang. Jointly reinforcing diversity and quality in language model
+generations, 2025. URL https://arxiv.org/abs/2509.02534.
+[20] Timothy P. Lillicrap, Jonathan J. Hunt, Alexander Pritzel, Nicolas Heess, Tom Erez, Yuval
+Tassa, David Silver, and Daan Wierstra. Continuous control with deep reinforcement learning.
+In Yoshua Bengio and Yann LeCun (eds.), 4th International Conference on Learning Representations, ICLR 2016, San Juan, Puerto Rico, May 2-4, 2016, Conference Track Proceedings,
+2016. URL http://arxiv.org/abs/1509.02971.
+[21] Zichen Liu, Changyu Chen, Wenjun Li, Penghui Qi, Tianyu Pang, Chao Du, Wee Sun Lee,
+and Min Lin. Understanding r1-zero-like training: A critical perspective, 2025. URL https:
+//arxiv.org/abs/2503.20783.
+[22] Vaishnavh Nagarajan, Chen Henry Wu, Charles Ding, and Aditi Raghunathan. Roll the dice
+and look before you leap: Going beyond the creative limits of next-token prediction, 2025.
+URL https://arxiv.org/abs/2504.15266.
+[23] OpenAI, :, Aaron Jaech, Adam Kalai, Adam Lerer, Adam Richardson, Ahmed El-Kishky,
+Aiden Low, Alec Helyar, Aleksander Madry, Alex Beutel, Alex Carney, Alex Iftimie, Alex
+Karpenko, Alex Tachard Passos, Alexander Neitz, Alexander Prokofiev, Alexander Wei, Allison Tam, Ally Bennett, Ananya Kumar, Andre Saraiva, Andrea Vallone, Andrew Duberstein,
+Andrew Kondrich, Andrey Mishchenko, Andy Applebaum, Angela Jiang, Ashvin Nair, Barret Zoph, Behrooz Ghorbani, Ben Rossen, Benjamin Sokolowsky, Boaz Barak, Bob McGrew,
+Borys Minaiev, Botao Hao, Bowen Baker, Brandon Houghton, Brandon McKinzie, Brydon
+Eastman, Camillo Lugaresi, Cary Bassin, Cary Hudson, Chak Ming Li, Charles de Bourcy,
+Chelsea Voss, Chen Shen, Chong Zhang, Chris Koch, Chris Orsinger, Christopher Hesse,
+Claudia Fischer, Clive Chan, Dan Roberts, Daniel Kappler, Daniel Levy, Daniel Selsam,
+David Dohan, David Farhi, David Mely, David Robinson, Dimitris Tsipras, Doug Li, Dragos Oprica, Eben Freeman, Eddie Zhang, Edmund Wong, Elizabeth Proehl, Enoch Cheung,
+Eric Mitchell, Eric Wallace, Erik Ritter, Evan Mays, Fan Wang, Felipe Petroski Such, Filippo
+Raso, Florencia Leoni, Foivos Tsimpourlas, Francis Song, Fred von Lohmann, Freddie Sulit,
+Geoff Salmon, Giambattista Parascandolo, Gildas Chabot, Grace Zhao, Greg Brockman, Guillaume Leclerc, Hadi Salman, Haiming Bao, Hao Sheng, Hart Andrin, Hessam Bagherinezhad,
+Hongyu Ren, Hunter Lightman, Hyung Won Chung, Ian Kivlichan, Ian O’Connell, Ian Osband, Ignasi Clavera Gilaberte, Ilge Akkaya, Ilya Kostrikov, Ilya Sutskever, Irina Kofman,
+Jakub Pachocki, James Lennon, Jason Wei, Jean Harb, Jerry Twore, Jiacheng Feng, Jiahui
+Yu, Jiayi Weng, Jie Tang, Jieqi Yu, Joaquin Quiñonero Candela, Joe Palermo, Joel Parish,
+Johannes Heidecke, John Hallman, John Rizzo, Jonathan Gordon, Jonathan Uesato, Jonathan
+Ward, Joost Huizinga, Julie Wang, Kai Chen, Kai Xiao, Karan Singhal, Karina Nguyen, Karl
+Cobbe, Katy Shi, Kayla Wood, Kendra Rimbach, Keren Gu-Lemberg, Kevin Liu, Kevin Lu,
+Kevin Stone, Kevin Yu, Lama Ahmad, Lauren Yang, Leo Liu, Leon Maksin, Leyton Ho,
+Liam Fedus, Lilian Weng, Linden Li, Lindsay McCallum, Lindsey Held, Lorenz Kuhn, Lukas
+13
+
+Kondraciuk, Lukasz Kaiser, Luke Metz, Madelaine Boyd, Maja Trebacz, Manas Joglekar,
+Mark Chen, Marko Tintor, Mason Meyer, Matt Jones, Matt Kaufer, Max Schwarzer, Meghan
+Shah, Mehmet Yatbaz, Melody Y. Guan, Mengyuan Xu, Mengyuan Yan, Mia Glaese, Mianna Chen, Michael Lampe, Michael Malek, Michele Wang, Michelle Fradin, Mike McClay,
+Mikhail Pavlov, Miles Wang, Mingxuan Wang, Mira Murati, Mo Bavarian, Mostafa Rohaninejad, Nat McAleese, Neil Chowdhury, Neil Chowdhury, Nick Ryder, Nikolas Tezak, Noam
+Brown, Ofir Nachum, Oleg Boiko, Oleg Murk, Olivia Watkins, Patrick Chao, Paul Ashbourne,
+Pavel Izmailov, Peter Zhokhov, Rachel Dias, Rahul Arora, Randall Lin, Rapha Gontijo Lopes,
+Raz Gaon, Reah Miyara, Reimar Leike, Renny Hwang, Rhythm Garg, Robin Brown, Roshan
+James, Rui Shu, Ryan Cheu, Ryan Greene, Saachi Jain, Sam Altman, Sam Toizer, Sam Toyer,
+Samuel Miserendino, Sandhini Agarwal, Santiago Hernandez, Sasha Baker, Scott McKinney,
+Scottie Yan, Shengjia Zhao, Shengli Hu, Shibani Santurkar, Shraman Ray Chaudhuri, Shuyuan
+Zhang, Siyuan Fu, Spencer Papay, Steph Lin, Suchir Balaji, Suvansh Sanjeev, Szymon Sidor,
+Tal Broda, Aidan Clark, Tao Wang, Taylor Gordon, Ted Sanders, Tejal Patwardhan, Thibault
+Sottiaux, Thomas Degry, Thomas Dimson, Tianhao Zheng, Timur Garipov, Tom Stasi, Trapit
+Bansal, Trevor Creech, Troy Peterson, Tyna Eloundou, Valerie Qi, Vineet Kosaraju, Vinnie
+Monaco, Vitchyr Pong, Vlad Fomenko, Weiyi Zheng, Wenda Zhou, Wes McCabe, Wojciech
+Zaremba, Yann Dubois, Yinghai Lu, Yining Chen, Young Cha, Yu Bai, Yuchen He, Yuchen
+Zhang, Yunyun Wang, Zheng Shao, and Zhuohan Li. Openai o1 system card, 2024. URL
+https://arxiv.org/abs/2412.16720.
+[24] Long Ouyang, Jeff Wu, Xu Jiang, Diogo Almeida, Carroll L. Wainwright, Pamela Mishkin,
+Chong Zhang, Sandhini Agarwal, Katarina Slama, Alex Ray, John Schulman, Jacob Hilton,
+Fraser Kelton, Luke Miller, Maddie Simens, Amanda Askell, Peter Welinder, Paul Christiano,
+Jan Leike, and Ryan Lowe. Training language models to follow instructions with human
+feedback, 2022. URL https://arxiv.org/abs/2203.02155.
+[25] Deepak Pathak, Pulkit Agrawal, Alexei A. Efros, and Trevor Darrell. Curiosity-driven exploration by self-supervised prediction. In Doina Precup and Yee Whye Teh (eds.), Proceedings of the 34th International Conference on Machine Learning, volume 70 of Proceedings of Machine Learning Research, pp. 2778–2787. PMLR, 06–11 Aug 2017. URL
+https://proceedings.mlr.press/v70/pathak17a.html.
+[26] Qwen. Qwq-32b: Embracing the power of reinforcement learning, March 2025. URL https:
+//qwenlm.github.io/blog/qwq-32b/.
+[27] Nicolas Le Roux, Marc G. Bellemare, Jonathan Lebensold, Arnaud Bergeron, Joshua Greaves,
+Alex Fréchette, Carolyne Pelletier, Eric Thibodeau-Laufer, Sándor Toth, and Sam Work. Tapered off-policy reinforce: Stable and efficient reinforcement learning for llms, 2025. URL
+https://arxiv.org/abs/2503.14286.
+[28] John Schulman, Sergey Levine, Philipp Moritz, Michael I. Jordan, and Pieter Abbeel. Trust
+region policy optimization, 2017. URL https://arxiv.org/abs/1502.05477.
+[29] John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, and Oleg Klimov. Proximal
+policy optimization algorithms, 2017. URL https://arxiv.org/abs/1707.06347.
+[30] John Schulman, Philipp Moritz, Sergey Levine, Michael Jordan, and Pieter Abbeel. Highdimensional continuous control using generalized advantage estimation, 2018. URL https:
+//arxiv.org/abs/1506.02438.
+[31] Younggyo Seo, Lili Chen, Jinwoo Shin, Honglak Lee, Pieter Abbeel, and Kimin Lee. State
+entropy maximization with random encoders for efficient exploration, 2021. URL https:
+//arxiv.org/abs/2102.09430.
+[32] David Silver, Guy Lever, Nicolas Heess, Thomas Degris, Daan Wierstra, and Martin Riedmiller. Deterministic policy gradient algorithms. In Eric P. Xing and Tony Jebara (eds.), Proceedings of the 31st International Conference on Machine Learning, volume 32 of Proceedings
+of Machine Learning Research, pp. 387–395, Bejing, China, 22–24 Jun 2014. PMLR. URL
+https://proceedings.mlr.press/v32/silver14.html.
+14
+
+[33] Charlie Snell, Jaehoon Lee, Kelvin Xu, and Aviral Kumar. Scaling llm test-time compute optimally can be more effective than scaling model parameters, 2024. URL https:
+//arxiv.org/abs/2408.03314.
+[34] Yuda Song, Julia Kempe, and Remi Munos. Outcome-based exploration for llm reasoning,
+2025. URL https://arxiv.org/abs/2509.06941.
+[35] Richard S. Sutton and Andrew G. Barto. Reinforcement Learning: An Introduction. A Bradford
+Book, Cambridge, MA, USA, 2018. ISBN 0262039249.
+[36] Richard S. Sutton, David McAllester, Satinder Singh, and Yishay Mansour. Policy gradient methods for reinforcement learning with function approximation. In Proceedings of
+the 13th International Conference on Neural Information Processing Systems, NIPS’99, pp.
+1057–1063, Cambridge, MA, USA, 1999. MIT Press.
+[37] Yunhao Tang, Kunhao Zheng, Gabriel Synnaeve, and Rémi Munos. Optimizing language
+models for inference time objectives using reinforcement learning, 2025. URL https://
+arxiv.org/abs/2503.19595.
+[38] Ziyu Wang, Victor Bapst, Nicolas Heess, Volodymyr Mnih, Remi Munos, Koray Kavukcuoglu,
+and Nando de Freitas. Sample efficient actor-critic with experience replay, 2017. URL
+https://arxiv.org/abs/1611.01224.
+[39] Ronald J. Williams. Simple statistical gradient-following algorithms for connectionist reinforcement learning. Mach. Learn., 8(3–4):229–256, May 1992. ISSN 0885-6125. doi:
+10.1007/BF00992696. URL https://doi.org/10.1007/BF00992696.
+[40] Fang Wu, Weihao Xuan, Ximing Lu, Zaid Harchaoui, and Yejin Choi. The invisible leash: Why
+rlvr may not escape its origin, 2025. URL https://arxiv.org/abs/2507.14843.
+[41] Omar G. Younis, Rodrigo Perez-Vicente, John U. Balis, Will Dudley, Alex Davey,
+and Jordan K Terry.
+Minari, September 2024.
+URL https://github.com/
+Farama-Foundation/Minari.
+[42] Qiying Yu, Zheng Zhang, Ruofei Zhu, Yufeng Yuan, Xiaochen Zuo, Yu Yue, Weinan Dai,
+Tiantian Fan, Gaohong Liu, Lingjun Liu, Xin Liu, Haibin Lin, Zhiqi Lin, Bole Ma, Guangming
+Sheng, Yuxuan Tong, Chi Zhang, Mofan Zhang, Wang Zhang, Hang Zhu, Jinhua Zhu, Jiaze
+Chen, Jiangjie Chen, Chengyi Wang, Hongli Yu, Yuxuan Song, Xiangpeng Wei, Hao Zhou,
+Jingjing Liu, Wei-Ying Ma, Ya-Qin Zhang, Lin Yan, Mu Qiao, Yonghui Wu, and Mingxuan
+Wang. Dapo: An open-source llm reinforcement learning system at scale, 2025. URL https:
+//arxiv.org/abs/2503.14476.
+[43] Yang Yue, Zhiqi Chen, Rui Lu, Andrew Zhao, Zhaokai Wang, Yang Yue, Shiji Song, and Gao
+Huang. Does reinforcement learning really incentivize reasoning capacity in llms beyond the
+base model?, 2025. URL https://arxiv.org/abs/2504.13837.
+[44] Yiming Zhang, Harshita Diddee, Susan Holm, Hanchen Liu, Xinyue Liu, Vinay Samuel, Barry
+Wang, and Daphne Ippolito. Noveltybench: Evaluating language models for humanlike diversity, 2025. URL https://arxiv.org/abs/2504.05228.
+[45] Rosie Zhao, Alexandru Meterez, Sham Kakade, Cengiz Pehlevan, Samy Jelassi, and Eran
+Malach. Echo chamber: Rl post-training amplifies behaviors learned in pretraining, 2025.
+URL https://arxiv.org/abs/2504.07912.
+[46] Chujie Zheng, Shixuan Liu, Mingze Li, Xiong-Hui Chen, Bowen Yu, Chang Gao, Kai Dang,
+Yuqiong Liu, Rui Men, An Yang, Jingren Zhou, and Junyang Lin. Group sequence policy
+optimization, 2025. URL https://arxiv.org/abs/2507.18071.
+
+15
+
+A
+
+I MPLEMENTATION D ETAILS
+
+BabyAI and MiniGrid. For BabyAI tasks, the policy conditions on the grid image, the agent’s
+direction embedding, and the mission text (encoded by a GRU); the action space is the standard
+BabyAI/MiniGrid discrete set left, right, forward, pickup, drop, toggle, done. We provide example
+configurations for each task in fig. 5. We train a CNN–GRU policy that outputs action logits. In
+MiniGrid–FourRooms, the action space is identical, but the observation excludes a mission (as the
+goal specification is fixed), so we use a compact MLP that produces action logits conditioned on a
+flattened image observation. During pretraining, we use an 80/20 train–test split of expert demonstrations for each task, except for Synthseq and BossLevel, where we found that the full dataset was
+required to obtain a reasonably strong base policy. We used the dataset from Younis et al. [41]. We
+pretrain by minimizing the cross-entropy loss with an entropy regularizer.
+During RLFT, we fine-tune on 50 configurations. For all tasks except BossLevel and Synthseq, these
+configurations are drawn from the pretraining test set; for BossLevel and Synthseq, we did not carve
+out a separate test set. If the agent reaches the goal at time t (episode horizon H=100), it receives
+the reward 1 − 0.5 · Ht ; otherwise r = 0. (BabyAI/MiniGrid defaults to 1 − 0.9 · Ht ; we found
+that lowering the time penalty improved diversity during RLFT, especially for REINFORCE, by
+reducing the disadvantage of longer but successful trajectories.)
+Algorithmic Creativity (Triangle Discovery). In Triangle Discovery, an agent must output a sequence of edge tokens that form a valid triangle in an unobserved undirected graph. The input
+sequence comprises a graph index plus a prefix prompt and the agent’s past outputs. We set the
+maximum sequence length to be 11. The action space is a discrete vocabulary of size 1017. We
+pretrain a decoder-only Transformer with masked cross-entropy. The pretraining dataset, from Nagarajan et al. [22], contains 15,000 samples per graph, with the same being a triangle with probability
+2
+1
+3 and an edge with probability 3 edges. Each graph has 999 nodes. For RLFT, we fine-tune on 3
+fixed graphs. The reward is sparse: +1 for a valid triangle, 0 otherwise.
+A.1
+
+P OLYCHROMIC PPO
+
+We summarize implementation details for polychromic PPO , beginning with the vine sampling
+scheme used for on-policy data collection, then additional stability techniques and full pseudocode
+in algorithm 2.
+A.1.1
+
+V INE S AMPLING
+
+In this section, we describe the vine sampling scheme [28] we used for polychromic PPO . In vine
+sampling, we first generate a number of trajectories. Then, we select a subset of the states visited,
+denoted by {s1 , . . . , sp } - this is called the rollout set. For each state si in the rollout set (we call
+this a rollout state), we generate a set of trajectories τ1:N ∼ πβ (· | si ). To avoid notational overload
+and to make sample accounting explicit, we distinguish:
+• n: the set size used by the set-RL objective (number of trajectories per set)
+• N : the number of rollouts collected from each rollout state/vine state
+• p: the number of rollout states selected along each seed rollout
+• B: the trajectory budget i.e., maximum number of trajectories we can collect.
+We now discuss the method we used to select the set of rollout states. Our goal is to identify multiple
+states from which we want to generate vines so that we can use the polychromic advantage to update
+the policy at a large number of states. Suppose, we have a trajectory budget B, i.e., we are allowed
+to generate at most B trajectories during the on-policy data collection. We first sample N rollouts
+independently where N > n. Now, for each of these N trajectories, we identify p rollout states
+according to some criterion. Some examples of rollout state criterion are: (1) Top p states with the
+highest entropy; sample more trajectories from states where the policy is more uncertain, (2) Top p
+states with the highest critic losses; sample more trajectories where our critic is wrong/biased, and
+(3) p equally spaced out states. Suppose the main trajectory is T timesteps long. We select the states
+pT
+2T
+T
+, p+1
+, · · · , p+1
+.
+at timestep p+1
+16
+
+(a) GoTo: mission “go to purple box.”
+
+(b) Pickup: mission “pick up a green
+ball.”
+
+(c) Synthseq: mission “put the ball on
+your right next to a red ball and pick
+up a purple ball after you open a grey
+door.”
+
+(d) Bosslevel: mission “put a yellow
+key next to the blue key and pick up
+a ball after you pick up a yellow key.”
+
+Figure 5: Example BabyAI environments and their missions.
+In this paper, we used the third criterion. Note that, in this scheme, we generate, in total, N +N 2 (p−
+1) trajectories. Since we are allowed to sample at most B trajectories, we must select N and p such
+that N > n and N + N 2 (p − 1) ≤ B. Across all environments, we set a trajectory budget B = 136
+for all methods. As such, we use sets of size n = 4 for set RL, N = 8 vines at each rollout state,
+and p = 2 rollout states per trajectory. Note that at each of these rollout states, given we generate N
+rollouts, we can find N
+n sets for our set RL algorithm. We set the number of sets, M , be 4. For our
+chosen hyperparameters, this was sufficiently large number of sets from each rollout state allowing
+us to use several sets to compute the baseline.
+A.1.2
+
+OTHER I MPLEMENTATION D ETAILS AND P SEUDOCODE
+
+Now, we will discuss other implementation details for polychromic PPO . We provide the pseudocode for the complete algorithm in algorithm 2 and the hyperparameters in table 3.
+We found that adding the KL penalty from the behavior policy was helpful for stability. In the
+absence of it, in some tasks, the model’s performance collapses after a certain number of training
+epochs. This is likely because our method explicitly encourages exploration and the KL penalty
+provides an anchor that prevents the model from drifting too far.
+In practical implementation, we found that adding a window within which we update all the advantages to the polychromic advantage to be useful. As shown in algorithm 2, we do not only set the
+advantage at the rollout state st to be the polychromic advantage - instead, we set the advantages
+at states st , st+1 , · · · , st+W to be the polychromic advantage even though we do not generate vines
+from st+1 , · · · , st+W . This ensures that the exploratory behavior that the polychromic advantage
+17
+
+encourages is induced at all states throughout the window. Otherwise, although the policy might
+be exploratory at st , it might revert to being purely exploitative at all subsequent states due to the
+updates using the standard PPO objective; this would cause the policy to not explore. This issue becomes pronounced in environments where, despite being exploratory at st , the exploitative behavior
+in all subsequent states may override the exploration in st . This is why this implementation trick
+was important in BabyAI and Minigrid while, in Algorithmic Creativity, we set W = 0 since once
+the policy visits a diverse set of nodes from st , it is not easy to merge paths.
+Hyperparameter
+PPO epochs
+Minibatch size
+Discount (γ)
+GAE parameter (λ)
+Clipping parameter (ϵ)
+Actor learning rate
+Critic learning rate
+Value loss coefficient (cv )
+KL coefficient (βKL )
+Max grad norm
+Temperature
+Num. vines at state (N )
+Size of sets (n)
+Num. sets (M )
+Num. rollout states (p)
+Polychrome window (W )
+
+Value
+2
+64
+1.0
+0.95
+0.2
+1 × 10−5
+1 × 10−4
+0.5
+{0.005, 0.01, 0.05, 0.1}
+0.5
+1.0
+8
+4
+4
+2
+5 for BabyAI/Minigrid, 0 for Algorithmic Creativity
+
+Table 3: Polychromic PPO hyperparameters. All hyperparameters are fixed apart from the KL
+coefficient βKL for which we provide the set we sweep over.
+
+18
+
+Algorithm 2 Polychromic PPO
+Require: pretrained Policy πβ , value function Vϕ , discount γ, GAE parameter λ, clipping ϵ, policy
+epochs K, value coef cv , KL target coef βKL
+(Poly-PPO specific:) number of sets N , set size n, number of vine states p, number of vines N ,
+window length W .
+1: Initialize πθ ← πβ
+2: for iteration = 1, 2, . . . do
+3:
+Collect on-policy data using fractal sampling:
+4:
+Initialize rollout states ← {}
+▷ dictionary: state 7→ list of trajectories
+5:
+Roll out N trajectories using πβ
+6:
+for each trajectory τ do
+7:
+select p vine states from τ
+8:
+for each vine state s do
+9:
+Roll out N trajectories from s using πβ
+10:
+Append the new trajectories to rollout states[s]
+11:
+end for
+12:
+end for
+13:
+Compute advantages:
+14:
+if s ̸∈ rollout states then
+15:
+δt ← rt + γVϕ (st+1 ) − Vϕ (st )
+16:
+At ← GAE(δt:T , γ, λ)
+▷ generalized advantage estimation
+17:
+R̂t ← At + Vϕ (st )
+18:
+else if s ∈ rollout states then
+19:
+Create groups g1 , g1 , · · · , gM of n trajectories from rollout states[s].
+20:
+Compute set scores score(gi ) = fpoly (s, τ1:n ) for τ1:n ∈ gi (eq. (7))
+PM
+1
+21:
+Compute baseline fˆ(s) = M
+i=1 score(gi ).
+22:
+Define polychromic advantage of pairs (st , at ), . . . , (st+W , at+W ) ∈ τ for each τ ∈ gi :
+Apoly (st′ , at′ ) ← score(gi ) − fˆ(s)
+23:
+24:
+25:
+26:
+27:
+28:
+
+▷ polychromic advantage
+
+end if
+Normalize {At }
+for epoch = 1, . . . , K do
+for minibatch B do
+t |st )
+Compute ratios rt (θ) ← ππβθ (a
+(at |st )
+Policy loss:
+
+
+1 X
+Lπ (θ) = −
+min rt (θ)At , clip(rt (θ), 1 − ϵ, 1 + ϵ) At
+|B|
+t∈B
+
+29:
+30:
+31:
+
+2
+P
+1
+Value loss: LV (ϕ) = |B|
+t∈B Vϕ (st ) − R̂t
+
+P
+1
+KL penalty: LKL (θ) = |B|
+t∈B KL πβ (·|st ) ∥ πθ (·|st )
+Total loss:
+L(θ, ϕ) = Lπ (θ) + cv LV (ϕ) + βKL LKL (θ)
+
+32:
+Take gradient step on θ, ϕ to minimize L
+33:
+Update πβ ← πθ
+34:
+end for
+35:
+end for
+36: end for
+
+19
+
+Figure 6: Generalization under state perturbations in BabyAI BossLevel environment. The mission
+here is “Pickup a key”. The figure shows successful rollouts across perturbed initial states (blue
+circles), highlighting diverse strategies learned by the agent.
+
+B
+
+G ENERALIZATION E XPERIMENT
+
+To evaluate the agent’s ability to generalize to initial state perturbations, we designed the following
+experiment. First, for each environment seed, we perform 100 rollouts with the pretrained policy
+to identify all reachable rooms. Then, for each unique room visited, we evaluate the target policy
+(fine-tuned using RL) by placing the agent at 10 randomly selected starting positions within that
+room. Performance is measured using the pass@1 metric, which calculates the success rate on the
+first attempt from these novel starting points. This randomization presents a significant challenge,
+as a successful trajectory from a new initial state often requires substantially different strategies than
+those effective from the original start state as shown in fig. 6.
+
+20
+
+C
+
+P ROOFS
+
+C.1
+
+P ROOF OF L EMMA 3.2
+
+Recall our setup where, from each state s visited during on-policy rollouts, we sample n actions,
+a1:n . As such, from each state, we generate a tree where each node (corresponding to a state)
+(1)
+(nt )
+branches out into n children. We denote all the nodes at depth t of this tree by st , · · · , st .
+Furthermore, if, from a state s, the agent samples the set of actions a1:n , the agent gets a reward
+f (s, a1:n ) where f is the our objective function to be used in set RL. We will assume that f is
+normalized between 0 and 1. For simplicity, we assume that the initial state is fixed. Note that
+we can construct the distribution of states visited by policy πθ at time t in this tree as follows: for
+j ∈ {1, · · · , nt }, the probability of reaching a state at the t-th timestep and in the j-th node at that
+level is:
+(j)
+
+P(s0 → st = s, t, πθ )
+X
+X
+(1:n)
+P (s1 ) | s0 , (a0 )1:n ) · · ·
+=
+πθ ((a0 )1:n | s0 )
+(1:n)
+
+(a0 )1:n
+
+s1
+
+×
+
+(nt−1 )
+
+(1)
+
+X
+
+πθ ((at−1 )1:n , · · · , (at−1 )1:n
+
+(nt−1 )
+
+(1)
+
+| st−1 , · · · , st−1
+
+)
+
+(nt−1 )
+(1)
+(at−1 )1:n ,··· ,(at−1 )1:n
+
+(j)
+
+× P (st
+
+(1:nt−1 )
+
+| st−1
+
+Here, each πθ (a1:n | s) =
+
+(nt−1 )
+
+(1)
+
+, (at−1 )1:n , · · · , (at−1 )1:n
+
+)
+
+Qn
+
+i=1 πθ (ai | s). Similarly, we use the following shorthand:
+
+(1)
+(nt−1 )
+(1)
+(nt−1 )
+πθ ((at−1 )1:n , · · · , (at−1 )1:n
+| st−1 , · · · , st−1 ) =
+
+t−1
+nY
+
+(i)
+
+(i)
+
+πθ ((at−1 )1:n | st−1 ).
+
+i=1
+
+Before we prove the lemma, we make the following observation: suppose the environment’s state
+transition dynamics is deterministic (i.e., the distribution P (st+1 | st , at ) is a Dirac delta distribution), then the set Q-function can be written using the set value function as follows:
+
+Q♯π (s, a1:n ) = f (s, a1:n ) + γ
+
+n
+X
+
+(i)
+
+Vπ♯ (s1 )
+
+i=1
+(1)
+
+(n)
+
+where s1 , · · · , s1 are the states reached from s after taking actions a1:n independently. One can
+verify this by using the definition set Q-functoin and noting that:
+
+
+∞
+nt
+X
+X
+(i)
+(i)
+E
+γt
+f (st , (at )1:n ) | s0 = s, a1:n (s0 ) = a1:n 
+t=1
+
+i=1
+
+
+
+n
+X
+
+= E γ
+
+(i)
+
+(i)
+
+f (s1 , (a1 )1:n +
+
+t=2
+
+i=1
+
+
+= E(a1 )(i) γ
+1:n
+
+=γ
+
+n
+X
+i=1
+
+=γ
+
+n
+X
+
+∞
+X
+
+n
+X
+
+
+
+t
+
+γt
+
+n
+X
+
+(i)
+
+(i)
+
+f (st , (at )1:n ) s0 = s, (a0 )1:n = a1:n 
+
+i=1
+
+
+
+
+∞
+nt
+X
+X
+(i)
+(i)
+(i)
+(i) s0 =s,(a0 )1:n =a1:n 
+γt
+f (st , (at )1:n )
+···
+f (s1 , (a1 )1:n ) + E 
+(i)
+(i)
+s ,(a )
+
+i=1
+
+t=2
+
+i=1
+
+
+
+1
+
+1 1:n
+
+
+
+
+t−1
+∞
+n
+X
+X
+(i)
+(i)
+(n(i−1)+j)
+(n(i−1)+j)
+E(a1 )(i) f (s1 , (a1 )1:n ) + E 
+γ t−1
+f (st
+, (at )1:n
+) ··· ···
+1:n
+
+t=2
+
+j=1
+
+(i)
+
+Vπ♯ (s1 )
+
+i=1
+
+21
+
+Now we prove Lemma 3.2. Our proof follows the same procedure as in the proof of the standard
+performance difference lemma in Kakade & Langford [15]. We first prove the following lemma:
+Lemma C.1 Given the state visitation tree generated by policy πθ and any normalized objective
+function f ,
+
+
+∞
+nt
+X
+X
+1
+(i)
+(i)
+Eπθ 
+γt
+f (st , (at )1:n ) =
+E ♯
+[f (s, a1:n )]
+(8)
+1
+−
+γn s∼dπθ (s),a1:n ∼πθ (·|s)
+t=0
+i=1
+where
+d♯π (s) = (1 − γn)
+
+∞ X
+n
+X
+
+(i)
+
+γ t P(s0 → st , t, πθ ).
+
+t=0 i=1
+
+Proof.
+
+
+∞ X
+nt
+X
+(i)
+(i)
+γ t f (st , (at )1:n )
+E
+t=0 i=1
+
+=
+
+∞
+X
+
+nt
+h
+i
+X
+(i)
+(i)
+γ
+E f (st , (at )1:n )
+t
+
+t=0
+
+=
+
+∞
+X
+
+i=1
+t
+
+γ
+
+t
+
+t=0
+
+n X
+X
+
+h
+i
+(i)
+(i)
+(i)
+P(s0 → st , t, πθ )Ea1:n (s(i) ) f (st , (at )1:n )
+t
+
+i=1 s(i)
+t
+
+t
+
+∞
+n X
+h
+i
+X
+X
+1
+(i)
+(i)
+(i)
+(1 − γn)
+γt
+P(s0 → st , t, πθ )Ea1:n (st,i ) f (st , (at )1:n )
+=
+1 − γn
+t=0
+i=1 (i)
+st
+
+1
+=
+E ♯
+[f (s, a1:n ] .
+1 − γn s∼dπθ (s),a1:n ∼πθ (·|s)
+□
+Lemma 3.2 (restated). Given any two policies πθ and πβ ,
+Vπ♯θ (s) − Vπ♯β (s) =
+
+h
+i
+1
+Es∼d♯π (·),a1:n ∼πθ (·|s) A♯πβ (s, a1:n ) .
+θ
+1 − γn
+
+(9)
+
+Proof. We first, show that
+
+∞ X
+nt
+X
+
+Vπ♯θ (s) − Vπ♯β (s) = E 
+
+
+(i)
+(i)
+(i)
+Q♯πβ (st , (at )1:n ) − Vπ♯β (st ) | s0 = s .
+
+(10)
+
+t=0 i=1
+
+We show this by the following simplification:
+Vπ♯θ (s) − Vπ♯β (s)
+= Eπθ
+
+"∞
+X
+
+t
+
+γt
+
+t=0
+
+= Eπθ
+
+"∞
+X
+
+n
+X
+
+#
+f
+
+(i)
+(i) 
+st , (at )1:n
+
+f
+
+(i)
+(i) 
+st , (at )1:n
+
+s0 = s − Vπ♯β (s)
+
+i=1
+t
+
+γ
+
+t
+
+n
+X
+
+#
+s0 = s − Vπ♯β (s)
+
+t=0
+
+i=1
+
+"∞
+X
+
+#
+#
+"∞
+nt
+n
+nt
+n
+X
+X
+X X
+X
+(n(i−1)+j)
+(n(i−1)+j)
+γt
+γ
+Vπ♯β (st+1
+) s0 = s − Eπθ
+γt
+γ
+Vπ♯β (st+1
+) s0 = s
+
++ E πθ
+
+t=0
+
+i=1
+
+t=0
+
+j=1
+
+22
+
+i=1
+
+j=1
+
+= Eπθ
+
+"∞
+X
+
+#
+"∞
+#
+nt 
+n
+nt
+
+X
+X
+X X
+(i)
+(i) 
+(n(i−1)+j)
+(1)
+(i)
+♯
+t
+♯
+γ
+f st , (at )1:n + γ
+Vπβ (st+1
+) − E πθ
+γ
+Vπβ (st ) s0 = s .
+t
+
+t=0
+
+i=1
+
+t=0
+
+j=1
+
+i=1
+
+Now, the first term on the right hand side can be simplified (we suppress the condition that s0 = s
+in terms of notation):
+
+Eπθ
+
+"∞
+X
+
+t
+
+γ
+
+t
+
+t=0
+
+=
+
+∞
+X
+
+=
+
+f
+
+(i)
+(i) 
+st , (at )1:n + γ
+
+i=1
+nt
+X
+
+γt
+
+t=0
+∞
+X
+
+n 
+X
+
+n
+X
+j=1
+
+
+n
+X
+
+(i)
+(i)
+(n(i−1)+j) 
+Vπ♯β (st+1
+)
+Eπθ f st , (at )1:n + γ
+j=1
+
+ 
+
+t
+
+γt
+
+t=0
+
+#
+
+
+
+i=1
+n
+X
+
+
+
+(n(i−1)+j)
+Vπ♯β (st+1
+)
+
+(i)
+
+(i) 
+
+Es(i) ,(at )(i) E f st , (at )1:n + γ
+t
+
+i=1
+
+1:n
+
+n
+X
+
+
+(n(i−1)+j
+
+Vπ♯β (st+1
+
+(i)
+
+(i)
+
+)) st , (at )1:n 
+
+j=1
+
+t
+
+=
+
+n
+∞ X
+X
+
+h
+i
+(i)
+(i)
+Es(i) ,(at )(i) Q♯πβ (st , (at )1:n )
+
+t=0 i=1
+
+t
+
+1:n
+
+
+
+∞
+nt
+X
+X
+(i)
+(i)
+= Eπθ 
+γt
+Q♯πβ (st , (at )1:n )
+t=0
+
+i=1
+
+Therefore,
+Vπ♯θ (s) − Vπ♯β (s)
+= Eπθ
+
+"∞
+X
+t=0
+
+t
+
+γt
+
+n
+X
+
+#
+(i)
+(i)
+(i)
+Q♯πβ (st , (at )1:n ) − Vπ♯β (st ) s0 = s
+
+.
+
+i=1
+
+Then, using eq. (8), the statement follows.
+□
+C.2
+
+P ROOF OF P ROPOSITION 5.1
+
+We follow the set-up in Cui et al. [6]. We parameterize the policy as a softmax distribution:
+exp (zsa )
+′
+a′ exp (zsa )
+
+πθ (a | s) = P
+
+where zsa is the output logit of action a from state s. We also have the following derivative:
+∂
+log πθ (a | s) = 1{a′ = a} − πθ (a′ | s).
+∂zsa′
+First, we prove the following that shows how the output logit changes after one-step parameter
+update in the set RL paradigm.
+Lemma C.2 Given the softmax policy πθ is updated using eq. (4) using a step-size α, the change in
+the output logit zsa after one step update is given by
+"
+#
+n
+X
+k+1
+k
+zsa − zsa = αEa1:n ∼πθk (·|s) f (s, a1:n )
+1{ai = a} − αnπθk (a | s)Ea1:n ∼πθk (·|s) [f (s, a1:n )] .
+i=1
+
+23
+
+Proof. This can be proven by elementary properties of expectation:
+∂
+Ea1:n ∼πθk (·|s) [f (s, a1:n )]
+k
+∂zsa
+
+
+∂
+= αEa1:n ∼πθk (·|s)
+log(P(a
+|
+s))f
+(s,
+a
+)
+1:n
+1:n
+∂z k
+" n sa
+#
+X ∂
+k
+= αEa1:n ∼πθk (·|s)
+log(πθ (ai | s))f (s, a1:n )
+k
+∂zsa
+i=1
+" n
+#
+X
+
+1{ai = a} − πθk (a | s) f (s, a1:n )
+= αEa1:n ∼πθk (·|s)
+
+k+1
+k
+zsa
+− zsa
+=α
+
+i=1
+
+□
+Now we prove the main result:
+Proposition 5.1 (restated). Consider the set-RL setup
+ at state s. After one update to the policy, the
+change in entropy, ∆ = H πθk+1 | s − H πθk | s , is given by
+
+
+
+n
+n
+X
+X
+1
+∆ ≈ −αCova1:n 
+log πθk (ai | s), Cova′1:n f (s, a′1:n ),
+1{ai = a′j } ,
+n i=1
+i,j=1
+where both covariances are taken with respect to πθk (· | s).
+Proof. We have the following first order approximation of ∆ [6]:
+
+k+1
+k
+∆ ≈ −Cova∼πθk (·|s) log πθk (a | s), zsa
+− zsa
+.
+Using Lemma C.2, we get that
+∆ ≈αnE[f (s, a1:n )]Cova∼πθk (·|s) log πθk (a | s), πθk (a | s)
+"
+− αCova∼πθk (·|s)
+
+log πθk (a | s), Ea1:n ∼πθk (·|s)
+
+
+
+f (s, a1:n )
+
+n
+X
+
+#!
+1{ai = a}
+
+i=1
+
+Note that
+Cova1:n
+
+f (s, a1:n ),
+
+n
+X
+
+!
+1{ai = a}
+
+"
+=Ea1:n ∼πθk (·|s) f (s, a1:n )
+
+i=1
+
+n
+X
+
+#
+1{ai = a}
+
+i=1
+
+− nπθk (a | s)Ea1:n ∼πθk (·|s) [f (s, a1:n )]
+Using this, we get that
+∆ ≈αnE[f (s, a1:n )]Cova∼πθk (·|s) log πθk (a | s), πθk (a | s)
+"
+− αCova∼πθk (·|s)
+
+
+
+log πθk (a | s), Ea1:n ∼πθk (·|s) f (s, a1:n )
+
+n
+X
+
+#!
+1{ai = a}
+
+i=1
+
+=αnE[f (s, a1:n )]Cova∼πθk (·|s) log πθk (a | s), πθk (a | s)
+− αCova∼πθk (·|s)
+
+log πθk (a | s), Cova1:n
+
+
+
+f (s, a1:n ),
+
+n
+X
+i=1
+
+!
+nπθk (a | s)Ea1:n ∼πθk (·|s) [f (s, a1:n )]
+24
+
+!
+1{ai = a} +
+
+= −αCova∼πθk (·|s)
+
+log πθk (a | s), Cova1:n
+
+f (s, a1:n ),
+
+n
+X
+
+!!
+1{ai = a}
+
+.
+
+i=1
+
+All that remains to show is
+
+
+
+n
+n
+X
+X
+1
+Cova1:n 
+log πθk (ai | s), Cova′1:n f (s, a′1:n ),
+1{a′i = aj }
+n i=1
+i,j=1
+!!
+n
+X
+k
+1{ai = a}
+= Cova∼πθk (·|s) log πθ (a | s), Cova1:n f (s, a1:n ),
+.
+i=1
+
+This can be seen using the linearity of covariance and the fact that each ai in a1:n is sampled
+independently:
+
+
+
+n
+n
+X
+X
+1
+Cova1:n 
+log πθk (ai | s), Cova′1:n f (s, a′1:n ),
+1{ai = a′j }
+n i=1
+i,j=1
+
+
+
+n
+n
+X
+1X
+Cova1:n log πθk (ai | s), Cova′1:n f (s, a′1:n ),
+1{ai = a′j }
+=
+n i=1
+j=1
+!!
+n
+X
+k
+= Cova∼πθk (·|s) log πθ (a | s), Cova1:n f (s, a1:n ),
+1{ai = a}
+.
+i=1
+
+□
+C.3
+
+P ROOF OF P ROPOSITION 5.3
+
+Proposition 5.3 (restated). Consider the polychromic objective in eq. (7). For any homogeneous set
+a1:n = {a} where r(s, a) = 1, there exists ϵ ∈ (0, 1) such that Λfpoly (a) < 0 when πθ (a | s) > ϵ.
+q
+.
+Furthermore, the scaffold values of these homogeneous sets satisfy the bound Λfpoly (a) ≤ p(1−p)
+n
+Proof. We first prove the first part of the proposition. Let p = πθ (a | s). We will use the shorthand
+Λ(a) = Λfpoly (a; πθ ), f = fpoly and fˆ = Ea1:n ∼πθ (·|s) [f (s, a1:n )]. Then,
+n
+
+Λ(a) = Cova′1:n ∼πθ (·|s) (fˆ(s, a′1:n ),
+
+1 X
+1{a′i = aj })
+I(a) i,j=1
+n
+
+= Cova′1:n ∼πθ (·|s) (fˆ(s, a′1:n ),
+n
+X
+
+1X
+1{a′i = a})
+n i=1
+
+
+
+"
+
+n
+1X
+
+#
+
+j
+− Eα1:n ∼πθ (·|s)
+1{αi = a} )
+n
+n i=1
+j=0
+|a′1:n ∩{a}|=j
+
+
+n
+X
+X
+j
+
+=
+πθ (a′1:n | s)(f (s, a′1:n ) − fˆ)( − p)
+n
+j=0
+|a′1:n ∩{a}|=j
+
+
+⌊np⌋
+X j
+X
+=
+( − p) 
+πθ (a′1:n | s)(f (s, a′1:n ) − fˆ)
+n
+j=0
+|a′1:n ∩{a}|=j
+
+
+n
+X
+X
+j
++
+( − p) 
+πθ (a′1:n | s)(f (s, a′1:n ) − fˆ)
+n
+j=⌊np⌋+1
+|a′1:n ∩{a}|=j
+
+
+⌊np⌋
+X j
+X
+=
+( − p) 
+πθ (a′1:n | s)(f (s, a′1:n ))
+n
+′
+j=0
+=
+
+X
+
+
+
+πθ (a′1:n | s)(f (s, a′1:n ) − fˆ)(
+
+|a1:n ∩{a}|=j
+
+25
+
++
+
+n
+X
+
+
+X
+j
+( − p) 
+n
+′
+
+πθ (a′1:n | s)(f (s, a′1:n ))
+
+|a1:n ∩{a}|=j
+
+j=⌊np⌋+1
+
+
+n
+X
+− fˆ 
+
+
+
+X
+
+j=0 |a′1:n ∩{a}|=j
+
+
+j
+πθ (a′1:n | s)( − p)
+n
+
+Now, we can simplify using properties of the binomial distribution as follows:
+ 
+n
+n 
+X
+X
+X
+n j
+j
+j
+−p
+p (1 − p)n−j = 0.
+πθ (a′1:n | s)( − p) =
+n
+n
+j
+j=0 ′
+j=0
+|a1:n ∩{a}|=j
+
+Therefore, the scaffold value becomes:
+
+
+⌊np⌋
+X j
+X
+Λ(a) =
+( − p) 
+πθ (a′1:n | s)(f (s, a′1:n ))
+n
+′
+j=0
+|a1:n ∩{a}|=j
+
+
+n
+X
+X
+j
+πθ (a′1:n | s)(f (s, a′1:n ))
++
+( − p) 
+n
+′
+|a1:n ∩{a}|=j
+
+j=⌊np⌋+1
+⌊np⌋
+
+≤
+
++
+
+X j
+2j
+( − p) 2
+n
+n
+j=0
+n
+X
+
+(
+
+j=⌊np⌋+1
+
+X
+
+πθ (a′1:n | s)
+
+|a′1:n ∩{a}|=j
+
+j
+n−j+1
+− p)
+n
+n
+
+X
+
+πθ (a′1:n | s)
+
+|a′1:n ∩{a}|=j
+
+⌊np⌋
+
+ 
+X j
+2j n j
+( − p) 2
+p (1 − p)n−j
+n
+n
+j
+j=0
+ 
+n
+X
+n−j+1 n j
+j
++
+( − p)
+p (1 − p)n−j
+n
+n
+j
+=
+
+j=⌊np⌋+1
+⌊np⌋
+
+=
+
++
+
+ 
+X j
+2j n j
+p (1 − p)n−j
+( − p) 2
+n
+n
+j
+j=0
+n−1
+X
+
+(
+
+j=⌊np⌋+1
+
+ 
+j
+n−j+1 n j
+− p)
+p (1 − p)n−j
+n
+n
+j
+
+Here, in the second line, we used the fact when a′1:n ∩{a} is of size j, then the smallest possible value
+of f (s, a′1:n ) is n2j2 since at least 2 out of n elements are unique and at least j out of n elements attain
+which happens if all elements
+reward +1. On the other hand, we can bound it above by n−j+1
+n
+get reward +1 and n − j + 1 elements are unique. In the last line, we used the fact that when
+f (s, a′1:n = {a}) = 0 as the diversity is 0. Now, let ϵ = n−1
+n . Then, when p ≥ ϵ, ⌊np⌋ ≥ n − 1.
+Therefore,
+ 
+⌊np⌋
+X j
+2j n j
+Λ(a) =
+( − p) 2
+p (1 − p)n−j ≤ 0.
+n
+n
+j
+j=0
+Now we prove the second part. First, define the following upper bound of the scaffold value of the
+homogeneous sets:
+
+
+
+X
+Λ(a) ≤ EX∼Bin(n,p)
+− p Cn (X) =: Ba (n)
+n
+26
+
+ 2x
+ n2
+
+x ≤ ⌊np⌋
+x ∈ [⌊np⌋ + 1, n − 1]
+x=n
+
+where Cn (x) = n−x+1
+ n
+0,
+
+.
+
+p(1−p)
+X
+X
+1
+2
+. On the other hand, we can
+Now, E[ X
+n −p] = 0 and E[( n −p) ] = Var( n ) = n2 Var(X) =
+n
+2⌊np⌋
+2x
+2
+bound Cn (X) as follows: when x ≤ ⌊np⌋, Cn (x) = n2 ≤ n2 ≤ n . On the other hand, when
+j ∈ [⌊np⌋ + 1, n − 1], we have Cn (x) = n−x+1
+≤ 1. Combining, we have that E[Cn (X)2 ] ≤ 1.
+n
+Therefore, using the Cauchy–Schwarz inequality:
+
+
+
+X
+Ba (n) = EX∼Bin(n,p)
+− p Cn (X)
+n
+v "
+u 
+2 #
+u
+X
+−p
+≤ tE
+E [Cn (X)2 ]
+n
+r
+p(1 − p)
+.
+≤
+n
+
+□
+C.4
+
+P ROOF OF P ROPOSITION 5.4
+
+Proposition 5.4 (restated). Suppose a1:n is heterogeneous where each ai is unique with probability
+p ∈ (0, n1 ). Suppose exactly q of the n actions satisfy r(s, ai ) = 1, and that any other action
+a′ ∈
+/ a1:n with πθ (a′ | s) > 0 yields r(s, a′ ) = 0. Then, the scaffold value of a1:n satisfies
+n
+Λfpoly (a1:n ) > qp (1−p)
+.
+n
+
+Proof. This can be proven using very similar techniques. Let Pj = np pj (1 − p)n−j . Again, we use
+the shorthand f = fpoly . Then,
+Λ(a1:n ) =
+
+n
+X
+
+Pj (
+
+j=0
+
+j
+− p)E|a′1:n ∩a1:n |=j [f (s, a′1:n )]
+n
+⌊np⌋
+
+= P0 (0 − p) · 0 +
+
+X
+j=1
+
++
+
+n−1
+X
+
+≥
+
+j
+q
+− p)E|a′1:n ∩a1:n |=j [f (s, a′1:n )] + Pn (1 − p) ·
+n
+n
+
+Pj (
+
+j
+q
+− p)E|a′1:n ∩a1:n |=j [f (s, a′1:n )] + Pn (1 − p) ·
+n
+n
+
+j=⌊np⌋+1
+
+≥ Pn (1 − p) ·
+=
+
+j
+− p)E|a′1:n ∩a1:n |=j [f (s, a′1:n )]
+n
+
+Pj (
+
+j=⌊np⌋+1
+n−1
+X
+
+Pj (
+
+q
+n
+
+qpn (1 − p)
+n
+□
+
+27
+
+

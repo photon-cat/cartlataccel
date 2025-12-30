@@ -1,0 +1,44 @@
+{
+  "config": {
+    "max_evals": 100000,
+    "benchmark_interval": 10000,
+    "eval_rollouts": 5,
+    "env_bs": 1000,
+    "device": "cpu",
+    "noise_mode": null,
+    "debug": false
+  },
+  "timestamp": "20251228_165504",
+  "total_time": 4.383639097213745,
+  "total_steps": 100000,
+  "steps_per_second": 22812.09693187569,
+  "initial_results": {
+    "lataccel_cost": 320.6541736809585,
+    "jerk_cost": 7.500538100794597,
+    "total_cost": 16040.20922214872,
+    "reward": -475.2352293590511,
+    "lataccel_cost_std": 7.186905209638316,
+    "jerk_cost_std": 4.889550255782386,
+    "total_cost_std": 357.2085189595122,
+    "reward_std": 13.422904629928885,
+    "timesteps": 0,
+    "wall_time": 0
+  },
+  "final_results": {
+    "lataccel_cost": 188.98610896388118,
+    "jerk_cost": 949232.5936658395,
+    "total_cost": 958681.8991140334,
+    "reward": -22.37780863687185,
+    "lataccel_cost_std": 3.7328419620622983,
+    "jerk_cost_std": 9463.471608452077,
+    "total_cost_std": 9316.533101064902,
+    "reward_std": 3.506742372350254,
+    "timesteps": 100000,
+    "wall_time": 4.2556679248809814,
+    "train_time_interval": 0.2680361270904541
+  },
+  "improvement": {
+    "total_cost_pct": 5876.741860637712,
+    "reward_pct": -95.29121427570662
+  }
+}

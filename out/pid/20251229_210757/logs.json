@@ -1,0 +1,10 @@
+[
+  {
+    "step": 1,
+    "reward": -107.27307579168288,
+    "timestamp": 7.542654991149902,
+    "loss": null,
+    "diversity": null,
+    "entropy": null
+  }
+]

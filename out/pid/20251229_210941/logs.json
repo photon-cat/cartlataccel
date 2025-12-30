@@ -1,0 +1,42 @@
+[
+  {
+    "step": 1,
+    "reward": -35.976075149590045,
+    "timestamp": 0.37104105949401855,
+    "loss": null,
+    "diversity": null,
+    "entropy": null
+  },
+  {
+    "step": 2,
+    "reward": -42.23395319898097,
+    "timestamp": 0.37485790252685547,
+    "loss": null,
+    "diversity": null,
+    "entropy": null
+  },
+  {
+    "step": 3,
+    "reward": -23.152598857557177,
+    "timestamp": 0.37840723991394043,
+    "loss": null,
+    "diversity": null,
+    "entropy": null
+  },
+  {
+    "step": 4,
+    "reward": -40.87426285518777,
+    "timestamp": 0.38228917121887207,
+    "loss": null,
+    "diversity": null,
+    "entropy": null
+  },
+  {
+    "step": 5,
+    "reward": -11.06291999757205,
+    "timestamp": 0.3859100341796875,
+    "loss": null,
+    "diversity": null,
+    "entropy": null
+  }
+]

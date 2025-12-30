@@ -1,0 +1,82 @@
+{
+  "config": {
+    "hidden_size": 256,
+    "n_layers": 4,
+    "max_evals": 300000,
+    "checkpoint_interval": 50000,
+    "eval_rollouts": 10,
+    "jerk_weight": 0.005,
+    "action_weight": 0.0005,
+    "lr": 0.0003,
+    "device": "cpu"
+  },
+  "pid_baseline": {
+    "total_cost": 2090.322470170665,
+    "lataccel_cost": 19.03478112894016,
+    "jerk_cost": 1138.583413723657
+  },
+  "checkpoints": [
+    {
+      "timesteps": 50000,
+      "wall_time": 19.373394012451172,
+      "train_time": 18.856852293014526,
+      "lataccel_cost": 397.11772920071473,
+      "jerk_cost": 0.001555429852341653,
+      "total_cost": 19855.88801546559,
+      "reward": -481.97028537826435,
+      "vs_pid": 9.498959274855066
+    },
+    {
+      "timesteps": 100000,
+      "wall_time": 37.06847381591797,
+      "train_time": 17.19065284729004,
+      "lataccel_cost": 362.5124048584181,
+      "jerk_cost": 150.21379610872654,
+      "total_cost": 18275.834039029636,
+      "reward": -467.49577857991227,
+      "vs_pid": 8.743069215314659
+    },
+    {
+      "timesteps": 150000,
+      "wall_time": 55.84141802787781,
+      "train_time": 18.1627037525177,
+      "lataccel_cost": 315.15159297151206,
+      "jerk_cost": 161.6189144615314,
+      "total_cost": 15919.198563037135,
+      "reward": -471.20687414837056,
+      "vs_pid": 7.61566638172215
+    },
+    {
+      "timesteps": 200000,
+      "wall_time": 75.03069114685059,
+      "train_time": 18.692657947540283,
+      "lataccel_cost": 57.53171021842028,
+      "jerk_cost": 493.9197342118041,
+      "total_cost": 3370.5052451328183,
+      "reward": -424.78731921550605,
+      "vs_pid": 1.6124331500190172
+    },
+    {
+      "timesteps": 250000,
+      "wall_time": 93.04685187339783,
+      "train_time": 17.515041828155518,
+      "lataccel_cost": 177.81121512423047,
+      "jerk_cost": 66.62609786789913,
+      "total_cost": 8957.18685407942,
+      "reward": -479.6530677290013,
+      "vs_pid": 4.285074184438207
+    },
+    {
+      "timesteps": 300000,
+      "wall_time": 110.74551773071289,
+      "train_time": 17.19076108932495,
+      "lataccel_cost": 377.8100269957543,
+      "jerk_cost": 0.4068976554061199,
+      "total_cost": 18890.908247443123,
+      "reward": -481.75896942419496,
+      "vs_pid": 9.037317694767339
+    }
+  ],
+  "best_checkpoint": 200000,
+  "best_cost": 3370.5052451328183
+}

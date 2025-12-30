@@ -1,0 +1,16 @@
+================================================================================
+1 MILLION STEP TRAINING SUMMARY
+================================================================================
+
+Training completed: 2025-12-28 18:37:56
+Total time: 0.4 minutes
+
+Best checkpoint: 200,000 steps
+  Total cost: 15,164.74
+  vs PID: 7.05x
+
+Final checkpoint: 1,000,000 steps
+  Total cost: 19,681.26
+  vs PID: 9.15x
+
+Training improvement: -9.9%

@@ -9,7 +9,7 @@ import gymnasium as gym
 import gym_cartlataccel
 from torchrl.data import ReplayBuffer, LazyTensorStorage
 from tensordict import TensorDict
-from model import ActorCritic
+from models.model import ActorCritic
 
 class PPO:
   def __init__(self, env, model, lr=1e-1, gamma=0.99, lam=0.95, clip_range=0.2, epochs=1, n_steps=30, ent_coeff=0.01, bs=30, env_bs=1, device='cuda', debug=False):
@@ -146,24 +146,25 @@ if __name__ == "__main__":
   parser = argparse.ArgumentParser()
   parser.add_argument("--max_evals", type=int, default=30000)
   parser.add_argument("--env_bs", type=int, default=1000)
-  parser.add_argument("--save_model", default=False)
+  parser.add_argument("--save_model", action='store_true', help="Save trained model to out/best.pt")
   parser.add_argument("--noise_mode", default=None)
   parser.add_argument("--render", type=str, default="human")
-  parser.add_argument("--debug", default=False)
+  parser.add_argument("--debug", action='store_true', help="Enable debug output")
+  parser.add_argument("--device", type=str, default="cuda")
   args = parser.parse_args()
 
   print(f"training ppo with max_evals {args.max_evals}") 
   start = time.time()
   env = gym.make("CartLatAccel-v1", noise_mode=args.noise_mode, env_bs=args.env_bs)
   model = ActorCritic(env.observation_space.shape[-1], {"pi": [32], "vf": [32]}, env.action_space.shape[-1])
-  ppo = PPO(env, model, env_bs=args.env_bs, debug=args.debug)
+  ppo = PPO(env, model, env_bs=args.env_bs, debug=args.debug, device=args.device)
   best_model, hist = ppo.train(args.max_evals)
   train_time = time.time() - start
 
   print(f"rolling out best model") 
   start = time.time()
   env = gym.make("CartLatAccel-v1", noise_mode=args.noise_mode, env_bs=1, render_mode=args.render)
-  states, actions, rewards, dones, next_state= ppo.rollout(env, best_model, max_steps=200, deterministic=True)
+  states, actions, rewards, dones, next_state= ppo.rollout(env, best_model, max_steps=200, deterministic=True, device=args.device)
   rollout_time = time.time() - start
   print(f"reward {sum(rewards)}")
   print(f"mean action {np.mean(abs(np.array(actions)))}")

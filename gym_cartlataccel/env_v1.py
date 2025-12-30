@@ -22,7 +22,7 @@ class CartLatAccelEnv(gym.Env):
     "render_fps": 50,
   }
 
-  def __init__(self, render_mode: str = None, noise_mode: str = None, moving_target: bool = True, env_bs: int = 1):
+  def __init__(self, render_mode: str = None, noise_mode: str = None, moving_target: bool = True, env_bs: int = 1, n_segments: int = 10):
     self.force_mag = 50.0 # steer -> accel
     self.tau = 0.02  # Time step
     self.max_u = 1.0 # steer/action
@@ -31,6 +31,8 @@ class CartLatAccelEnv(gym.Env):
     self.max_x_frame = 2.2 # size of render frame
 
     self.bs = env_bs
+    self.n_segments = n_segments  # number of waypoints for target trajectory
+    
     # Action space is continuous steer/accel
     self.action_space = spaces.Box(
       low=-self.max_u, high=self.max_u, shape=(self.bs, 1), dtype=np.float32
@@ -57,8 +59,10 @@ class CartLatAccelEnv(gym.Env):
     self.noise_model = SimNoise(self.max_episode_steps, 1/self.tau, self.noise_mode, seed=42)
     np.random.seed(42)
 
-  def generate_traj(self, n_traj=1, n_points=10):
+  def generate_traj(self, n_traj=1, n_points=None):
     # generates smooth curve using cubic interpolation
+    if n_points is None:
+      n_points = self.n_segments
     t_control = np.linspace(0, self.max_episode_steps - 1, n_points)
     control_points = np.random.uniform(-2, 2, (n_traj, n_points)) # slightly less than max x
     f = interp1d(t_control, control_points, kind='cubic')

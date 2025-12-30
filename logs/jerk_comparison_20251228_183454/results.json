@@ -1,0 +1,84 @@
+{
+  "config": {
+    "max_evals": 100000,
+    "jerk_weight": 0.01,
+    "action_weight": 0.001,
+    "device": "cpu",
+    "n_eval_rollouts": 5
+  },
+  "timestamp": "20251228_183454",
+  "original": {
+    "10000": {
+      "lataccel_cost": 113.78944762285487,
+      "jerk_cost": 325295.01868670015,
+      "total_cost": 330984.4910678429,
+      "reward": -13.959332432478666,
+      "train_time": 0.3307490348815918,
+      "timesteps": 10000
+    },
+    "30000": {
+      "lataccel_cost": 54.37093115457718,
+      "jerk_cost": 147520.98005260254,
+      "total_cost": 150239.5266103314,
+      "reward": -35.16901172692332,
+      "train_time": 0.4415559768676758,
+      "timesteps": 30000
+    },
+    "50000": {
+      "lataccel_cost": 165.20546810325487,
+      "jerk_cost": 747662.9135912443,
+      "total_cost": 755923.186996407,
+      "reward": -34.092854183811575,
+      "train_time": 0.36463117599487305,
+      "timesteps": 50000
+    },
+    "100000": {
+      "lataccel_cost": 185.19712098305197,
+      "jerk_cost": 916866.8034571648,
+      "total_cost": 926126.659506317,
+      "reward": -21.630241149639055,
+      "train_time": 1.0144031047821045,
+      "timesteps": 100000
+    }
+  },
+  "jerk_aware": {
+    "10000": {
+      "lataccel_cost": 393.6209637659625,
+      "jerk_cost": 0.0,
+      "total_cost": 19681.04818829812,
+      "reward": -464.9875816579756,
+      "train_time": 0.29436373710632324,
+      "timesteps": 10000
+    },
+    "30000": {
+      "lataccel_cost": 397.55148806656064,
+      "jerk_cost": 2.5489948855059437,
+      "total_cost": 19880.123398213535,
+      "reward": -476.3694007373726,
+      "train_time": 0.3817760944366455,
+      "timesteps": 30000
+    },
+    "50000": {
+      "lataccel_cost": 390.7579767935304,
+      "jerk_cost": 132.314565435995,
+      "total_cost": 19670.213405112518,
+      "reward": -474.05282238474666,
+      "train_time": 0.45288777351379395,
+      "timesteps": 50000
+    },
+    "100000": {
+      "lataccel_cost": 389.36981036594744,
+      "jerk_cost": 41.561913023730696,
+      "total_cost": 19510.0524313211,
+      "reward": -473.9479909241828,
+      "train_time": 1.041930913925171,
+      "timesteps": 100000
+    }
+  },
+  "analysis": {
+    "orig_degradation_pct": 179.8096842901579,
+    "jerk_degradation_pct": -0.8688346034267047,
+    "best_orig": 150239.5266103314,
+    "best_jerk": 19510.0524313211
+  }
+}

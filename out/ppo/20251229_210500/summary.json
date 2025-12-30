@@ -1,0 +1,7 @@
+{
+  "controller": "ppo",
+  "avg_reward": -189.39451621857583,
+  "std_reward": 11.751553176764586,
+  "position_mse": 96.59895701521945,
+  "n_episodes": 3
+}

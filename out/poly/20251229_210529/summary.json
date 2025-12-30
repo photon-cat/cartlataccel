@@ -1,0 +1,7 @@
+{
+  "controller": "poly",
+  "avg_reward": -13.659367531995054,
+  "std_reward": 1.5012804438908545,
+  "position_mse": 0.608510352588115,
+  "n_episodes": 3
+}

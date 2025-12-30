@@ -1,0 +1,1002 @@
+[
+  {
+    "step": 4,
+    "reward": -33.18753972318705,
+    "timestamp": 1.0256037712097168,
+    "loss": 26.602752685546875,
+    "diversity": 0.75,
+    "entropy": null
+  },
+  {
+    "step": 8,
+    "reward": -37.062563308475745,
+    "timestamp": 1.0958001613616943,
+    "loss": 29.53434944152832,
+    "diversity": 0.75,
+    "entropy": null
+  },
+  {
+    "step": 12,
+    "reward": -49.513667863676744,
+    "timestamp": 1.164402961730957,
+    "loss": 46.12944793701172,
+    "diversity": 0.75,
+    "entropy": null
+  },
+  {
+    "step": 16,
+    "reward": -40.314749893776224,
+    "timestamp": 1.2343571186065674,
+    "loss": 31.203147888183594,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 20,
+    "reward": -60.49064548667009,
+    "timestamp": 1.3018860816955566,
+    "loss": 57.2979850769043,
+    "diversity": 0.75,
+    "entropy": null
+  },
+  {
+    "step": 24,
+    "reward": -50.814291140207814,
+    "timestamp": 1.3696990013122559,
+    "loss": 49.70534896850586,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 28,
+    "reward": -46.48909907842213,
+    "timestamp": 1.4420537948608398,
+    "loss": 40.475276947021484,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 32,
+    "reward": -43.26466767398661,
+    "timestamp": 1.512389898300171,
+    "loss": 29.854076385498047,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 36,
+    "reward": -58.43949603464638,
+    "timestamp": 1.5815529823303223,
+    "loss": 57.55937194824219,
+    "diversity": 0.75,
+    "entropy": null
+  },
+  {
+    "step": 40,
+    "reward": -60.762406742220946,
+    "timestamp": 1.6498911380767822,
+    "loss": 59.66314697265625,
+    "diversity": 0.5,
+    "entropy": null
+  },
+  {
+    "step": 44,
+    "reward": -43.97317450756065,
+    "timestamp": 1.71878981590271,
+    "loss": 40.22524642944336,
+    "diversity": 0.75,
+    "entropy": null
+  },
+  {
+    "step": 48,
+    "reward": -33.130548411716006,
+    "timestamp": 1.7864749431610107,
+    "loss": 17.928194046020508,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 52,
+    "reward": -32.2653873036602,
+    "timestamp": 1.8560240268707275,
+    "loss": 25.040233612060547,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 56,
+    "reward": -31.161656909017918,
+    "timestamp": 1.9277079105377197,
+    "loss": 23.28314208984375,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 60,
+    "reward": -22.102849233340564,
+    "timestamp": 1.9955358505249023,
+    "loss": 9.24360179901123,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 64,
+    "reward": -51.275524744889395,
+    "timestamp": 2.0624778270721436,
+    "loss": 42.76035690307617,
+    "diversity": 0.75,
+    "entropy": null
+  },
+  {
+    "step": 68,
+    "reward": -29.243808379904195,
+    "timestamp": 2.1312918663024902,
+    "loss": 15.475238800048828,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 72,
+    "reward": -31.390249379552422,
+    "timestamp": 2.2084999084472656,
+    "loss": 23.99702262878418,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 76,
+    "reward": -11.979108838660576,
+    "timestamp": 2.2827301025390625,
+    "loss": 2.589695453643799,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 80,
+    "reward": -29.010054220177743,
+    "timestamp": 2.350322961807251,
+    "loss": 23.41385269165039,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 84,
+    "reward": -20.288937393957244,
+    "timestamp": 2.4168829917907715,
+    "loss": 7.853018760681152,
+    "diversity": 0.75,
+    "entropy": null
+  },
+  {
+    "step": 88,
+    "reward": -34.24221983654982,
+    "timestamp": 2.4841208457946777,
+    "loss": 21.073869705200195,
+    "diversity": 0.75,
+    "entropy": null
+  },
+  {
+    "step": 92,
+    "reward": -26.646055846469647,
+    "timestamp": 2.5509378910064697,
+    "loss": 13.827191352844238,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 96,
+    "reward": -28.05139045627019,
+    "timestamp": 2.6195220947265625,
+    "loss": 13.773004531860352,
+    "diversity": 0.5,
+    "entropy": null
+  },
+  {
+    "step": 100,
+    "reward": -55.08293843879375,
+    "timestamp": 2.686589002609253,
+    "loss": 50.254058837890625,
+    "diversity": 0.5,
+    "entropy": null
+  },
+  {
+    "step": 104,
+    "reward": -35.96601944327909,
+    "timestamp": 2.75311279296875,
+    "loss": 22.34035873413086,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 108,
+    "reward": -25.684702471761526,
+    "timestamp": 2.8375449180603027,
+    "loss": 13.137985229492188,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 112,
+    "reward": -14.9643110109357,
+    "timestamp": 2.905606985092163,
+    "loss": 4.119077682495117,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 116,
+    "reward": -47.090713818742756,
+    "timestamp": 2.9836020469665527,
+    "loss": 44.76112747192383,
+    "diversity": 0.75,
+    "entropy": null
+  },
+  {
+    "step": 120,
+    "reward": -40.26494846775157,
+    "timestamp": 3.0583760738372803,
+    "loss": 32.22677230834961,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 124,
+    "reward": -40.753091672696,
+    "timestamp": 3.130061149597168,
+    "loss": 28.8756046295166,
+    "diversity": 0.75,
+    "entropy": null
+  },
+  {
+    "step": 128,
+    "reward": -31.328052806103663,
+    "timestamp": 3.202788829803467,
+    "loss": 15.256484985351562,
+    "diversity": 0.75,
+    "entropy": null
+  },
+  {
+    "step": 132,
+    "reward": -32.389261602500014,
+    "timestamp": 3.269771099090576,
+    "loss": 26.249738693237305,
+    "diversity": 0.75,
+    "entropy": null
+  },
+  {
+    "step": 136,
+    "reward": -29.196679924218138,
+    "timestamp": 3.339050054550171,
+    "loss": 14.31069564819336,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 140,
+    "reward": -14.923788380536106,
+    "timestamp": 3.4056529998779297,
+    "loss": 4.366661071777344,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 144,
+    "reward": -26.070486311401766,
+    "timestamp": 3.47284197807312,
+    "loss": 17.22954750061035,
+    "diversity": 0.75,
+    "entropy": null
+  },
+  {
+    "step": 148,
+    "reward": -27.33779617103269,
+    "timestamp": 3.5388381481170654,
+    "loss": 13.794425964355469,
+    "diversity": 0.75,
+    "entropy": null
+  },
+  {
+    "step": 152,
+    "reward": -35.639503824039096,
+    "timestamp": 3.6108829975128174,
+    "loss": 28.331256866455078,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 156,
+    "reward": -31.331014876070643,
+    "timestamp": 3.678691864013672,
+    "loss": 22.596149444580078,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 160,
+    "reward": -43.84166253349498,
+    "timestamp": 3.747107982635498,
+    "loss": 30.031171798706055,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 164,
+    "reward": -39.70349351649915,
+    "timestamp": 3.813945770263672,
+    "loss": 31.2679500579834,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 168,
+    "reward": -56.36301406184459,
+    "timestamp": 3.880033016204834,
+    "loss": 50.783241271972656,
+    "diversity": 0.75,
+    "entropy": null
+  },
+  {
+    "step": 172,
+    "reward": -36.71685168148703,
+    "timestamp": 3.946884870529175,
+    "loss": 25.702129364013672,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 176,
+    "reward": -42.33707546500166,
+    "timestamp": 4.012220859527588,
+    "loss": 30.440690994262695,
+    "diversity": 0.75,
+    "entropy": null
+  },
+  {
+    "step": 180,
+    "reward": -30.812616563687502,
+    "timestamp": 4.0799338817596436,
+    "loss": 16.70285415649414,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 184,
+    "reward": -40.26294875626972,
+    "timestamp": 4.146358013153076,
+    "loss": 28.95392417907715,
+    "diversity": 0.5,
+    "entropy": null
+  },
+  {
+    "step": 188,
+    "reward": -16.606515074184614,
+    "timestamp": 4.216389894485474,
+    "loss": 5.4900617599487305,
+    "diversity": 0.75,
+    "entropy": null
+  },
+  {
+    "step": 192,
+    "reward": -36.956906120322536,
+    "timestamp": 4.284873008728027,
+    "loss": 26.45705795288086,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 196,
+    "reward": -27.838017476197763,
+    "timestamp": 4.3514299392700195,
+    "loss": 15.364911079406738,
+    "diversity": 0.75,
+    "entropy": null
+  },
+  {
+    "step": 200,
+    "reward": -41.54368832893852,
+    "timestamp": 4.418581008911133,
+    "loss": 36.0489616394043,
+    "diversity": 0.75,
+    "entropy": null
+  },
+  {
+    "step": 204,
+    "reward": -40.47428775150486,
+    "timestamp": 4.485089063644409,
+    "loss": 32.22376251220703,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 208,
+    "reward": -40.176781469667546,
+    "timestamp": 4.551097869873047,
+    "loss": 27.318538665771484,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 212,
+    "reward": -42.82502734054008,
+    "timestamp": 4.618234872817993,
+    "loss": 33.78718185424805,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 216,
+    "reward": -52.29574891966201,
+    "timestamp": 4.685176134109497,
+    "loss": 50.20548629760742,
+    "diversity": 0.75,
+    "entropy": null
+  },
+  {
+    "step": 220,
+    "reward": -29.27681686135511,
+    "timestamp": 4.754488945007324,
+    "loss": 18.513879776000977,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 224,
+    "reward": -43.23359597772068,
+    "timestamp": 4.821393966674805,
+    "loss": 31.882007598876953,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 228,
+    "reward": -42.08274965713258,
+    "timestamp": 4.889017820358276,
+    "loss": 33.033329010009766,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 232,
+    "reward": -24.059071195855743,
+    "timestamp": 4.956316947937012,
+    "loss": 9.445592880249023,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 236,
+    "reward": -19.703594844473862,
+    "timestamp": 5.023169040679932,
+    "loss": 7.030686855316162,
+    "diversity": 0.75,
+    "entropy": null
+  },
+  {
+    "step": 240,
+    "reward": -21.73056597350871,
+    "timestamp": 5.089828968048096,
+    "loss": 12.821328163146973,
+    "diversity": 0.75,
+    "entropy": null
+  },
+  {
+    "step": 244,
+    "reward": -46.714464710255776,
+    "timestamp": 5.156408786773682,
+    "loss": 34.917510986328125,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 248,
+    "reward": -37.45908992653329,
+    "timestamp": 5.228872060775757,
+    "loss": 28.444515228271484,
+    "diversity": 0.5,
+    "entropy": null
+  },
+  {
+    "step": 252,
+    "reward": -38.783030192498614,
+    "timestamp": 5.296728849411011,
+    "loss": 32.18562316894531,
+    "diversity": 0.75,
+    "entropy": null
+  },
+  {
+    "step": 256,
+    "reward": -38.99820428249237,
+    "timestamp": 5.365072011947632,
+    "loss": 25.099397659301758,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 260,
+    "reward": -37.14378378010738,
+    "timestamp": 5.431855916976929,
+    "loss": 25.144262313842773,
+    "diversity": 0.5,
+    "entropy": null
+  },
+  {
+    "step": 264,
+    "reward": -26.7166087800819,
+    "timestamp": 5.498082160949707,
+    "loss": 11.677203178405762,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 268,
+    "reward": -34.83328034732344,
+    "timestamp": 5.565475940704346,
+    "loss": 20.95502281188965,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 272,
+    "reward": -42.988031240093115,
+    "timestamp": 5.633755922317505,
+    "loss": 33.891197204589844,
+    "diversity": 0.75,
+    "entropy": null
+  },
+  {
+    "step": 276,
+    "reward": -29.970501892734163,
+    "timestamp": 5.707262992858887,
+    "loss": 19.11770248413086,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 280,
+    "reward": -32.82012434029751,
+    "timestamp": 5.775436162948608,
+    "loss": 18.958837509155273,
+    "diversity": 0.75,
+    "entropy": null
+  },
+  {
+    "step": 284,
+    "reward": -32.681818062762375,
+    "timestamp": 5.84491491317749,
+    "loss": 22.220489501953125,
+    "diversity": 0.5,
+    "entropy": null
+  },
+  {
+    "step": 288,
+    "reward": -45.88654939058806,
+    "timestamp": 5.924587965011597,
+    "loss": 38.64647674560547,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 292,
+    "reward": -40.06301757314013,
+    "timestamp": 5.993016004562378,
+    "loss": 28.221227645874023,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 296,
+    "reward": -32.677116251203415,
+    "timestamp": 6.063578844070435,
+    "loss": 18.377620697021484,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 300,
+    "reward": -46.6542036604593,
+    "timestamp": 6.130599021911621,
+    "loss": 37.035003662109375,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 304,
+    "reward": -27.17894875447209,
+    "timestamp": 6.196969032287598,
+    "loss": 16.26316261291504,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 308,
+    "reward": -32.31995889079524,
+    "timestamp": 6.264127969741821,
+    "loss": 25.688926696777344,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 312,
+    "reward": -58.21322728637097,
+    "timestamp": 6.331943988800049,
+    "loss": 61.63597869873047,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 316,
+    "reward": -38.198023143585324,
+    "timestamp": 6.398334980010986,
+    "loss": 27.7857608795166,
+    "diversity": 0.5,
+    "entropy": null
+  },
+  {
+    "step": 320,
+    "reward": -42.58567664211222,
+    "timestamp": 6.466196060180664,
+    "loss": 31.724884033203125,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 324,
+    "reward": -49.14900721499892,
+    "timestamp": 6.533624172210693,
+    "loss": 40.525760650634766,
+    "diversity": 0.75,
+    "entropy": null
+  },
+  {
+    "step": 328,
+    "reward": -23.000344408716963,
+    "timestamp": 6.600969076156616,
+    "loss": 11.779731750488281,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 332,
+    "reward": -22.333266330139132,
+    "timestamp": 6.759042024612427,
+    "loss": 9.07047176361084,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 336,
+    "reward": -33.41731406243552,
+    "timestamp": 6.8520660400390625,
+    "loss": 25.248708724975586,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 340,
+    "reward": -30.38752346483237,
+    "timestamp": 6.928248882293701,
+    "loss": 16.206947326660156,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 344,
+    "reward": -24.814367659505194,
+    "timestamp": 6.997978925704956,
+    "loss": 10.912942886352539,
+    "diversity": 0.75,
+    "entropy": null
+  },
+  {
+    "step": 348,
+    "reward": -22.672398018266293,
+    "timestamp": 7.068060874938965,
+    "loss": 9.75767993927002,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 352,
+    "reward": -47.325634928738886,
+    "timestamp": 7.135998964309692,
+    "loss": 39.95220947265625,
+    "diversity": 0.75,
+    "entropy": null
+  },
+  {
+    "step": 356,
+    "reward": -42.347368173014296,
+    "timestamp": 7.220111846923828,
+    "loss": 28.491439819335938,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 360,
+    "reward": -35.81839396597303,
+    "timestamp": 7.2892820835113525,
+    "loss": 24.125038146972656,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 364,
+    "reward": -47.50532641493708,
+    "timestamp": 7.358078956604004,
+    "loss": 43.06768798828125,
+    "diversity": 0.75,
+    "entropy": null
+  },
+  {
+    "step": 368,
+    "reward": -29.116753805458462,
+    "timestamp": 7.430541038513184,
+    "loss": 20.5106201171875,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 372,
+    "reward": -31.617198090386186,
+    "timestamp": 7.498492002487183,
+    "loss": 18.21810531616211,
+    "diversity": 0.75,
+    "entropy": null
+  },
+  {
+    "step": 376,
+    "reward": -28.843849446507875,
+    "timestamp": 7.571769952774048,
+    "loss": 14.568984985351562,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 380,
+    "reward": -57.98062894562732,
+    "timestamp": 7.640842914581299,
+    "loss": 55.57650375366211,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 384,
+    "reward": -12.11901012759871,
+    "timestamp": 7.709313154220581,
+    "loss": 2.0265989303588867,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 388,
+    "reward": -28.41160696993476,
+    "timestamp": 7.7783238887786865,
+    "loss": 12.390894889831543,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 392,
+    "reward": -23.23409333942534,
+    "timestamp": 7.8464179039001465,
+    "loss": 9.93049430847168,
+    "diversity": 0.75,
+    "entropy": null
+  },
+  {
+    "step": 396,
+    "reward": -41.555155041969506,
+    "timestamp": 7.914361953735352,
+    "loss": 29.330705642700195,
+    "diversity": 0.75,
+    "entropy": null
+  },
+  {
+    "step": 400,
+    "reward": -37.339078952135026,
+    "timestamp": 7.982618808746338,
+    "loss": 29.777828216552734,
+    "diversity": 0.75,
+    "entropy": null
+  },
+  {
+    "step": 404,
+    "reward": -45.56053617734391,
+    "timestamp": 8.05149793624878,
+    "loss": 33.82650375366211,
+    "diversity": 0.75,
+    "entropy": null
+  },
+  {
+    "step": 408,
+    "reward": -56.817500931140486,
+    "timestamp": 8.120033979415894,
+    "loss": 49.89923095703125,
+    "diversity": 0.75,
+    "entropy": null
+  },
+  {
+    "step": 412,
+    "reward": -36.559517665620824,
+    "timestamp": 8.190001964569092,
+    "loss": 30.45241355895996,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 416,
+    "reward": -53.28582390933835,
+    "timestamp": 8.260213136672974,
+    "loss": 47.28864669799805,
+    "diversity": 0.75,
+    "entropy": null
+  },
+  {
+    "step": 420,
+    "reward": -52.508145782175454,
+    "timestamp": 8.328060865402222,
+    "loss": 49.49807357788086,
+    "diversity": 0.75,
+    "entropy": null
+  },
+  {
+    "step": 424,
+    "reward": -34.69896129150149,
+    "timestamp": 8.395776987075806,
+    "loss": 23.23037338256836,
+    "diversity": 0.75,
+    "entropy": null
+  },
+  {
+    "step": 428,
+    "reward": -26.665689320483157,
+    "timestamp": 8.462573051452637,
+    "loss": 14.209073066711426,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 432,
+    "reward": -34.025329706812414,
+    "timestamp": 8.529404878616333,
+    "loss": 25.073360443115234,
+    "diversity": 0.5,
+    "entropy": null
+  },
+  {
+    "step": 436,
+    "reward": -25.420211125051196,
+    "timestamp": 8.598488807678223,
+    "loss": 9.179058074951172,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 440,
+    "reward": -14.654590472107154,
+    "timestamp": 8.664855003356934,
+    "loss": 4.704051971435547,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 444,
+    "reward": -24.613104099316335,
+    "timestamp": 8.732184886932373,
+    "loss": 11.2940034866333,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 448,
+    "reward": -18.628517106863875,
+    "timestamp": 8.800433874130249,
+    "loss": 4.650914192199707,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 452,
+    "reward": -29.477488068311864,
+    "timestamp": 8.879878997802734,
+    "loss": 14.101226806640625,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 456,
+    "reward": -30.644100919268297,
+    "timestamp": 8.952241897583008,
+    "loss": 17.812471389770508,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 460,
+    "reward": -34.614933083592064,
+    "timestamp": 9.02046799659729,
+    "loss": 22.630613327026367,
+    "diversity": 0.75,
+    "entropy": null
+  },
+  {
+    "step": 464,
+    "reward": -49.66446083337885,
+    "timestamp": 9.09152603149414,
+    "loss": 37.50551986694336,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 468,
+    "reward": -24.523636044844423,
+    "timestamp": 9.161838054656982,
+    "loss": 14.663299560546875,
+    "diversity": 0.5,
+    "entropy": null
+  },
+  {
+    "step": 472,
+    "reward": -36.445109874977256,
+    "timestamp": 9.235115051269531,
+    "loss": 25.15525245666504,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 476,
+    "reward": -19.956771295823945,
+    "timestamp": 9.306275129318237,
+    "loss": 6.4209699630737305,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 480,
+    "reward": -38.728307167234846,
+    "timestamp": 9.376315832138062,
+    "loss": 35.065311431884766,
+    "diversity": 0.75,
+    "entropy": null
+  },
+  {
+    "step": 484,
+    "reward": -21.420809360819202,
+    "timestamp": 9.446442127227783,
+    "loss": 6.905755043029785,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 488,
+    "reward": -52.060250936926344,
+    "timestamp": 9.515750885009766,
+    "loss": 43.1317253112793,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 492,
+    "reward": -33.17048932900288,
+    "timestamp": 9.583842039108276,
+    "loss": 20.690011978149414,
+    "diversity": 1.0,
+    "entropy": null
+  },
+  {
+    "step": 496,
+    "reward": -22.54736924990689,
+    "timestamp": 9.652272939682007,
+    "loss": 6.969453811645508,
+    "diversity": 0.75,
+    "entropy": null
+  },
+  {
+    "step": 500,
+    "reward": -29.62933315358145,
+    "timestamp": 9.720239877700806,
+    "loss": 12.355612754821777,
+    "diversity": 0.75,
+    "entropy": null
+  }
+]

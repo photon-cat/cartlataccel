@@ -1,0 +1,2526 @@
+/Users/delta/.local/lib/python3.11/site-packages/pygame/pkgdata.py:25: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import resource_stream, resource_exists
+/Users/delta/.local/lib/python3.11/site-packages/gymnasium/envs/registration.py:694: UserWarning: [33mWARN: Overriding environment CartLatAccel-Jerk-v1 already in registry.[0m
+  logger.warn(f"Overriding environment {new_spec.id} already in registry.")
+/Users/delta/.local/lib/python3.11/site-packages/gymnasium/utils/passive_env_checker.py:159: UserWarning: [33mWARN: The obs returned by the `reset()` method is not within the observation space.[0m
+  logger.warn(f"{pre} is not within the observation space.")
+/Users/delta/.local/lib/python3.11/site-packages/gymnasium/utils/passive_env_checker.py:159: UserWarning: [33mWARN: The obs returned by the `step()` method is not within the observation space.[0m
+  logger.warn(f"{pre} is not within the observation space.")
+================================================================================
+NETWORK SCALING EXPERIMENT
+================================================================================
+
+Testing increasingly large networks to find performance limits
+
+Evaluating PID baseline...
+PID Baseline: 2085.34
+
+
+================================================================================
+TESTING: 256 hidden units x 4 layers
+================================================================================
+Parameters: 397,315
+
+Training 0 → 50,000... /Users/delta/.local/lib/python3.11/site-packages/gymnasium/utils/passive_env_checker.py:246: UserWarning: [33mWARN: The reward returned by `step()` must be a float, int, np.integer or np.floating, actual type: <class 'numpy.ndarray'>[0m
+  logger.warn(
+eps 1000.00, reward -716.417, t 0.49
+Runtimes: rollout 0.099, gae 0.096, buffer 0.088, update 0.208
+eps 2000.00, reward -711.705, t 0.92
+Runtimes: rollout 0.120, gae 0.093, buffer 0.000, update 0.217
+eps 3000.00, reward -712.038, t 1.46
+Runtimes: rollout 0.090, gae 0.196, buffer 0.000, update 0.254
+eps 4000.00, reward -708.339, t 1.83
+Runtimes: rollout 0.070, gae 0.091, buffer 0.003, update 0.205
+eps 5000.00, reward -706.958, t 2.16
+Runtimes: rollout 0.082, gae 0.082, buffer 0.000, update 0.163
+eps 6000.00, reward -706.081, t 2.63
+Runtimes: rollout 0.083, gae 0.092, buffer 0.000, update 0.295
+eps 7000.00, reward -706.815, t 2.98
+Runtimes: rollout 0.106, gae 0.086, buffer 0.001, update 0.162
+eps 8000.00, reward -707.450, t 3.30
+Runtimes: rollout 0.056, gae 0.078, buffer 0.000, update 0.179
+eps 9000.00, reward -707.677, t 3.68
+Runtimes: rollout 0.116, gae 0.083, buffer 0.000, update 0.183
+eps 10000.00, reward -698.829, t 3.98
+Runtimes: rollout 0.065, gae 0.077, buffer 0.000, update 0.158
+eps 11000.00, reward -702.984, t 4.41
+Runtimes: rollout 0.121, gae 0.114, buffer 0.000, update 0.194
+eps 12000.00, reward -704.023, t 4.76
+Runtimes: rollout 0.085, gae 0.084, buffer 0.000, update 0.185
+eps 13000.00, reward -706.733, t 5.10
+Runtimes: rollout 0.081, gae 0.085, buffer 0.000, update 0.175
+eps 14000.00, reward -701.461, t 5.44
+Runtimes: rollout 0.068, gae 0.080, buffer 0.001, update 0.191
+eps 15000.00, reward -703.678, t 5.81
+Runtimes: rollout 0.096, gae 0.091, buffer 0.000, update 0.181
+eps 16000.00, reward -697.004, t 6.12
+Runtimes: rollout 0.076, gae 0.080, buffer 0.000, update 0.153
+eps 17000.00, reward -710.047, t 6.45
+Runtimes: rollout 0.071, gae 0.107, buffer 0.000, update 0.150
+eps 18000.00, reward -704.029, t 6.77
+Runtimes: rollout 0.065, gae 0.090, buffer 0.000, update 0.166
+eps 19000.00, reward -707.981, t 7.06
+Runtimes: rollout 0.069, gae 0.077, buffer 0.000, update 0.148
+eps 20000.00, reward -707.765, t 7.38
+Runtimes: rollout 0.059, gae 0.092, buffer 0.001, update 0.162
+eps 21000.00, reward -714.879, t 7.69
+Runtimes: rollout 0.063, gae 0.079, buffer 0.009, update 0.166
+eps 22000.00, reward -708.562, t 7.99
+Runtimes: rollout 0.055, gae 0.087, buffer 0.000, update 0.155
+eps 23000.00, reward -712.393, t 8.28
+Runtimes: rollout 0.056, gae 0.077, buffer 0.000, update 0.153
+eps 24000.00, reward -701.647, t 8.58
+Runtimes: rollout 0.052, gae 0.077, buffer 0.000, update 0.173
+eps 25000.00, reward -707.238, t 8.92
+Runtimes: rollout 0.087, gae 0.088, buffer 0.000, update 0.161
+eps 26000.00, reward -701.970, t 9.23
+Runtimes: rollout 0.059, gae 0.082, buffer 0.000, update 0.170
+eps 27000.00, reward -701.872, t 9.58
+Runtimes: rollout 0.099, gae 0.080, buffer 0.000, update 0.172
+eps 28000.00, reward -707.712, t 9.87
+Runtimes: rollout 0.058, gae 0.075, buffer 0.000, update 0.152
+eps 29000.00, reward -705.621, t 10.16
+Runtimes: rollout 0.056, gae 0.082, buffer 0.001, update 0.151
+eps 30000.00, reward -698.002, t 10.46
+Runtimes: rollout 0.057, gae 0.085, buffer 0.000, update 0.160
+eps 31000.00, reward -701.657, t 10.77
+Runtimes: rollout 0.056, gae 0.101, buffer 0.000, update 0.158
+eps 32000.00, reward -707.244, t 11.07
+Runtimes: rollout 0.070, gae 0.075, buffer 0.000, update 0.153
+eps 33000.00, reward -707.678, t 11.44
+Runtimes: rollout 0.069, gae 0.109, buffer 0.000, update 0.186
+eps 34000.00, reward -705.679, t 11.83
+Runtimes: rollout 0.099, gae 0.090, buffer 0.001, update 0.200
+eps 35000.00, reward -707.362, t 12.25
+Runtimes: rollout 0.075, gae 0.092, buffer 0.000, update 0.260
+eps 36000.00, reward -701.749, t 12.63
+Runtimes: rollout 0.071, gae 0.103, buffer 0.000, update 0.204
+eps 37000.00, reward -704.466, t 12.99
+Runtimes: rollout 0.077, gae 0.097, buffer 0.001, update 0.182
+eps 38000.00, reward -708.572, t 13.33
+Runtimes: rollout 0.073, gae 0.090, buffer 0.000, update 0.177
+eps 39000.00, reward -704.467, t 13.67
+Runtimes: rollout 0.068, gae 0.088, buffer 0.000, update 0.178
+eps 40000.00, reward -703.576, t 14.01
+Runtimes: rollout 0.080, gae 0.091, buffer 0.000, update 0.168
+eps 41000.00, reward -707.866, t 14.35
+Runtimes: rollout 0.072, gae 0.088, buffer 0.000, update 0.179
+eps 42000.00, reward -704.215, t 14.72
+Runtimes: rollout 0.103, gae 0.096, buffer 0.000, update 0.180
+eps 43000.00, reward -702.617, t 15.06
+Runtimes: rollout 0.071, gae 0.095, buffer 0.001, update 0.169
+eps 44000.00, reward -701.428, t 15.38
+Runtimes: rollout 0.077, gae 0.083, buffer 0.000, update 0.163
+eps 45000.00, reward -713.317, t 15.82
+Runtimes: rollout 0.070, gae 0.102, buffer 0.001, update 0.263
+eps 46000.00, reward -706.599, t 16.14
+Runtimes: rollout 0.066, gae 0.080, buffer 0.001, update 0.169
+eps 47000.00, reward -709.039, t 16.47
+Runtimes: rollout 0.058, gae 0.084, buffer 0.000, update 0.190
+eps 48000.00, reward -709.626, t 16.80
+Runtimes: rollout 0.070, gae 0.090, buffer 0.000, update 0.167
+eps 49000.00, reward -707.121, t 17.12
+Runtimes: rollout 0.061, gae 0.090, buffer 0.001, update 0.171
+eps 50000.00, reward -707.392, t 17.46
+Runtimes: rollout 0.070, gae 0.099, buffer 0.000, update 0.169
+Total time: 17.811660766601562
+✓ 19764 ⭐ NEW BEST!
+
+Training 50,000 → 100,000... eps 1000.00, reward -710.538, t 18.60
+Runtimes: rollout 0.090, gae 0.089, buffer 0.002, update 0.161
+eps 2000.00, reward -706.193, t 18.97
+Runtimes: rollout 0.070, gae 0.109, buffer 0.000, update 0.185
+eps 3000.00, reward -706.164, t 19.32
+Runtimes: rollout 0.071, gae 0.080, buffer 0.007, update 0.192
+eps 4000.00, reward -707.341, t 19.62
+Runtimes: rollout 0.055, gae 0.076, buffer 0.000, update 0.166
+eps 5000.00, reward -702.594, t 19.98
+Runtimes: rollout 0.055, gae 0.077, buffer 0.000, update 0.228
+eps 6000.00, reward -706.273, t 20.36
+Runtimes: rollout 0.083, gae 0.113, buffer 0.006, update 0.180
+eps 7000.00, reward -707.604, t 20.78
+Runtimes: rollout 0.086, gae 0.139, buffer 0.000, update 0.193
+eps 8000.00, reward -707.951, t 21.10
+Runtimes: rollout 0.076, gae 0.083, buffer 0.000, update 0.167
+eps 9000.00, reward -700.155, t 21.44
+Runtimes: rollout 0.062, gae 0.088, buffer 0.002, update 0.183
+eps 10000.00, reward -700.640, t 21.80
+Runtimes: rollout 0.092, gae 0.090, buffer 0.000, update 0.176
+eps 11000.00, reward -701.439, t 22.15
+Runtimes: rollout 0.082, gae 0.083, buffer 0.000, update 0.185
+eps 12000.00, reward -700.871, t 22.46
+Runtimes: rollout 0.063, gae 0.091, buffer 0.004, update 0.155
+eps 13000.00, reward -708.634, t 22.82
+Runtimes: rollout 0.100, gae 0.084, buffer 0.000, update 0.169
+eps 14000.00, reward -708.180, t 23.12
+Runtimes: rollout 0.058, gae 0.080, buffer 0.000, update 0.162
+eps 15000.00, reward -706.003, t 23.47
+Runtimes: rollout 0.087, gae 0.081, buffer 0.000, update 0.184
+eps 16000.00, reward -708.748, t 23.83
+Runtimes: rollout 0.082, gae 0.120, buffer 0.000, update 0.161
+eps 17000.00, reward -705.963, t 24.14
+Runtimes: rollout 0.063, gae 0.078, buffer 0.000, update 0.163
+eps 18000.00, reward -700.502, t 24.46
+Runtimes: rollout 0.071, gae 0.084, buffer 0.000, update 0.171
+eps 19000.00, reward -705.214, t 24.79
+Runtimes: rollout 0.092, gae 0.080, buffer 0.001, update 0.156
+eps 20000.00, reward -706.865, t 25.10
+Runtimes: rollout 0.071, gae 0.077, buffer 0.000, update 0.162
+eps 21000.00, reward -703.732, t 25.40
+Runtimes: rollout 0.058, gae 0.085, buffer 0.000, update 0.158
+eps 22000.00, reward -709.610, t 25.70
+Runtimes: rollout 0.054, gae 0.086, buffer 0.000, update 0.158
+eps 23000.00, reward -705.288, t 26.00
+Runtimes: rollout 0.058, gae 0.079, buffer 0.000, update 0.158
+eps 24000.00, reward -706.897, t 26.32
+Runtimes: rollout 0.070, gae 0.080, buffer 0.000, update 0.166
+eps 25000.00, reward -697.165, t 26.64
+Runtimes: rollout 0.084, gae 0.079, buffer 0.000, update 0.164
+eps 26000.00, reward -707.315, t 26.94
+Runtimes: rollout 0.056, gae 0.083, buffer 0.000, update 0.159
+eps 27000.00, reward -706.912, t 27.25
+Runtimes: rollout 0.062, gae 0.092, buffer 0.000, update 0.157
+eps 28000.00, reward -702.241, t 27.55
+Runtimes: rollout 0.067, gae 0.078, buffer 0.000, update 0.153
+eps 29000.00, reward -703.720, t 27.83
+Runtimes: rollout 0.052, gae 0.075, buffer 0.000, update 0.155
+eps 30000.00, reward -708.297, t 28.13
+Runtimes: rollout 0.060, gae 0.081, buffer 0.000, update 0.158
+eps 31000.00, reward -704.360, t 28.43
+Runtimes: rollout 0.061, gae 0.082, buffer 0.000, update 0.153
+eps 32000.00, reward -708.616, t 28.73
+Runtimes: rollout 0.063, gae 0.087, buffer 0.000, update 0.152
+eps 33000.00, reward -701.542, t 29.02
+Runtimes: rollout 0.060, gae 0.076, buffer 0.000, update 0.148
+eps 34000.00, reward -706.841, t 29.36
+Runtimes: rollout 0.090, gae 0.083, buffer 0.000, update 0.169
+eps 35000.00, reward -702.107, t 29.66
+Runtimes: rollout 0.061, gae 0.076, buffer 0.000, update 0.168
+eps 36000.00, reward -703.682, t 29.97
+Runtimes: rollout 0.051, gae 0.081, buffer 0.000, update 0.179
+eps 37000.00, reward -700.839, t 30.26
+Runtimes: rollout 0.061, gae 0.077, buffer 0.000, update 0.151
+eps 38000.00, reward -696.618, t 30.57
+Runtimes: rollout 0.057, gae 0.077, buffer 0.000, update 0.170
+eps 39000.00, reward -709.281, t 30.89
+Runtimes: rollout 0.091, gae 0.077, buffer 0.000, update 0.156
+eps 40000.00, reward -709.607, t 31.20
+Runtimes: rollout 0.055, gae 0.082, buffer 0.000, update 0.168
+eps 41000.00, reward -713.262, t 31.49
+Runtimes: rollout 0.058, gae 0.078, buffer 0.000, update 0.151
+eps 42000.00, reward -704.824, t 31.80
+Runtimes: rollout 0.075, gae 0.084, buffer 0.000, update 0.152
+eps 43000.00, reward -697.587, t 32.09
+Runtimes: rollout 0.056, gae 0.084, buffer 0.001, update 0.150
+eps 44000.00, reward -702.860, t 32.38
+Runtimes: rollout 0.056, gae 0.078, buffer 0.000, update 0.162
+eps 45000.00, reward -712.532, t 32.70
+Runtimes: rollout 0.065, gae 0.083, buffer 0.000, update 0.170
+eps 46000.00, reward -707.706, t 33.03
+Runtimes: rollout 0.068, gae 0.087, buffer 0.001, update 0.175
+eps 47000.00, reward -698.760, t 33.36
+Runtimes: rollout 0.060, gae 0.095, buffer 0.000, update 0.168
+eps 48000.00, reward -704.319, t 33.72
+Runtimes: rollout 0.085, gae 0.080, buffer 0.001, update 0.195
+eps 49000.00, reward -710.539, t 34.06
+Runtimes: rollout 0.070, gae 0.087, buffer 0.000, update 0.187
+eps 50000.00, reward -701.868, t 34.49
+Runtimes: rollout 0.097, gae 0.110, buffer 0.001, update 0.217
+Total time: 34.90352988243103
+✓ 18886 ⭐ NEW BEST!
+
+Training 100,000 → 150,000... eps 1000.00, reward -703.638, t 35.86
+Runtimes: rollout 0.099, gae 0.103, buffer 0.001, update 0.314
+eps 2000.00, reward -704.970, t 36.24
+Runtimes: rollout 0.072, gae 0.109, buffer 0.000, update 0.200
+eps 3000.00, reward -709.934, t 36.63
+Runtimes: rollout 0.089, gae 0.103, buffer 0.000, update 0.193
+eps 4000.00, reward -704.741, t 37.01
+Runtimes: rollout 0.096, gae 0.099, buffer 0.000, update 0.187
+eps 5000.00, reward -703.338, t 37.37
+Runtimes: rollout 0.083, gae 0.094, buffer 0.002, update 0.179
+eps 6000.00, reward -705.769, t 37.72
+Runtimes: rollout 0.074, gae 0.089, buffer 0.000, update 0.183
+eps 7000.00, reward -700.928, t 38.06
+Runtimes: rollout 0.082, gae 0.086, buffer 0.000, update 0.171
+eps 8000.00, reward -705.268, t 38.40
+Runtimes: rollout 0.061, gae 0.103, buffer 0.000, update 0.178
+eps 9000.00, reward -717.467, t 38.72
+Runtimes: rollout 0.065, gae 0.089, buffer 0.000, update 0.172
+eps 10000.00, reward -702.680, t 39.03
+Runtimes: rollout 0.059, gae 0.084, buffer 0.003, update 0.163
+eps 11000.00, reward -706.428, t 39.41
+Runtimes: rollout 0.088, gae 0.087, buffer 0.000, update 0.199
+eps 12000.00, reward -708.379, t 39.76
+Runtimes: rollout 0.086, gae 0.092, buffer 0.000, update 0.177
+eps 13000.00, reward -702.471, t 40.14
+Runtimes: rollout 0.076, gae 0.089, buffer 0.000, update 0.209
+eps 14000.00, reward -704.115, t 40.45
+Runtimes: rollout 0.064, gae 0.093, buffer 0.000, update 0.155
+eps 15000.00, reward -705.733, t 40.75
+Runtimes: rollout 0.062, gae 0.082, buffer 0.001, update 0.158
+eps 16000.00, reward -707.384, t 41.05
+Runtimes: rollout 0.069, gae 0.079, buffer 0.000, update 0.154
+eps 17000.00, reward -703.324, t 41.46
+Runtimes: rollout 0.059, gae 0.156, buffer 0.001, update 0.187
+eps 18000.00, reward -698.084, t 41.85
+Runtimes: rollout 0.078, gae 0.099, buffer 0.011, update 0.206
+eps 19000.00, reward -703.115, t 42.19
+Runtimes: rollout 0.068, gae 0.098, buffer 0.000, update 0.170
+eps 20000.00, reward -708.473, t 42.49
+Runtimes: rollout 0.067, gae 0.081, buffer 0.000, update 0.158
+eps 21000.00, reward -705.715, t 42.83
+Runtimes: rollout 0.087, gae 0.074, buffer 0.000, update 0.172
+eps 22000.00, reward -705.716, t 43.13
+Runtimes: rollout 0.060, gae 0.082, buffer 0.000, update 0.157
+eps 23000.00, reward -711.297, t 43.48
+Runtimes: rollout 0.059, gae 0.109, buffer 0.000, update 0.188
+eps 24000.00, reward -706.279, t 43.89
+Runtimes: rollout 0.085, gae 0.132, buffer 0.001, update 0.190
+eps 25000.00, reward -706.765, t 44.24
+Runtimes: rollout 0.089, gae 0.099, buffer 0.001, update 0.164
+eps 26000.00, reward -708.110, t 44.69
+Runtimes: rollout 0.067, gae 0.103, buffer 0.000, update 0.277
+eps 27000.00, reward -711.386, t 45.02
+Runtimes: rollout 0.086, gae 0.090, buffer 0.000, update 0.157
+eps 28000.00, reward -697.113, t 45.38
+Runtimes: rollout 0.060, gae 0.107, buffer 0.003, update 0.186
+eps 29000.00, reward -706.294, t 45.75
+Runtimes: rollout 0.093, gae 0.116, buffer 0.000, update 0.161
+eps 30000.00, reward -707.349, t 46.06
+Runtimes: rollout 0.061, gae 0.082, buffer 0.000, update 0.164
+eps 31000.00, reward -706.859, t 46.35
+Runtimes: rollout 0.053, gae 0.090, buffer 0.000, update 0.155
+eps 32000.00, reward -711.889, t 46.65
+Runtimes: rollout 0.054, gae 0.081, buffer 0.000, update 0.157
+eps 33000.00, reward -710.197, t 46.97
+Runtimes: rollout 0.066, gae 0.108, buffer 0.000, update 0.153
+eps 34000.00, reward -710.025, t 47.27
+Runtimes: rollout 0.056, gae 0.082, buffer 0.000, update 0.158
+eps 35000.00, reward -705.245, t 47.56
+Runtimes: rollout 0.053, gae 0.085, buffer 0.001, update 0.153
+eps 36000.00, reward -710.279, t 47.85
+Runtimes: rollout 0.057, gae 0.077, buffer 0.000, update 0.155
+eps 37000.00, reward -708.341, t 48.14
+Runtimes: rollout 0.058, gae 0.081, buffer 0.000, update 0.152
+eps 38000.00, reward -708.519, t 48.44
+Runtimes: rollout 0.060, gae 0.086, buffer 0.000, update 0.152
+eps 39000.00, reward -703.128, t 48.73
+Runtimes: rollout 0.054, gae 0.076, buffer 0.000, update 0.161
+eps 40000.00, reward -700.043, t 49.03
+Runtimes: rollout 0.066, gae 0.077, buffer 0.000, update 0.156
+eps 41000.00, reward -708.875, t 49.33
+Runtimes: rollout 0.063, gae 0.076, buffer 0.000, update 0.159
+eps 42000.00, reward -700.419, t 49.64
+Runtimes: rollout 0.062, gae 0.088, buffer 0.000, update 0.158
+eps 43000.00, reward -709.445, t 49.93
+Runtimes: rollout 0.056, gae 0.079, buffer 0.000, update 0.153
+eps 44000.00, reward -703.225, t 50.22
+Runtimes: rollout 0.056, gae 0.082, buffer 0.000, update 0.158
+eps 45000.00, reward -707.583, t 50.52
+Runtimes: rollout 0.066, gae 0.077, buffer 0.000, update 0.153
+eps 46000.00, reward -700.716, t 50.82
+Runtimes: rollout 0.058, gae 0.077, buffer 0.000, update 0.159
+eps 47000.00, reward -703.090, t 51.10
+Runtimes: rollout 0.056, gae 0.078, buffer 0.000, update 0.154
+eps 48000.00, reward -703.217, t 51.40
+Runtimes: rollout 0.054, gae 0.078, buffer 0.000, update 0.162
+eps 49000.00, reward -705.510, t 51.69
+Runtimes: rollout 0.056, gae 0.080, buffer 0.001, update 0.154
+eps 50000.00, reward -706.110, t 51.97
+Runtimes: rollout 0.055, gae 0.078, buffer 0.000, update 0.151
+Total time: 52.28638696670532
+✓ 7469 ⭐ NEW BEST!
+
+Training 150,000 → 200,000... eps 1000.00, reward -705.112, t 53.06
+Runtimes: rollout 0.080, gae 0.097, buffer 0.000, update 0.166
+eps 2000.00, reward -712.412, t 53.37
+Runtimes: rollout 0.056, gae 0.082, buffer 0.000, update 0.167
+eps 3000.00, reward -707.967, t 53.69
+Runtimes: rollout 0.076, gae 0.081, buffer 0.000, update 0.165
+eps 4000.00, reward -698.944, t 53.98
+Runtimes: rollout 0.061, gae 0.078, buffer 0.001, update 0.154
+eps 5000.00, reward -703.586, t 54.29
+Runtimes: rollout 0.070, gae 0.078, buffer 0.000, update 0.159
+eps 6000.00, reward -702.859, t 54.59
+Runtimes: rollout 0.054, gae 0.088, buffer 0.000, update 0.153
+eps 7000.00, reward -714.238, t 54.87
+Runtimes: rollout 0.056, gae 0.079, buffer 0.001, update 0.151
+eps 8000.00, reward -709.454, t 55.16
+Runtimes: rollout 0.053, gae 0.080, buffer 0.000, update 0.155
+eps 9000.00, reward -704.568, t 55.45
+Runtimes: rollout 0.062, gae 0.079, buffer 0.000, update 0.149
+eps 10000.00, reward -708.094, t 55.74
+Runtimes: rollout 0.052, gae 0.081, buffer 0.000, update 0.157
+eps 11000.00, reward -703.391, t 56.04
+Runtimes: rollout 0.061, gae 0.078, buffer 0.000, update 0.158
+eps 12000.00, reward -705.459, t 56.34
+Runtimes: rollout 0.062, gae 0.076, buffer 0.000, update 0.159
+eps 13000.00, reward -694.930, t 56.65
+Runtimes: rollout 0.061, gae 0.083, buffer 0.000, update 0.166
+eps 14000.00, reward -706.054, t 56.95
+Runtimes: rollout 0.058, gae 0.080, buffer 0.001, update 0.162
+eps 15000.00, reward -706.220, t 57.27
+Runtimes: rollout 0.063, gae 0.082, buffer 0.002, update 0.171
+eps 16000.00, reward -702.619, t 57.61
+Runtimes: rollout 0.065, gae 0.077, buffer 0.000, update 0.196
+eps 17000.00, reward -711.515, t 57.90
+Runtimes: rollout 0.056, gae 0.076, buffer 0.002, update 0.154
+eps 18000.00, reward -711.197, t 58.19
+Runtimes: rollout 0.053, gae 0.078, buffer 0.000, update 0.161
+eps 19000.00, reward -701.762, t 58.47
+Runtimes: rollout 0.055, gae 0.078, buffer 0.000, update 0.149
+eps 20000.00, reward -705.166, t 58.77
+Runtimes: rollout 0.053, gae 0.087, buffer 0.000, update 0.158
+eps 21000.00, reward -705.675, t 59.07
+Runtimes: rollout 0.052, gae 0.077, buffer 0.000, update 0.170
+eps 22000.00, reward -712.094, t 59.39
+Runtimes: rollout 0.080, gae 0.085, buffer 0.000, update 0.157
+eps 23000.00, reward -703.448, t 59.70
+Runtimes: rollout 0.061, gae 0.095, buffer 0.000, update 0.155
+eps 24000.00, reward -697.146, t 59.98
+Runtimes: rollout 0.052, gae 0.077, buffer 0.000, update 0.149
+eps 25000.00, reward -706.911, t 60.27
+Runtimes: rollout 0.056, gae 0.080, buffer 0.001, update 0.158
+eps 26000.00, reward -707.573, t 60.60
+Runtimes: rollout 0.060, gae 0.080, buffer 0.000, update 0.192
+eps 27000.00, reward -709.130, t 61.00
+Runtimes: rollout 0.082, gae 0.112, buffer 0.000, update 0.196
+eps 28000.00, reward -712.045, t 61.53
+Runtimes: rollout 0.140, gae 0.158, buffer 0.000, update 0.240
+eps 29000.00, reward -699.241, t 61.88
+Runtimes: rollout 0.089, gae 0.091, buffer 0.000, update 0.170
+eps 30000.00, reward -711.084, t 62.33
+Runtimes: rollout 0.111, gae 0.120, buffer 0.000, update 0.213
+eps 31000.00, reward -704.034, t 62.71
+Runtimes: rollout 0.070, gae 0.107, buffer 0.000, update 0.200
+eps 32000.00, reward -709.442, t 63.07
+Runtimes: rollout 0.085, gae 0.088, buffer 0.000, update 0.186
+eps 33000.00, reward -699.434, t 63.40
+Runtimes: rollout 0.058, gae 0.094, buffer 0.001, update 0.180
+eps 34000.00, reward -705.037, t 63.85
+Runtimes: rollout 0.083, gae 0.112, buffer 0.000, update 0.255
+eps 35000.00, reward -715.925, t 64.30
+Runtimes: rollout 0.081, gae 0.121, buffer 0.002, update 0.247
+eps 36000.00, reward -710.463, t 64.70
+Runtimes: rollout 0.113, gae 0.086, buffer 0.000, update 0.198
+eps 37000.00, reward -713.902, t 65.01
+Runtimes: rollout 0.063, gae 0.085, buffer 0.000, update 0.160
+eps 38000.00, reward -700.088, t 65.30
+Runtimes: rollout 0.054, gae 0.079, buffer 0.000, update 0.161
+eps 39000.00, reward -707.055, t 65.63
+Runtimes: rollout 0.054, gae 0.082, buffer 0.001, update 0.189
+eps 40000.00, reward -709.440, t 66.05
+Runtimes: rollout 0.151, gae 0.092, buffer 0.003, update 0.182
+eps 41000.00, reward -700.806, t 66.44
+Runtimes: rollout 0.096, gae 0.099, buffer 0.000, update 0.187
+eps 42000.00, reward -711.535, t 66.74
+Runtimes: rollout 0.071, gae 0.080, buffer 0.000, update 0.155
+eps 43000.00, reward -707.625, t 67.06
+Runtimes: rollout 0.071, gae 0.086, buffer 0.000, update 0.164
+eps 44000.00, reward -711.792, t 67.36
+Runtimes: rollout 0.059, gae 0.081, buffer 0.000, update 0.159
+eps 45000.00, reward -704.588, t 67.70
+Runtimes: rollout 0.080, gae 0.086, buffer 0.000, update 0.170
+eps 46000.00, reward -709.336, t 68.17
+Runtimes: rollout 0.091, gae 0.119, buffer 0.000, update 0.263
+eps 47000.00, reward -712.319, t 68.57
+Runtimes: rollout 0.103, gae 0.110, buffer 0.000, update 0.184
+eps 48000.00, reward -703.694, t 68.92
+Runtimes: rollout 0.079, gae 0.104, buffer 0.000, update 0.166
+eps 49000.00, reward -704.346, t 69.25
+Runtimes: rollout 0.062, gae 0.088, buffer 0.000, update 0.175
+eps 50000.00, reward -698.410, t 69.56
+Runtimes: rollout 0.066, gae 0.080, buffer 0.000, update 0.172
+Total time: 69.89820075035095
+✓ 10172
+
+Training 200,000 → 250,000... eps 1000.00, reward -706.090, t 70.85
+Runtimes: rollout 0.085, gae 0.091, buffer 0.000, update 0.179
+eps 2000.00, reward -704.926, t 71.16
+Runtimes: rollout 0.064, gae 0.085, buffer 0.002, update 0.165
+eps 3000.00, reward -715.445, t 71.49
+Runtimes: rollout 0.075, gae 0.080, buffer 0.000, update 0.168
+eps 4000.00, reward -701.405, t 71.82
+Runtimes: rollout 0.069, gae 0.087, buffer 0.000, update 0.172
+eps 5000.00, reward -701.822, t 72.12
+Runtimes: rollout 0.061, gae 0.084, buffer 0.000, update 0.154
+eps 6000.00, reward -703.264, t 72.46
+Runtimes: rollout 0.067, gae 0.116, buffer 0.000, update 0.163
+eps 7000.00, reward -711.946, t 72.80
+Runtimes: rollout 0.069, gae 0.110, buffer 0.001, update 0.163
+eps 8000.00, reward -705.423, t 73.16
+Runtimes: rollout 0.079, gae 0.102, buffer 0.001, update 0.176
+eps 9000.00, reward -705.148, t 73.58
+Runtimes: rollout 0.076, gae 0.156, buffer 0.000, update 0.183
+eps 10000.00, reward -705.805, t 73.99
+Runtimes: rollout 0.078, gae 0.168, buffer 0.000, update 0.171
+eps 11000.00, reward -709.686, t 74.33
+Runtimes: rollout 0.065, gae 0.083, buffer 0.000, update 0.183
+eps 12000.00, reward -704.237, t 74.67
+Runtimes: rollout 0.072, gae 0.094, buffer 0.000, update 0.178
+eps 13000.00, reward -705.625, t 74.99
+Runtimes: rollout 0.071, gae 0.081, buffer 0.000, update 0.169
+eps 14000.00, reward -709.511, t 75.30
+Runtimes: rollout 0.060, gae 0.086, buffer 0.000, update 0.162
+eps 15000.00, reward -705.209, t 75.63
+Runtimes: rollout 0.067, gae 0.094, buffer 0.000, update 0.172
+eps 16000.00, reward -708.405, t 75.97
+Runtimes: rollout 0.065, gae 0.099, buffer 0.000, update 0.170
+eps 17000.00, reward -711.213, t 76.28
+Runtimes: rollout 0.067, gae 0.083, buffer 0.000, update 0.162
+eps 18000.00, reward -711.312, t 76.58
+Runtimes: rollout 0.057, gae 0.085, buffer 0.000, update 0.159
+eps 19000.00, reward -712.118, t 76.88
+Runtimes: rollout 0.065, gae 0.083, buffer 0.000, update 0.151
+eps 20000.00, reward -712.400, t 77.18
+Runtimes: rollout 0.056, gae 0.082, buffer 0.000, update 0.156
+eps 21000.00, reward -706.542, t 77.55
+Runtimes: rollout 0.062, gae 0.079, buffer 0.000, update 0.232
+eps 22000.00, reward -700.270, t 77.89
+Runtimes: rollout 0.065, gae 0.087, buffer 0.000, update 0.189
+eps 23000.00, reward -713.384, t 78.23
+Runtimes: rollout 0.073, gae 0.091, buffer 0.000, update 0.177
+eps 24000.00, reward -701.756, t 78.55
+Runtimes: rollout 0.070, gae 0.081, buffer 0.000, update 0.162
+eps 25000.00, reward -701.794, t 78.88
+Runtimes: rollout 0.083, gae 0.079, buffer 0.000, update 0.166
+eps 26000.00, reward -705.667, t 79.21
+Runtimes: rollout 0.078, gae 0.091, buffer 0.000, update 0.167
+eps 27000.00, reward -706.585, t 79.57
+Runtimes: rollout 0.085, gae 0.086, buffer 0.000, update 0.191
+eps 28000.00, reward -710.721, t 79.89
+Runtimes: rollout 0.068, gae 0.081, buffer 0.005, update 0.166
+eps 29000.00, reward -712.071, t 80.19
+Runtimes: rollout 0.056, gae 0.078, buffer 0.000, update 0.157
+eps 30000.00, reward -708.830, t 80.49
+Runtimes: rollout 0.067, gae 0.081, buffer 0.001, update 0.152
+eps 31000.00, reward -703.018, t 80.78
+Runtimes: rollout 0.065, gae 0.077, buffer 0.000, update 0.155
+eps 32000.00, reward -703.325, t 81.08
+Runtimes: rollout 0.057, gae 0.078, buffer 0.000, update 0.157
+eps 33000.00, reward -705.212, t 81.38
+Runtimes: rollout 0.062, gae 0.084, buffer 0.000, update 0.158
+eps 34000.00, reward -703.299, t 81.71
+Runtimes: rollout 0.057, gae 0.094, buffer 0.000, update 0.175
+eps 35000.00, reward -699.743, t 82.04
+Runtimes: rollout 0.057, gae 0.100, buffer 0.000, update 0.180
+eps 36000.00, reward -705.142, t 82.43
+Runtimes: rollout 0.095, gae 0.114, buffer 0.000, update 0.177
+eps 37000.00, reward -706.316, t 82.81
+Runtimes: rollout 0.105, gae 0.105, buffer 0.000, update 0.175
+eps 38000.00, reward -706.732, t 83.14
+Runtimes: rollout 0.072, gae 0.085, buffer 0.000, update 0.165
+eps 39000.00, reward -695.325, t 83.47
+Runtimes: rollout 0.068, gae 0.080, buffer 0.000, update 0.181
+eps 40000.00, reward -712.892, t 83.86
+Runtimes: rollout 0.090, gae 0.093, buffer 0.002, update 0.202
+eps 41000.00, reward -704.237, t 84.20
+Runtimes: rollout 0.080, gae 0.087, buffer 0.000, update 0.177
+eps 42000.00, reward -699.261, t 84.60
+Runtimes: rollout 0.093, gae 0.089, buffer 0.000, update 0.215
+eps 43000.00, reward -701.885, t 84.90
+Runtimes: rollout 0.065, gae 0.080, buffer 0.000, update 0.156
+eps 44000.00, reward -707.721, t 85.21
+Runtimes: rollout 0.057, gae 0.099, buffer 0.000, update 0.159
+eps 45000.00, reward -701.768, t 85.53
+Runtimes: rollout 0.061, gae 0.076, buffer 0.000, update 0.183
+eps 46000.00, reward -712.789, t 85.83
+Runtimes: rollout 0.062, gae 0.078, buffer 0.000, update 0.159
+eps 47000.00, reward -714.775, t 86.14
+Runtimes: rollout 0.070, gae 0.079, buffer 0.000, update 0.157
+eps 48000.00, reward -706.362, t 86.44
+Runtimes: rollout 0.061, gae 0.085, buffer 0.000, update 0.154
+eps 49000.00, reward -716.226, t 86.76
+Runtimes: rollout 0.069, gae 0.098, buffer 0.000, update 0.158
+eps 50000.00, reward -710.326, t 87.06
+Runtimes: rollout 0.072, gae 0.075, buffer 0.000, update 0.153
+Total time: 87.38773775100708
+✓ 18045
+
+Training 250,000 → 300,000... eps 1000.00, reward -710.607, t 88.18
+Runtimes: rollout 0.060, gae 0.109, buffer 0.000, update 0.187
+eps 2000.00, reward -710.790, t 88.55
+Runtimes: rollout 0.078, gae 0.086, buffer 0.001, update 0.200
+eps 3000.00, reward -707.638, t 88.93
+Runtimes: rollout 0.085, gae 0.102, buffer 0.011, update 0.189
+eps 4000.00, reward -708.736, t 89.24
+Runtimes: rollout 0.062, gae 0.080, buffer 0.000, update 0.165
+eps 5000.00, reward -699.581, t 89.57
+Runtimes: rollout 0.060, gae 0.095, buffer 0.000, update 0.169
+eps 6000.00, reward -711.568, t 89.91
+Runtimes: rollout 0.074, gae 0.086, buffer 0.003, update 0.177
+eps 7000.00, reward -709.748, t 90.24
+Runtimes: rollout 0.074, gae 0.095, buffer 0.001, update 0.169
+eps 8000.00, reward -701.738, t 90.56
+Runtimes: rollout 0.069, gae 0.077, buffer 0.001, update 0.165
+eps 9000.00, reward -703.729, t 90.92
+Runtimes: rollout 0.073, gae 0.090, buffer 0.004, update 0.193
+eps 10000.00, reward -706.581, t 91.28
+Runtimes: rollout 0.076, gae 0.112, buffer 0.000, update 0.180
+eps 11000.00, reward -705.484, t 91.63
+Runtimes: rollout 0.075, gae 0.092, buffer 0.001, update 0.175
+eps 12000.00, reward -702.377, t 91.93
+Runtimes: rollout 0.064, gae 0.081, buffer 0.000, update 0.162
+eps 13000.00, reward -695.273, t 92.25
+Runtimes: rollout 0.073, gae 0.081, buffer 0.001, update 0.163
+eps 14000.00, reward -707.268, t 92.61
+Runtimes: rollout 0.095, gae 0.092, buffer 0.001, update 0.172
+eps 15000.00, reward -703.067, t 92.95
+Runtimes: rollout 0.078, gae 0.093, buffer 0.000, update 0.168
+eps 16000.00, reward -701.076, t 93.30
+Runtimes: rollout 0.081, gae 0.090, buffer 0.001, update 0.180
+eps 17000.00, reward -702.785, t 93.66
+Runtimes: rollout 0.083, gae 0.093, buffer 0.000, update 0.178
+eps 18000.00, reward -709.809, t 94.00
+Runtimes: rollout 0.064, gae 0.099, buffer 0.000, update 0.181
+eps 19000.00, reward -697.877, t 94.36
+Runtimes: rollout 0.077, gae 0.099, buffer 0.000, update 0.179
+eps 20000.00, reward -709.925, t 94.73
+Runtimes: rollout 0.091, gae 0.097, buffer 0.000, update 0.182
+eps 21000.00, reward -715.427, t 95.08
+Runtimes: rollout 0.095, gae 0.083, buffer 0.000, update 0.169
+eps 22000.00, reward -699.821, t 95.40
+Runtimes: rollout 0.076, gae 0.085, buffer 0.000, update 0.165
+eps 23000.00, reward -700.856, t 95.71
+Runtimes: rollout 0.065, gae 0.080, buffer 0.000, update 0.164
+eps 24000.00, reward -701.171, t 96.04
+Runtimes: rollout 0.066, gae 0.080, buffer 0.000, update 0.185
+eps 25000.00, reward -702.958, t 96.35
+Runtimes: rollout 0.067, gae 0.083, buffer 0.000, update 0.161
+eps 26000.00, reward -706.870, t 96.65
+Runtimes: rollout 0.055, gae 0.084, buffer 0.000, update 0.162
+eps 27000.00, reward -705.548, t 97.01
+Runtimes: rollout 0.079, gae 0.100, buffer 0.000, update 0.181
+eps 28000.00, reward -704.225, t 97.56
+Runtimes: rollout 0.241, gae 0.114, buffer 0.001, update 0.186
+eps 29000.00, reward -707.002, t 97.89
+Runtimes: rollout 0.080, gae 0.088, buffer 0.000, update 0.168
+eps 30000.00, reward -700.802, t 98.24
+Runtimes: rollout 0.082, gae 0.100, buffer 0.000, update 0.167
+eps 31000.00, reward -705.746, t 98.64
+Runtimes: rollout 0.069, gae 0.090, buffer 0.000, update 0.235
+eps 32000.00, reward -699.494, t 98.99
+Runtimes: rollout 0.087, gae 0.099, buffer 0.001, update 0.171
+eps 33000.00, reward -706.546, t 99.36
+Runtimes: rollout 0.097, gae 0.092, buffer 0.000, update 0.173
+eps 34000.00, reward -703.601, t 99.71
+Runtimes: rollout 0.074, gae 0.093, buffer 0.000, update 0.188
+eps 35000.00, reward -710.121, t 100.05
+Runtimes: rollout 0.077, gae 0.090, buffer 0.001, update 0.170
+eps 36000.00, reward -704.888, t 100.39
+Runtimes: rollout 0.088, gae 0.082, buffer 0.000, update 0.175
+eps 37000.00, reward -715.799, t 100.78
+Runtimes: rollout 0.088, gae 0.101, buffer 0.000, update 0.200
+eps 38000.00, reward -704.186, t 101.11
+Runtimes: rollout 0.073, gae 0.082, buffer 0.000, update 0.174
+eps 39000.00, reward -705.494, t 101.43
+Runtimes: rollout 0.066, gae 0.083, buffer 0.000, update 0.170
+eps 40000.00, reward -700.785, t 101.74
+Runtimes: rollout 0.058, gae 0.086, buffer 0.000, update 0.162
+eps 41000.00, reward -709.573, t 102.08
+Runtimes: rollout 0.066, gae 0.086, buffer 0.001, update 0.193
+eps 42000.00, reward -709.843, t 102.40
+Runtimes: rollout 0.066, gae 0.080, buffer 0.000, update 0.169
+eps 43000.00, reward -711.037, t 102.77
+Runtimes: rollout 0.096, gae 0.100, buffer 0.000, update 0.174
+eps 44000.00, reward -708.635, t 103.14
+Runtimes: rollout 0.079, gae 0.114, buffer 0.001, update 0.173
+eps 45000.00, reward -709.783, t 103.47
+Runtimes: rollout 0.063, gae 0.094, buffer 0.001, update 0.178
+eps 46000.00, reward -705.046, t 103.82
+Runtimes: rollout 0.079, gae 0.094, buffer 0.000, update 0.171
+eps 47000.00, reward -711.281, t 104.19
+Runtimes: rollout 0.069, gae 0.126, buffer 0.000, update 0.174
+eps 48000.00, reward -706.107, t 104.53
+Runtimes: rollout 0.070, gae 0.089, buffer 0.001, update 0.183
+eps 49000.00, reward -697.382, t 104.87
+Runtimes: rollout 0.077, gae 0.092, buffer 0.000, update 0.173
+eps 50000.00, reward -702.409, t 105.31
+Runtimes: rollout 0.073, gae 0.090, buffer 0.000, update 0.276
+Total time: 105.71135997772217
+✓ 19509
+
+Result: 7469 (3.58x vs PID)
+
+================================================================================
+TESTING: 512 hidden units x 4 layers
+================================================================================
+Parameters: 1,581,059
+
+Training 0 → 50,000... eps 1000.00, reward -717.517, t 1.03
+Runtimes: rollout 0.163, gae 0.227, buffer 0.050, update 0.593
+eps 2000.00, reward -717.021, t 1.80
+Runtimes: rollout 0.145, gae 0.201, buffer 0.000, update 0.416
+eps 3000.00, reward -707.110, t 2.63
+Runtimes: rollout 0.153, gae 0.216, buffer 0.000, update 0.466
+eps 4000.00, reward -709.725, t 3.53
+Runtimes: rollout 0.162, gae 0.229, buffer 0.000, update 0.504
+eps 5000.00, reward -703.636, t 4.69
+Runtimes: rollout 0.181, gae 0.247, buffer 0.001, update 0.732
+eps 6000.00, reward -695.286, t 5.57
+Runtimes: rollout 0.179, gae 0.235, buffer 0.004, update 0.460
+eps 7000.00, reward -702.411, t 6.39
+Runtimes: rollout 0.160, gae 0.202, buffer 0.000, update 0.460
+eps 8000.00, reward -706.784, t 7.23
+Runtimes: rollout 0.211, gae 0.210, buffer 0.000, update 0.425
+eps 9000.00, reward -703.187, t 8.10
+Runtimes: rollout 0.156, gae 0.210, buffer 0.000, update 0.495
+eps 10000.00, reward -700.816, t 8.90
+Runtimes: rollout 0.175, gae 0.219, buffer 0.000, update 0.414
+eps 11000.00, reward -709.470, t 9.77
+Runtimes: rollout 0.145, gae 0.239, buffer 0.002, update 0.481
+eps 12000.00, reward -714.389, t 10.66
+Runtimes: rollout 0.206, gae 0.217, buffer 0.000, update 0.467
+eps 13000.00, reward -704.060, t 11.47
+Runtimes: rollout 0.139, gae 0.220, buffer 0.000, update 0.446
+eps 14000.00, reward -708.783, t 12.32
+Runtimes: rollout 0.213, gae 0.225, buffer 0.001, update 0.410
+eps 15000.00, reward -705.664, t 13.11
+Runtimes: rollout 0.137, gae 0.195, buffer 0.001, update 0.460
+eps 16000.00, reward -705.697, t 13.97
+Runtimes: rollout 0.187, gae 0.209, buffer 0.000, update 0.469
+eps 17000.00, reward -700.990, t 15.04
+Runtimes: rollout 0.173, gae 0.253, buffer 0.001, update 0.636
+eps 18000.00, reward -701.670, t 15.94
+Runtimes: rollout 0.152, gae 0.217, buffer 0.000, update 0.531
+eps 19000.00, reward -703.222, t 16.67
+Runtimes: rollout 0.133, gae 0.208, buffer 0.001, update 0.387
+eps 20000.00, reward -701.585, t 17.41
+Runtimes: rollout 0.149, gae 0.188, buffer 0.000, update 0.402
+eps 21000.00, reward -704.030, t 18.18
+Runtimes: rollout 0.160, gae 0.187, buffer 0.000, update 0.423
+eps 22000.00, reward -703.179, t 18.97
+Runtimes: rollout 0.162, gae 0.202, buffer 0.000, update 0.427
+eps 23000.00, reward -704.205, t 19.73
+Runtimes: rollout 0.161, gae 0.206, buffer 0.000, update 0.391
+eps 24000.00, reward -706.869, t 20.45
+Runtimes: rollout 0.149, gae 0.186, buffer 0.003, update 0.387
+eps 25000.00, reward -695.785, t 21.21
+Runtimes: rollout 0.168, gae 0.192, buffer 0.000, update 0.402
+eps 26000.00, reward -702.176, t 21.92
+Runtimes: rollout 0.128, gae 0.196, buffer 0.000, update 0.381
+eps 27000.00, reward -710.092, t 22.65
+Runtimes: rollout 0.163, gae 0.186, buffer 0.001, update 0.384
+eps 28000.00, reward -700.215, t 23.37
+Runtimes: rollout 0.143, gae 0.186, buffer 0.000, update 0.394
+eps 29000.00, reward -706.222, t 24.12
+Runtimes: rollout 0.135, gae 0.219, buffer 0.000, update 0.397
+eps 30000.00, reward -711.072, t 24.84
+Runtimes: rollout 0.140, gae 0.195, buffer 0.000, update 0.381
+eps 31000.00, reward -707.087, t 25.58
+Runtimes: rollout 0.150, gae 0.207, buffer 0.000, update 0.379
+eps 32000.00, reward -708.288, t 26.28
+Runtimes: rollout 0.132, gae 0.186, buffer 0.001, update 0.383
+eps 33000.00, reward -697.399, t 27.02
+Runtimes: rollout 0.156, gae 0.189, buffer 0.000, update 0.396
+eps 34000.00, reward -701.561, t 27.75
+Runtimes: rollout 0.141, gae 0.195, buffer 0.000, update 0.388
+eps 35000.00, reward -705.145, t 28.46
+Runtimes: rollout 0.136, gae 0.190, buffer 0.000, update 0.388
+eps 36000.00, reward -709.650, t 29.17
+Runtimes: rollout 0.136, gae 0.188, buffer 0.001, update 0.381
+eps 37000.00, reward -700.494, t 29.89
+Runtimes: rollout 0.153, gae 0.193, buffer 0.000, update 0.374
+eps 38000.00, reward -705.076, t 30.62
+Runtimes: rollout 0.165, gae 0.184, buffer 0.000, update 0.386
+eps 39000.00, reward -712.887, t 31.44
+Runtimes: rollout 0.134, gae 0.253, buffer 0.000, update 0.434
+eps 40000.00, reward -707.917, t 32.22
+Runtimes: rollout 0.163, gae 0.205, buffer 0.000, update 0.410
+eps 41000.00, reward -709.828, t 33.06
+Runtimes: rollout 0.205, gae 0.216, buffer 0.000, update 0.416
+eps 42000.00, reward -706.533, t 33.80
+Runtimes: rollout 0.156, gae 0.193, buffer 0.000, update 0.393
+eps 43000.00, reward -707.929, t 34.53
+Runtimes: rollout 0.124, gae 0.196, buffer 0.000, update 0.407
+eps 44000.00, reward -711.470, t 35.28
+Runtimes: rollout 0.163, gae 0.197, buffer 0.000, update 0.387
+eps 45000.00, reward -713.148, t 36.00
+Runtimes: rollout 0.143, gae 0.195, buffer 0.000, update 0.386
+eps 46000.00, reward -703.526, t 36.76
+Runtimes: rollout 0.168, gae 0.195, buffer 0.003, update 0.394
+eps 47000.00, reward -706.832, t 37.50
+Runtimes: rollout 0.158, gae 0.194, buffer 0.000, update 0.384
+eps 48000.00, reward -704.112, t 38.27
+Runtimes: rollout 0.196, gae 0.193, buffer 0.000, update 0.386
+eps 49000.00, reward -708.620, t 39.08
+Runtimes: rollout 0.161, gae 0.254, buffer 0.000, update 0.395
+eps 50000.00, reward -703.293, t 39.82
+Runtimes: rollout 0.143, gae 0.200, buffer 0.000, update 0.391
+Total time: 40.80333209037781
+✓ 19894 ⭐ NEW BEST!
+
+Training 50,000 → 100,000... eps 1000.00, reward -706.948, t 42.17
+Runtimes: rollout 0.166, gae 0.202, buffer 0.000, update 0.443
+eps 2000.00, reward -700.646, t 43.03
+Runtimes: rollout 0.163, gae 0.217, buffer 0.001, update 0.477
+eps 3000.00, reward -706.465, t 43.92
+Runtimes: rollout 0.190, gae 0.225, buffer 0.000, update 0.472
+eps 4000.00, reward -699.242, t 44.66
+Runtimes: rollout 0.137, gae 0.204, buffer 0.001, update 0.397
+eps 5000.00, reward -704.758, t 45.45
+Runtimes: rollout 0.167, gae 0.210, buffer 0.000, update 0.413
+eps 6000.00, reward -703.803, t 46.20
+Runtimes: rollout 0.163, gae 0.199, buffer 0.000, update 0.390
+eps 7000.00, reward -699.124, t 46.95
+Runtimes: rollout 0.161, gae 0.202, buffer 0.001, update 0.388
+eps 8000.00, reward -703.313, t 47.74
+Runtimes: rollout 0.172, gae 0.185, buffer 0.001, update 0.425
+eps 9000.00, reward -707.024, t 48.51
+Runtimes: rollout 0.164, gae 0.188, buffer 0.000, update 0.425
+eps 10000.00, reward -705.221, t 49.28
+Runtimes: rollout 0.174, gae 0.192, buffer 0.000, update 0.393
+eps 11000.00, reward -702.243, t 50.03
+Runtimes: rollout 0.155, gae 0.192, buffer 0.001, update 0.409
+eps 12000.00, reward -709.583, t 50.81
+Runtimes: rollout 0.170, gae 0.188, buffer 0.001, update 0.418
+eps 13000.00, reward -705.071, t 51.54
+Runtimes: rollout 0.158, gae 0.186, buffer 0.000, update 0.386
+eps 14000.00, reward -706.451, t 52.27
+Runtimes: rollout 0.140, gae 0.194, buffer 0.000, update 0.398
+eps 15000.00, reward -710.005, t 53.06
+Runtimes: rollout 0.189, gae 0.200, buffer 0.000, update 0.399
+eps 16000.00, reward -705.300, t 53.78
+Runtimes: rollout 0.137, gae 0.184, buffer 0.000, update 0.392
+eps 17000.00, reward -701.014, t 54.51
+Runtimes: rollout 0.155, gae 0.196, buffer 0.000, update 0.379
+eps 18000.00, reward -702.808, t 55.25
+Runtimes: rollout 0.155, gae 0.204, buffer 0.000, update 0.379
+eps 19000.00, reward -711.354, t 55.96
+Runtimes: rollout 0.143, gae 0.184, buffer 0.000, update 0.385
+eps 20000.00, reward -712.634, t 56.70
+Runtimes: rollout 0.155, gae 0.197, buffer 0.002, update 0.390
+eps 21000.00, reward -705.228, t 57.49
+Runtimes: rollout 0.186, gae 0.200, buffer 0.000, update 0.401
+eps 22000.00, reward -705.516, t 58.23
+Runtimes: rollout 0.148, gae 0.190, buffer 0.000, update 0.402
+eps 23000.00, reward -697.907, t 58.99
+Runtimes: rollout 0.177, gae 0.185, buffer 0.001, update 0.394
+eps 24000.00, reward -707.015, t 59.71
+Runtimes: rollout 0.147, gae 0.183, buffer 0.001, update 0.388
+eps 25000.00, reward -719.103, t 60.43
+Runtimes: rollout 0.142, gae 0.190, buffer 0.000, update 0.390
+eps 26000.00, reward -703.475, t 61.18
+Runtimes: rollout 0.153, gae 0.188, buffer 0.000, update 0.406
+eps 27000.00, reward -707.600, t 61.91
+Runtimes: rollout 0.168, gae 0.184, buffer 0.000, update 0.379
+eps 28000.00, reward -705.175, t 62.65
+Runtimes: rollout 0.168, gae 0.183, buffer 0.000, update 0.386
+eps 29000.00, reward -711.769, t 63.37
+Runtimes: rollout 0.150, gae 0.192, buffer 0.000, update 0.378
+eps 30000.00, reward -711.164, t 64.08
+Runtimes: rollout 0.139, gae 0.182, buffer 0.000, update 0.390
+eps 31000.00, reward -702.776, t 64.86
+Runtimes: rollout 0.165, gae 0.188, buffer 0.002, update 0.423
+eps 32000.00, reward -706.289, t 65.61
+Runtimes: rollout 0.162, gae 0.187, buffer 0.000, update 0.403
+eps 33000.00, reward -711.551, t 66.33
+Runtimes: rollout 0.135, gae 0.187, buffer 0.001, update 0.401
+eps 34000.00, reward -706.656, t 67.08
+Runtimes: rollout 0.163, gae 0.187, buffer 0.001, update 0.393
+eps 35000.00, reward -707.235, t 67.81
+Runtimes: rollout 0.149, gae 0.197, buffer 0.000, update 0.384
+eps 36000.00, reward -710.898, t 68.91
+Runtimes: rollout 0.195, gae 0.208, buffer 0.001, update 0.704
+eps 37000.00, reward -704.318, t 69.73
+Runtimes: rollout 0.177, gae 0.205, buffer 0.001, update 0.433
+eps 38000.00, reward -699.430, t 70.61
+Runtimes: rollout 0.178, gae 0.282, buffer 0.003, update 0.418
+eps 39000.00, reward -707.523, t 71.33
+Runtimes: rollout 0.147, gae 0.186, buffer 0.000, update 0.384
+eps 40000.00, reward -702.138, t 72.05
+Runtimes: rollout 0.146, gae 0.200, buffer 0.000, update 0.373
+eps 41000.00, reward -705.431, t 72.81
+Runtimes: rollout 0.138, gae 0.196, buffer 0.002, update 0.421
+eps 42000.00, reward -707.012, t 73.64
+Runtimes: rollout 0.264, gae 0.187, buffer 0.001, update 0.382
+eps 43000.00, reward -705.817, t 74.44
+Runtimes: rollout 0.146, gae 0.200, buffer 0.000, update 0.451
+eps 44000.00, reward -706.049, t 75.34
+Runtimes: rollout 0.180, gae 0.226, buffer 0.000, update 0.493
+eps 45000.00, reward -706.445, t 76.08
+Runtimes: rollout 0.144, gae 0.192, buffer 0.000, update 0.405
+eps 46000.00, reward -710.023, t 76.84
+Runtimes: rollout 0.149, gae 0.202, buffer 0.001, update 0.408
+eps 47000.00, reward -705.871, t 77.55
+Runtimes: rollout 0.129, gae 0.199, buffer 0.000, update 0.383
+eps 48000.00, reward -708.552, t 78.26
+Runtimes: rollout 0.131, gae 0.182, buffer 0.000, update 0.397
+eps 49000.00, reward -701.149, t 78.99
+Runtimes: rollout 0.147, gae 0.195, buffer 0.000, update 0.385
+eps 50000.00, reward -701.047, t 79.71
+Runtimes: rollout 0.148, gae 0.189, buffer 0.000, update 0.379
+Total time: 80.41286015510559
+✓ 3533 ⭐ NEW BEST!
+
+Training 100,000 → 150,000... eps 1000.00, reward -709.076, t 81.73
+Runtimes: rollout 0.161, gae 0.193, buffer 0.000, update 0.452
+eps 2000.00, reward -709.310, t 82.42
+Runtimes: rollout 0.126, gae 0.180, buffer 0.000, update 0.382
+eps 3000.00, reward -706.862, t 83.15
+Runtimes: rollout 0.146, gae 0.182, buffer 0.000, update 0.403
+eps 4000.00, reward -711.861, t 83.84
+Runtimes: rollout 0.127, gae 0.181, buffer 0.000, update 0.375
+eps 5000.00, reward -703.105, t 84.53
+Runtimes: rollout 0.142, gae 0.182, buffer 0.000, update 0.372
+eps 6000.00, reward -707.791, t 85.24
+Runtimes: rollout 0.149, gae 0.181, buffer 0.003, update 0.374
+eps 7000.00, reward -701.068, t 85.95
+Runtimes: rollout 0.145, gae 0.188, buffer 0.000, update 0.372
+eps 8000.00, reward -707.288, t 86.64
+Runtimes: rollout 0.135, gae 0.189, buffer 0.000, update 0.374
+eps 9000.00, reward -709.305, t 87.34
+Runtimes: rollout 0.132, gae 0.184, buffer 0.001, update 0.380
+eps 10000.00, reward -700.533, t 88.03
+Runtimes: rollout 0.127, gae 0.187, buffer 0.000, update 0.373
+eps 11000.00, reward -699.322, t 88.88
+Runtimes: rollout 0.137, gae 0.232, buffer 0.001, update 0.482
+eps 12000.00, reward -711.109, t 89.65
+Runtimes: rollout 0.192, gae 0.195, buffer 0.000, update 0.383
+eps 13000.00, reward -706.699, t 90.37
+Runtimes: rollout 0.134, gae 0.183, buffer 0.000, update 0.402
+eps 14000.00, reward -705.275, t 91.08
+Runtimes: rollout 0.146, gae 0.188, buffer 0.000, update 0.373
+eps 15000.00, reward -708.265, t 91.78
+Runtimes: rollout 0.140, gae 0.191, buffer 0.000, update 0.375
+eps 16000.00, reward -710.447, t 92.48
+Runtimes: rollout 0.131, gae 0.185, buffer 0.001, update 0.377
+eps 17000.00, reward -702.456, t 93.20
+Runtimes: rollout 0.169, gae 0.181, buffer 0.000, update 0.377
+eps 18000.00, reward -708.092, t 93.93
+Runtimes: rollout 0.143, gae 0.183, buffer 0.012, update 0.384
+eps 19000.00, reward -700.556, t 94.64
+Runtimes: rollout 0.135, gae 0.183, buffer 0.001, update 0.390
+eps 20000.00, reward -709.921, t 95.33
+Runtimes: rollout 0.135, gae 0.190, buffer 0.000, update 0.370
+eps 21000.00, reward -708.037, t 96.02
+Runtimes: rollout 0.134, gae 0.183, buffer 0.000, update 0.374
+eps 22000.00, reward -703.699, t 96.71
+Runtimes: rollout 0.121, gae 0.185, buffer 0.000, update 0.384
+eps 23000.00, reward -702.056, t 97.42
+Runtimes: rollout 0.131, gae 0.188, buffer 0.000, update 0.384
+eps 24000.00, reward -704.714, t 98.15
+Runtimes: rollout 0.154, gae 0.194, buffer 0.000, update 0.388
+eps 25000.00, reward -712.449, t 98.89
+Runtimes: rollout 0.144, gae 0.190, buffer 0.000, update 0.401
+eps 26000.00, reward -704.540, t 99.62
+Runtimes: rollout 0.138, gae 0.191, buffer 0.000, update 0.400
+eps 27000.00, reward -704.283, t 100.45
+Runtimes: rollout 0.143, gae 0.186, buffer 0.000, update 0.508
+eps 28000.00, reward -703.116, t 101.15
+Runtimes: rollout 0.136, gae 0.187, buffer 0.000, update 0.375
+eps 29000.00, reward -708.527, t 101.88
+Runtimes: rollout 0.164, gae 0.194, buffer 0.000, update 0.370
+eps 30000.00, reward -707.006, t 102.59
+Runtimes: rollout 0.141, gae 0.188, buffer 0.000, update 0.383
+eps 31000.00, reward -707.137, t 103.30
+Runtimes: rollout 0.130, gae 0.186, buffer 0.000, update 0.384
+eps 32000.00, reward -708.855, t 104.00
+Runtimes: rollout 0.149, gae 0.182, buffer 0.001, update 0.371
+eps 33000.00, reward -701.534, t 104.69
+Runtimes: rollout 0.132, gae 0.182, buffer 0.002, update 0.373
+eps 34000.00, reward -701.876, t 105.38
+Runtimes: rollout 0.129, gae 0.183, buffer 0.000, update 0.375
+eps 35000.00, reward -703.664, t 106.09
+Runtimes: rollout 0.146, gae 0.183, buffer 0.000, update 0.378
+eps 36000.00, reward -707.731, t 106.77
+Runtimes: rollout 0.129, gae 0.183, buffer 0.001, update 0.374
+eps 37000.00, reward -714.371, t 107.49
+Runtimes: rollout 0.136, gae 0.186, buffer 0.000, update 0.392
+eps 38000.00, reward -705.055, t 108.21
+Runtimes: rollout 0.136, gae 0.193, buffer 0.001, update 0.390
+eps 39000.00, reward -704.210, t 108.98
+Runtimes: rollout 0.151, gae 0.209, buffer 0.001, update 0.412
+eps 40000.00, reward -704.898, t 109.72
+Runtimes: rollout 0.133, gae 0.190, buffer 0.017, update 0.400
+eps 41000.00, reward -712.282, t 110.43
+Runtimes: rollout 0.145, gae 0.181, buffer 0.000, update 0.382
+eps 42000.00, reward -701.612, t 111.18
+Runtimes: rollout 0.133, gae 0.183, buffer 0.000, update 0.433
+eps 43000.00, reward -702.230, t 111.93
+Runtimes: rollout 0.160, gae 0.205, buffer 0.000, update 0.386
+eps 44000.00, reward -704.791, t 112.66
+Runtimes: rollout 0.158, gae 0.184, buffer 0.000, update 0.392
+eps 45000.00, reward -702.585, t 113.36
+Runtimes: rollout 0.140, gae 0.183, buffer 0.000, update 0.377
+eps 46000.00, reward -711.610, t 114.07
+Runtimes: rollout 0.135, gae 0.187, buffer 0.001, update 0.379
+eps 47000.00, reward -703.951, t 114.78
+Runtimes: rollout 0.132, gae 0.185, buffer 0.000, update 0.395
+eps 48000.00, reward -706.692, t 115.48
+Runtimes: rollout 0.133, gae 0.183, buffer 0.000, update 0.381
+eps 49000.00, reward -715.467, t 116.18
+Runtimes: rollout 0.146, gae 0.180, buffer 0.000, update 0.376
+eps 50000.00, reward -708.164, t 116.86
+Runtimes: rollout 0.125, gae 0.181, buffer 0.000, update 0.375
+Total time: 117.57057285308838
+✓ 18038
+
+Training 150,000 → 200,000... eps 1000.00, reward -705.301, t 118.86
+Runtimes: rollout 0.162, gae 0.189, buffer 0.001, update 0.392
+eps 2000.00, reward -706.477, t 119.98
+Runtimes: rollout 0.149, gae 0.182, buffer 0.000, update 0.792
+eps 3000.00, reward -703.226, t 120.77
+Runtimes: rollout 0.124, gae 0.238, buffer 0.000, update 0.427
+eps 4000.00, reward -705.880, t 121.49
+Runtimes: rollout 0.160, gae 0.178, buffer 0.000, update 0.381
+eps 5000.00, reward -704.455, t 122.30
+Runtimes: rollout 0.123, gae 0.223, buffer 0.000, update 0.467
+eps 6000.00, reward -706.892, t 123.18
+Runtimes: rollout 0.132, gae 0.224, buffer 0.000, update 0.519
+eps 7000.00, reward -706.410, t 124.68
+Runtimes: rollout 0.243, gae 0.389, buffer 0.001, update 0.865
+eps 8000.00, reward -704.677, t 125.45
+Runtimes: rollout 0.138, gae 0.198, buffer 0.000, update 0.435
+eps 9000.00, reward -706.016, t 286.62
+Runtimes: rollout 0.119, gae 0.233, buffer 0.000, update 0.597
+eps 10000.00, reward -708.594, t 287.67
+Runtimes: rollout 0.197, gae 0.314, buffer 0.001, update 0.543
+eps 11000.00, reward -704.569, t 288.72
+Runtimes: rollout 0.322, gae 0.188, buffer 0.001, update 0.536
+eps 12000.00, reward -705.048, t 289.41
+Runtimes: rollout 0.112, gae 0.187, buffer 0.000, update 0.392
+eps 13000.00, reward -711.373, t 290.28
+Runtimes: rollout 0.137, gae 0.202, buffer 0.000, update 0.523
+eps 14000.00, reward -707.379, t 294.99
+Runtimes: rollout 0.231, gae 0.348, buffer 0.052, update 4.079
+eps 15000.00, reward -711.069, t 299.14
+Runtimes: rollout 3.307, gae 0.281, buffer 0.002, update 0.569
+eps 16000.00, reward -707.480, t 492.90
+Runtimes: rollout 0.144, gae 0.227, buffer 0.000, update 2.060
+eps 17000.00, reward -701.729, t 494.25
+Runtimes: rollout 0.264, gae 0.442, buffer 0.016, update 0.627
+eps 18000.00, reward -705.034, t 495.10
+Runtimes: rollout 0.167, gae 0.219, buffer 0.001, update 0.467
+eps 19000.00, reward -705.375, t 495.86
+Runtimes: rollout 0.131, gae 0.202, buffer 0.000, update 0.423
+eps 20000.00, reward -703.571, t 496.71
+Runtimes: rollout 0.159, gae 0.220, buffer 0.001, update 0.476
+eps 21000.00, reward -707.922, t 497.50
+Runtimes: rollout 0.154, gae 0.203, buffer 0.000, update 0.429
+eps 22000.00, reward -709.549, t 498.32
+Runtimes: rollout 0.152, gae 0.217, buffer 0.001, update 0.451
+eps 23000.00, reward -708.204, t 499.12
+Runtimes: rollout 0.147, gae 0.220, buffer 0.000, update 0.429
+eps 24000.00, reward -710.234, t 499.92
+Runtimes: rollout 0.137, gae 0.209, buffer 0.001, update 0.455
+eps 25000.00, reward -712.549, t 500.71
+Runtimes: rollout 0.155, gae 0.217, buffer 0.001, update 0.415
+eps 26000.00, reward -701.353, t 501.46
+Runtimes: rollout 0.138, gae 0.200, buffer 0.000, update 0.418
+eps 27000.00, reward -712.016, t 502.23
+Runtimes: rollout 0.131, gae 0.204, buffer 0.000, update 0.433
+eps 28000.00, reward -710.838, t 503.00
+Runtimes: rollout 0.142, gae 0.210, buffer 0.000, update 0.416
+eps 29000.00, reward -707.334, t 503.73
+Runtimes: rollout 0.136, gae 0.191, buffer 0.000, update 0.405
+eps 30000.00, reward -703.230, t 504.51
+Runtimes: rollout 0.140, gae 0.222, buffer 0.000, update 0.417
+eps 31000.00, reward -699.824, t 505.27
+Runtimes: rollout 0.131, gae 0.233, buffer 0.000, update 0.396
+eps 32000.00, reward -701.407, t 506.03
+Runtimes: rollout 0.137, gae 0.203, buffer 0.000, update 0.416
+eps 33000.00, reward -707.873, t 506.79
+Runtimes: rollout 0.148, gae 0.216, buffer 0.000, update 0.396
+eps 34000.00, reward -708.799, t 507.54
+Runtimes: rollout 0.116, gae 0.228, buffer 0.000, update 0.406
+eps 35000.00, reward -710.014, t 508.28
+Runtimes: rollout 0.134, gae 0.186, buffer 0.000, update 0.422
+eps 36000.00, reward -707.242, t 509.01
+Runtimes: rollout 0.124, gae 0.197, buffer 0.000, update 0.410
+eps 37000.00, reward -704.801, t 509.84
+Runtimes: rollout 0.160, gae 0.212, buffer 0.000, update 0.452
+eps 38000.00, reward -706.469, t 510.62
+Runtimes: rollout 0.136, gae 0.212, buffer 0.001, update 0.430
+eps 39000.00, reward -704.644, t 511.39
+Runtimes: rollout 0.134, gae 0.218, buffer 0.013, update 0.407
+eps 40000.00, reward -711.102, t 512.17
+Runtimes: rollout 0.140, gae 0.233, buffer 0.000, update 0.410
+eps 41000.00, reward -704.625, t 512.96
+Runtimes: rollout 0.132, gae 0.220, buffer 0.008, update 0.429
+eps 42000.00, reward -709.742, t 513.77
+Runtimes: rollout 0.129, gae 0.244, buffer 0.000, update 0.434
+eps 43000.00, reward -707.863, t 514.56
+Runtimes: rollout 0.130, gae 0.226, buffer 0.018, update 0.420
+eps 44000.00, reward -706.436, t 515.31
+Runtimes: rollout 0.142, gae 0.194, buffer 0.000, update 0.409
+eps 45000.00, reward -703.734, t 516.14
+Runtimes: rollout 0.126, gae 0.258, buffer 0.014, update 0.431
+eps 46000.00, reward -704.070, t 516.89
+Runtimes: rollout 0.144, gae 0.214, buffer 0.001, update 0.396
+eps 47000.00, reward -705.101, t 517.66
+Runtimes: rollout 0.144, gae 0.206, buffer 0.000, update 0.414
+eps 48000.00, reward -707.186, t 518.43
+Runtimes: rollout 0.134, gae 0.204, buffer 0.000, update 0.437
+eps 49000.00, reward -697.227, t 519.42
+Runtimes: rollout 0.151, gae 0.224, buffer 0.000, update 0.612
+eps 50000.00, reward -701.211, t 520.26
+Runtimes: rollout 0.153, gae 0.230, buffer 0.000, update 0.457
+Total time: 521.1437940597534
+✓ 16827
+
+Training 200,000 → 250,000... eps 1000.00, reward -705.653, t 522.54
+Runtimes: rollout 0.176, gae 0.241, buffer 0.001, update 0.431
+eps 2000.00, reward -711.500, t 523.25
+Runtimes: rollout 0.143, gae 0.184, buffer 0.003, update 0.389
+eps 3000.00, reward -695.018, t 524.03
+Runtimes: rollout 0.137, gae 0.243, buffer 0.001, update 0.399
+eps 4000.00, reward -710.658, t 524.78
+Runtimes: rollout 0.160, gae 0.200, buffer 0.000, update 0.390
+eps 5000.00, reward -712.460, t 525.49
+Runtimes: rollout 0.127, gae 0.184, buffer 0.000, update 0.391
+eps 6000.00, reward -711.963, t 526.27
+Runtimes: rollout 0.177, gae 0.198, buffer 0.007, update 0.402
+eps 7000.00, reward -703.529, t 527.03
+Runtimes: rollout 0.186, gae 0.189, buffer 0.001, update 0.382
+eps 8000.00, reward -707.095, t 527.74
+Runtimes: rollout 0.145, gae 0.196, buffer 0.001, update 0.372
+eps 9000.00, reward -705.067, t 528.47
+Runtimes: rollout 0.166, gae 0.181, buffer 0.000, update 0.380
+eps 10000.00, reward -701.623, t 529.21
+Runtimes: rollout 0.128, gae 0.195, buffer 0.000, update 0.415
+eps 11000.00, reward -705.887, t 529.97
+Runtimes: rollout 0.136, gae 0.193, buffer 0.000, update 0.426
+eps 12000.00, reward -702.784, t 530.74
+Runtimes: rollout 0.144, gae 0.211, buffer 0.000, update 0.423
+eps 13000.00, reward -710.865, t 531.55
+Runtimes: rollout 0.168, gae 0.229, buffer 0.018, update 0.393
+eps 14000.00, reward -705.355, t 532.26
+Runtimes: rollout 0.132, gae 0.193, buffer 0.000, update 0.385
+eps 15000.00, reward -709.924, t 532.98
+Runtimes: rollout 0.143, gae 0.195, buffer 0.000, update 0.376
+eps 16000.00, reward -710.574, t 533.69
+Runtimes: rollout 0.135, gae 0.190, buffer 0.000, update 0.387
+eps 17000.00, reward -713.149, t 534.42
+Runtimes: rollout 0.134, gae 0.197, buffer 0.000, update 0.399
+eps 18000.00, reward -710.241, t 535.15
+Runtimes: rollout 0.158, gae 0.187, buffer 0.000, update 0.387
+eps 19000.00, reward -705.380, t 535.86
+Runtimes: rollout 0.126, gae 0.190, buffer 0.001, update 0.387
+eps 20000.00, reward -712.791, t 536.60
+Runtimes: rollout 0.154, gae 0.201, buffer 0.002, update 0.387
+eps 21000.00, reward -707.169, t 537.32
+Runtimes: rollout 0.145, gae 0.191, buffer 0.001, update 0.385
+eps 22000.00, reward -705.862, t 538.06
+Runtimes: rollout 0.154, gae 0.185, buffer 0.000, update 0.394
+eps 23000.00, reward -709.706, t 538.83
+Runtimes: rollout 0.196, gae 0.186, buffer 0.000, update 0.389
+eps 24000.00, reward -700.260, t 539.62
+Runtimes: rollout 0.216, gae 0.189, buffer 0.000, update 0.387
+eps 25000.00, reward -704.250, t 540.37
+Runtimes: rollout 0.151, gae 0.210, buffer 0.001, update 0.388
+eps 26000.00, reward -698.784, t 541.30
+Runtimes: rollout 0.164, gae 0.273, buffer 0.000, update 0.494
+eps 27000.00, reward -710.035, t 542.19
+Runtimes: rollout 0.275, gae 0.204, buffer 0.002, update 0.409
+eps 28000.00, reward -706.893, t 543.07
+Runtimes: rollout 0.231, gae 0.214, buffer 0.000, update 0.431
+eps 29000.00, reward -705.626, t 543.84
+Runtimes: rollout 0.175, gae 0.196, buffer 0.002, update 0.399
+eps 30000.00, reward -709.814, t 544.64
+Runtimes: rollout 0.181, gae 0.196, buffer 0.000, update 0.426
+eps 31000.00, reward -712.541, t 545.41
+Runtimes: rollout 0.169, gae 0.198, buffer 0.000, update 0.399
+eps 32000.00, reward -709.670, t 546.33
+Runtimes: rollout 0.191, gae 0.205, buffer 0.000, update 0.529
+eps 33000.00, reward -701.454, t 547.36
+Runtimes: rollout 0.268, gae 0.263, buffer 0.001, update 0.493
+eps 34000.00, reward -708.285, t 548.24
+Runtimes: rollout 0.196, gae 0.220, buffer 0.000, update 0.458
+eps 35000.00, reward -705.591, t 549.08
+Runtimes: rollout 0.205, gae 0.217, buffer 0.001, update 0.419
+eps 36000.00, reward -704.879, t 549.93
+Runtimes: rollout 0.225, gae 0.197, buffer 0.000, update 0.433
+eps 37000.00, reward -703.347, t 550.70
+Runtimes: rollout 0.143, gae 0.208, buffer 0.001, update 0.414
+eps 38000.00, reward -700.517, t 551.49
+Runtimes: rollout 0.167, gae 0.213, buffer 0.000, update 0.407
+eps 39000.00, reward -705.981, t 552.41
+Runtimes: rollout 0.229, gae 0.275, buffer 0.000, update 0.423
+eps 40000.00, reward -706.185, t 553.19
+Runtimes: rollout 0.170, gae 0.215, buffer 0.001, update 0.396
+eps 41000.00, reward -705.688, t 553.93
+Runtimes: rollout 0.152, gae 0.189, buffer 0.000, update 0.391
+eps 42000.00, reward -708.796, t 554.70
+Runtimes: rollout 0.182, gae 0.198, buffer 0.001, update 0.392
+eps 43000.00, reward -709.248, t 555.46
+Runtimes: rollout 0.186, gae 0.184, buffer 0.000, update 0.392
+eps 44000.00, reward -704.999, t 556.24
+Runtimes: rollout 0.167, gae 0.200, buffer 0.000, update 0.407
+eps 45000.00, reward -698.367, t 557.14
+Runtimes: rollout 0.218, gae 0.197, buffer 0.000, update 0.486
+eps 46000.00, reward -701.466, t 558.15
+Runtimes: rollout 0.254, gae 0.242, buffer 0.000, update 0.512
+eps 47000.00, reward -703.774, t 558.93
+Runtimes: rollout 0.156, gae 0.193, buffer 0.001, update 0.437
+eps 48000.00, reward -701.992, t 559.67
+Runtimes: rollout 0.136, gae 0.206, buffer 0.001, update 0.396
+eps 49000.00, reward -703.682, t 560.47
+Runtimes: rollout 0.140, gae 0.239, buffer 0.000, update 0.419
+eps 50000.00, reward -706.740, t 561.25
+Runtimes: rollout 0.144, gae 0.194, buffer 0.001, update 0.442
+Total time: 562.0376119613647
+✓ 19641
+
+Training 250,000 → 300,000... eps 1000.00, reward -706.962, t 563.41
+Runtimes: rollout 0.179, gae 0.251, buffer 0.011, update 0.420
+eps 2000.00, reward -702.975, t 564.19
+Runtimes: rollout 0.133, gae 0.226, buffer 0.000, update 0.426
+eps 3000.00, reward -694.847, t 565.03
+Runtimes: rollout 0.144, gae 0.245, buffer 0.001, update 0.445
+eps 4000.00, reward -702.547, t 566.04
+Runtimes: rollout 0.216, gae 0.282, buffer 0.000, update 0.512
+eps 5000.00, reward -703.556, t 566.79
+Runtimes: rollout 0.153, gae 0.203, buffer 0.000, update 0.393
+eps 6000.00, reward -700.555, t 567.56
+Runtimes: rollout 0.169, gae 0.203, buffer 0.000, update 0.398
+eps 7000.00, reward -703.413, t 568.35
+Runtimes: rollout 0.169, gae 0.199, buffer 0.000, update 0.425
+eps 8000.00, reward -711.778, t 569.13
+Runtimes: rollout 0.182, gae 0.193, buffer 0.000, update 0.403
+eps 9000.00, reward -714.767, t 569.92
+Runtimes: rollout 0.185, gae 0.195, buffer 0.000, update 0.413
+eps 10000.00, reward -697.794, t 570.67
+Runtimes: rollout 0.160, gae 0.197, buffer 0.000, update 0.386
+eps 11000.00, reward -700.826, t 571.57
+Runtimes: rollout 0.229, gae 0.273, buffer 0.000, update 0.405
+eps 12000.00, reward -705.883, t 572.29
+Runtimes: rollout 0.142, gae 0.186, buffer 0.000, update 0.385
+eps 13000.00, reward -708.027, t 573.00
+Runtimes: rollout 0.150, gae 0.181, buffer 0.000, update 0.378
+eps 14000.00, reward -711.660, t 573.70
+Runtimes: rollout 0.135, gae 0.183, buffer 0.001, update 0.383
+eps 15000.00, reward -700.589, t 574.47
+Runtimes: rollout 0.167, gae 0.194, buffer 0.000, update 0.403
+eps 16000.00, reward -706.162, t 575.15
+Runtimes: rollout 0.125, gae 0.188, buffer 0.000, update 0.373
+eps 17000.00, reward -700.437, t 575.92
+Runtimes: rollout 0.160, gae 0.192, buffer 0.000, update 0.411
+eps 18000.00, reward -700.920, t 576.63
+Runtimes: rollout 0.155, gae 0.179, buffer 0.000, update 0.381
+eps 19000.00, reward -707.275, t 577.36
+Runtimes: rollout 0.155, gae 0.188, buffer 0.001, update 0.388
+eps 20000.00, reward -700.146, t 578.08
+Runtimes: rollout 0.148, gae 0.194, buffer 0.000, update 0.371
+eps 21000.00, reward -703.675, t 578.79
+Runtimes: rollout 0.144, gae 0.187, buffer 0.000, update 0.385
+eps 22000.00, reward -704.530, t 579.69
+Runtimes: rollout 0.158, gae 0.221, buffer 0.002, update 0.520
+eps 23000.00, reward -703.419, t 580.44
+Runtimes: rollout 0.135, gae 0.216, buffer 0.001, update 0.396
+eps 24000.00, reward -699.067, t 581.20
+Runtimes: rollout 0.161, gae 0.186, buffer 0.000, update 0.412
+eps 25000.00, reward -705.955, t 581.92
+Runtimes: rollout 0.157, gae 0.185, buffer 0.000, update 0.379
+eps 26000.00, reward -705.539, t 582.71
+Runtimes: rollout 0.157, gae 0.201, buffer 0.000, update 0.429
+eps 27000.00, reward -705.370, t 583.47
+Runtimes: rollout 0.159, gae 0.196, buffer 0.006, update 0.393
+eps 28000.00, reward -709.131, t 584.22
+Runtimes: rollout 0.147, gae 0.187, buffer 0.000, update 0.418
+eps 29000.00, reward -699.602, t 584.98
+Runtimes: rollout 0.180, gae 0.195, buffer 0.000, update 0.385
+eps 30000.00, reward -708.773, t 585.71
+Runtimes: rollout 0.146, gae 0.193, buffer 0.000, update 0.392
+eps 31000.00, reward -706.433, t 586.47
+Runtimes: rollout 0.170, gae 0.196, buffer 0.001, update 0.394
+eps 32000.00, reward -699.052, t 587.20
+Runtimes: rollout 0.152, gae 0.190, buffer 0.000, update 0.381
+eps 33000.00, reward -708.321, t 587.95
+Runtimes: rollout 0.118, gae 0.197, buffer 0.000, update 0.441
+eps 34000.00, reward -705.517, t 588.80
+Runtimes: rollout 0.208, gae 0.200, buffer 0.000, update 0.435
+eps 35000.00, reward -699.595, t 589.69
+Runtimes: rollout 0.194, gae 0.216, buffer 0.001, update 0.487
+eps 36000.00, reward -704.248, t 590.53
+Runtimes: rollout 0.216, gae 0.218, buffer 0.001, update 0.398
+eps 37000.00, reward -716.274, t 591.31
+Runtimes: rollout 0.171, gae 0.196, buffer 0.002, update 0.412
+eps 38000.00, reward -713.512, t 593.05
+Runtimes: rollout 0.301, gae 0.238, buffer 0.000, update 1.197
+eps 39000.00, reward -714.921, t 594.11
+Runtimes: rollout 0.217, gae 0.245, buffer 0.001, update 0.605
+eps 40000.00, reward -709.901, t 595.04
+Runtimes: rollout 0.179, gae 0.246, buffer 0.001, update 0.497
+eps 41000.00, reward -703.134, t 596.01
+Runtimes: rollout 0.157, gae 0.281, buffer 0.000, update 0.532
+eps 42000.00, reward -701.183, t 597.04
+Runtimes: rollout 0.232, gae 0.303, buffer 0.000, update 0.501
+eps 43000.00, reward -706.589, t 597.95
+Runtimes: rollout 0.199, gae 0.263, buffer 0.000, update 0.446
+eps 44000.00, reward -703.963, t 598.75
+Runtimes: rollout 0.165, gae 0.208, buffer 0.001, update 0.423
+eps 45000.00, reward -703.559, t 599.59
+Runtimes: rollout 0.166, gae 0.245, buffer 0.000, update 0.431
+eps 46000.00, reward -707.987, t 600.75
+Runtimes: rollout 0.216, gae 0.395, buffer 0.001, update 0.543
+eps 47000.00, reward -712.457, t 601.64
+Runtimes: rollout 0.184, gae 0.238, buffer 0.001, update 0.476
+eps 48000.00, reward -714.673, t 602.50
+Runtimes: rollout 0.179, gae 0.254, buffer 0.001, update 0.422
+eps 49000.00, reward -703.196, t 603.27
+Runtimes: rollout 0.136, gae 0.200, buffer 0.000, update 0.437
+eps 50000.00, reward -704.193, t 604.08
+Runtimes: rollout 0.165, gae 0.212, buffer 0.001, update 0.433
+Total time: 604.933347940445
+✓ 19736
+
+Result: 3533 (1.69x vs PID)
+
+================================================================================
+TESTING: 512 hidden units x 6 layers
+================================================================================
+Parameters: 2,631,683
+
+Training 0 → 50,000... eps 1000.00, reward -712.199, t 2.37
+Runtimes: rollout 0.273, gae 0.733, buffer 0.067, update 1.300
+eps 2000.00, reward -704.552, t 4.02
+Runtimes: rollout 0.442, gae 0.388, buffer 0.002, update 0.816
+eps 3000.00, reward -706.915, t 5.43
+Runtimes: rollout 0.282, gae 0.435, buffer 0.000, update 0.693
+eps 4000.00, reward -700.981, t 6.73
+Runtimes: rollout 0.247, gae 0.367, buffer 0.000, update 0.683
+eps 5000.00, reward -711.039, t 8.17
+Runtimes: rollout 0.248, gae 0.418, buffer 0.002, update 0.769
+eps 6000.00, reward -710.093, t 9.36
+Runtimes: rollout 0.218, gae 0.344, buffer 0.000, update 0.633
+eps 7000.00, reward -708.942, t 10.56
+Runtimes: rollout 0.222, gae 0.327, buffer 0.000, update 0.646
+eps 8000.00, reward -700.913, t 11.75
+Runtimes: rollout 0.221, gae 0.318, buffer 0.000, update 0.657
+eps 9000.00, reward -701.530, t 12.95
+Runtimes: rollout 0.205, gae 0.326, buffer 0.002, update 0.668
+eps 10000.00, reward -706.363, t 14.16
+Runtimes: rollout 0.243, gae 0.333, buffer 0.001, update 0.632
+eps 11000.00, reward -711.160, t 15.35
+Runtimes: rollout 0.206, gae 0.354, buffer 0.000, update 0.628
+eps 12000.00, reward -715.568, t 16.47
+Runtimes: rollout 0.193, gae 0.299, buffer 0.000, update 0.627
+eps 13000.00, reward -710.339, t 17.71
+Runtimes: rollout 0.221, gae 0.331, buffer 0.000, update 0.688
+eps 14000.00, reward -719.808, t 18.89
+Runtimes: rollout 0.210, gae 0.315, buffer 0.000, update 0.656
+eps 15000.00, reward -704.043, t 20.16
+Runtimes: rollout 0.249, gae 0.352, buffer 0.000, update 0.671
+eps 16000.00, reward -705.350, t 21.39
+Runtimes: rollout 0.227, gae 0.322, buffer 0.000, update 0.673
+eps 17000.00, reward -705.990, t 22.57
+Runtimes: rollout 0.224, gae 0.316, buffer 0.000, update 0.647
+eps 18000.00, reward -708.338, t 23.84
+Runtimes: rollout 0.291, gae 0.321, buffer 0.001, update 0.651
+eps 19000.00, reward -702.034, t 25.25
+Runtimes: rollout 0.269, gae 0.320, buffer 0.001, update 0.817
+eps 20000.00, reward -702.462, t 26.58
+Runtimes: rollout 0.277, gae 0.317, buffer 0.010, update 0.728
+eps 21000.00, reward -712.495, t 27.95
+Runtimes: rollout 0.337, gae 0.357, buffer 0.001, update 0.681
+eps 22000.00, reward -703.753, t 29.28
+Runtimes: rollout 0.320, gae 0.325, buffer 0.000, update 0.676
+eps 23000.00, reward -706.080, t 30.52
+Runtimes: rollout 0.256, gae 0.335, buffer 0.000, update 0.651
+eps 24000.00, reward -699.614, t 31.87
+Runtimes: rollout 0.321, gae 0.340, buffer 0.000, update 0.690
+eps 25000.00, reward -701.978, t 33.12
+Runtimes: rollout 0.249, gae 0.350, buffer 0.000, update 0.655
+eps 26000.00, reward -702.121, t 34.39
+Runtimes: rollout 0.261, gae 0.343, buffer 0.000, update 0.662
+eps 27000.00, reward -706.273, t 35.75
+Runtimes: rollout 0.303, gae 0.348, buffer 0.001, update 0.705
+eps 28000.00, reward -704.105, t 37.09
+Runtimes: rollout 0.312, gae 0.359, buffer 0.001, update 0.666
+eps 29000.00, reward -703.489, t 38.38
+Runtimes: rollout 0.277, gae 0.320, buffer 0.000, update 0.697
+eps 30000.00, reward -708.094, t 39.71
+Runtimes: rollout 0.289, gae 0.340, buffer 0.000, update 0.703
+eps 31000.00, reward -702.372, t 41.00
+Runtimes: rollout 0.288, gae 0.325, buffer 0.000, update 0.674
+eps 32000.00, reward -709.818, t 42.28
+Runtimes: rollout 0.263, gae 0.336, buffer 0.001, update 0.680
+eps 33000.00, reward -708.343, t 43.64
+Runtimes: rollout 0.314, gae 0.353, buffer 0.001, update 0.691
+eps 34000.00, reward -706.415, t 44.97
+Runtimes: rollout 0.286, gae 0.347, buffer 0.000, update 0.695
+eps 35000.00, reward -710.329, t 46.38
+Runtimes: rollout 0.266, gae 0.456, buffer 0.001, update 0.686
+eps 36000.00, reward -702.272, t 47.72
+Runtimes: rollout 0.290, gae 0.338, buffer 0.001, update 0.710
+eps 37000.00, reward -705.152, t 49.03
+Runtimes: rollout 0.318, gae 0.357, buffer 0.000, update 0.642
+eps 38000.00, reward -701.920, t 50.40
+Runtimes: rollout 0.219, gae 0.311, buffer 0.001, update 0.840
+eps 39000.00, reward -711.106, t 51.69
+Runtimes: rollout 0.241, gae 0.353, buffer 0.001, update 0.689
+eps 40000.00, reward -702.777, t 53.00
+Runtimes: rollout 0.273, gae 0.325, buffer 0.001, update 0.711
+eps 41000.00, reward -699.830, t 54.35
+Runtimes: rollout 0.308, gae 0.344, buffer 0.000, update 0.702
+eps 42000.00, reward -701.474, t 56.05
+Runtimes: rollout 0.270, gae 0.441, buffer 0.002, update 0.984
+eps 43000.00, reward -709.670, t 57.28
+Runtimes: rollout 0.222, gae 0.309, buffer 0.002, update 0.698
+eps 44000.00, reward -704.143, t 58.48
+Runtimes: rollout 0.232, gae 0.350, buffer 0.000, update 0.613
+eps 45000.00, reward -702.945, t 59.62
+Runtimes: rollout 0.190, gae 0.332, buffer 0.000, update 0.625
+eps 46000.00, reward -703.568, t 61.26
+Runtimes: rollout 0.225, gae 0.310, buffer 0.001, update 1.100
+eps 47000.00, reward -702.313, t 62.62
+Runtimes: rollout 0.296, gae 0.350, buffer 0.001, update 0.715
+eps 48000.00, reward -705.969, t 63.85
+Runtimes: rollout 0.213, gae 0.348, buffer 0.000, update 0.663
+eps 49000.00, reward -706.976, t 65.13
+Runtimes: rollout 0.228, gae 0.339, buffer 0.000, update 0.712
+eps 50000.00, reward -707.564, t 66.38
+Runtimes: rollout 0.250, gae 0.345, buffer 0.000, update 0.658
+Total time: 67.61781764030457
+✓ 19823 ⭐ NEW BEST!
+
+Training 50,000 → 100,000... eps 1000.00, reward -707.580, t 69.83
+Runtimes: rollout 0.284, gae 0.331, buffer 0.000, update 0.762
+eps 2000.00, reward -704.692, t 71.12
+Runtimes: rollout 0.243, gae 0.336, buffer 0.004, update 0.703
+eps 3000.00, reward -706.398, t 72.35
+Runtimes: rollout 0.246, gae 0.327, buffer 0.001, update 0.661
+eps 4000.00, reward -704.437, t 73.65
+Runtimes: rollout 0.332, gae 0.309, buffer 0.001, update 0.652
+eps 5000.00, reward -712.025, t 74.88
+Runtimes: rollout 0.242, gae 0.310, buffer 0.002, update 0.683
+eps 6000.00, reward -695.648, t 76.15
+Runtimes: rollout 0.267, gae 0.331, buffer 0.001, update 0.671
+eps 7000.00, reward -699.654, t 77.37
+Runtimes: rollout 0.257, gae 0.324, buffer 0.000, update 0.638
+eps 8000.00, reward -703.746, t 78.63
+Runtimes: rollout 0.264, gae 0.335, buffer 0.000, update 0.664
+eps 9000.00, reward -707.527, t 79.91
+Runtimes: rollout 0.265, gae 0.345, buffer 0.000, update 0.668
+eps 10000.00, reward -705.081, t 81.10
+Runtimes: rollout 0.222, gae 0.319, buffer 0.000, update 0.648
+eps 11000.00, reward -701.756, t 82.29
+Runtimes: rollout 0.258, gae 0.344, buffer 0.000, update 0.584
+eps 12000.00, reward -701.049, t 83.36
+Runtimes: rollout 0.203, gae 0.291, buffer 0.001, update 0.579
+eps 13000.00, reward -708.423, t 84.44
+Runtimes: rollout 0.203, gae 0.282, buffer 0.000, update 0.589
+eps 14000.00, reward -708.950, t 85.69
+Runtimes: rollout 0.198, gae 0.292, buffer 0.001, update 0.761
+eps 15000.00, reward -705.299, t 86.76
+Runtimes: rollout 0.199, gae 0.283, buffer 0.000, update 0.591
+eps 16000.00, reward -708.392, t 87.83
+Runtimes: rollout 0.198, gae 0.293, buffer 0.000, update 0.575
+eps 17000.00, reward -707.525, t 88.89
+Runtimes: rollout 0.199, gae 0.282, buffer 0.000, update 0.578
+eps 18000.00, reward -706.307, t 90.02
+Runtimes: rollout 0.268, gae 0.286, buffer 0.000, update 0.573
+eps 19000.00, reward -706.184, t 91.08
+Runtimes: rollout 0.214, gae 0.279, buffer 0.000, update 0.572
+eps 20000.00, reward -706.301, t 92.16
+Runtimes: rollout 0.216, gae 0.277, buffer 0.000, update 0.581
+eps 21000.00, reward -700.968, t 93.23
+Runtimes: rollout 0.205, gae 0.293, buffer 0.000, update 0.575
+eps 22000.00, reward -708.588, t 94.39
+Runtimes: rollout 0.231, gae 0.294, buffer 0.000, update 0.630
+eps 23000.00, reward -716.551, t 95.52
+Runtimes: rollout 0.214, gae 0.294, buffer 0.001, update 0.624
+eps 24000.00, reward -706.252, t 96.67
+Runtimes: rollout 0.181, gae 0.338, buffer 0.000, update 0.636
+eps 25000.00, reward -702.607, t 97.79
+Runtimes: rollout 0.197, gae 0.279, buffer 0.000, update 0.636
+eps 26000.00, reward -709.393, t 98.85
+Runtimes: rollout 0.192, gae 0.292, buffer 0.001, update 0.576
+eps 27000.00, reward -713.411, t 99.91
+Runtimes: rollout 0.198, gae 0.282, buffer 0.000, update 0.584
+eps 28000.00, reward -705.350, t 100.98
+Runtimes: rollout 0.201, gae 0.284, buffer 0.000, update 0.576
+eps 29000.00, reward -708.749, t 102.05
+Runtimes: rollout 0.215, gae 0.287, buffer 0.000, update 0.571
+eps 30000.00, reward -707.890, t 103.16
+Runtimes: rollout 0.253, gae 0.277, buffer 0.000, update 0.579
+eps 31000.00, reward -709.186, t 104.24
+Runtimes: rollout 0.207, gae 0.282, buffer 0.000, update 0.589
+eps 32000.00, reward -713.087, t 105.30
+Runtimes: rollout 0.201, gae 0.283, buffer 0.000, update 0.575
+eps 33000.00, reward -723.346, t 106.38
+Runtimes: rollout 0.212, gae 0.280, buffer 0.000, update 0.594
+eps 34000.00, reward -706.232, t 107.50
+Runtimes: rollout 0.194, gae 0.281, buffer 0.001, update 0.635
+eps 35000.00, reward -715.834, t 108.54
+Runtimes: rollout 0.203, gae 0.278, buffer 0.000, update 0.567
+eps 36000.00, reward -712.705, t 109.60
+Runtimes: rollout 0.201, gae 0.281, buffer 0.000, update 0.574
+eps 37000.00, reward -711.445, t 110.67
+Runtimes: rollout 0.209, gae 0.278, buffer 0.000, update 0.579
+eps 38000.00, reward -712.740, t 111.73
+Runtimes: rollout 0.203, gae 0.278, buffer 0.004, update 0.581
+eps 39000.00, reward -709.132, t 112.78
+Runtimes: rollout 0.197, gae 0.280, buffer 0.000, update 0.569
+eps 40000.00, reward -707.540, t 113.96
+Runtimes: rollout 0.258, gae 0.319, buffer 0.000, update 0.605
+eps 41000.00, reward -708.932, t 115.05
+Runtimes: rollout 0.185, gae 0.319, buffer 0.001, update 0.583
+eps 42000.00, reward -708.931, t 116.23
+Runtimes: rollout 0.211, gae 0.383, buffer 0.000, update 0.589
+eps 43000.00, reward -704.802, t 117.29
+Runtimes: rollout 0.211, gae 0.282, buffer 0.000, update 0.566
+eps 44000.00, reward -708.276, t 118.37
+Runtimes: rollout 0.204, gae 0.293, buffer 0.000, update 0.581
+eps 45000.00, reward -711.410, t 119.46
+Runtimes: rollout 0.190, gae 0.274, buffer 0.000, update 0.622
+eps 46000.00, reward -704.801, t 120.68
+Runtimes: rollout 0.247, gae 0.290, buffer 0.000, update 0.687
+eps 47000.00, reward -704.417, t 121.89
+Runtimes: rollout 0.277, gae 0.281, buffer 0.000, update 0.655
+eps 48000.00, reward -703.824, t 122.96
+Runtimes: rollout 0.195, gae 0.285, buffer 0.000, update 0.582
+eps 49000.00, reward -698.619, t 124.05
+Runtimes: rollout 0.202, gae 0.302, buffer 0.000, update 0.592
+eps 50000.00, reward -695.903, t 125.17
+Runtimes: rollout 0.201, gae 0.288, buffer 0.001, update 0.627
+Total time: 126.29353904724121
+✓ 19770 ⭐ NEW BEST!
+
+Training 100,000 → 150,000... eps 1000.00, reward -706.903, t 128.16
+Runtimes: rollout 0.224, gae 0.288, buffer 0.002, update 0.611
+eps 2000.00, reward -700.149, t 129.30
+Runtimes: rollout 0.227, gae 0.279, buffer 0.000, update 0.628
+eps 3000.00, reward -702.030, t 130.52
+Runtimes: rollout 0.222, gae 0.404, buffer 0.001, update 0.598
+eps 4000.00, reward -703.505, t 131.61
+Runtimes: rollout 0.221, gae 0.278, buffer 0.000, update 0.594
+eps 5000.00, reward -698.781, t 132.70
+Runtimes: rollout 0.179, gae 0.305, buffer 0.000, update 0.597
+eps 6000.00, reward -693.476, t 133.80
+Runtimes: rollout 0.235, gae 0.288, buffer 0.000, update 0.578
+eps 7000.00, reward -708.242, t 134.88
+Runtimes: rollout 0.226, gae 0.281, buffer 0.000, update 0.575
+eps 8000.00, reward -714.699, t 135.96
+Runtimes: rollout 0.214, gae 0.293, buffer 0.000, update 0.577
+eps 9000.00, reward -707.695, t 137.03
+Runtimes: rollout 0.188, gae 0.295, buffer 0.000, update 0.578
+eps 10000.00, reward -705.820, t 138.13
+Runtimes: rollout 0.206, gae 0.276, buffer 0.000, update 0.621
+eps 11000.00, reward -705.635, t 139.22
+Runtimes: rollout 0.199, gae 0.278, buffer 0.001, update 0.610
+eps 12000.00, reward -708.547, t 140.30
+Runtimes: rollout 0.196, gae 0.281, buffer 0.000, update 0.609
+eps 13000.00, reward -695.962, t 141.38
+Runtimes: rollout 0.214, gae 0.280, buffer 0.000, update 0.581
+eps 14000.00, reward -704.031, t 142.43
+Runtimes: rollout 0.190, gae 0.275, buffer 0.000, update 0.583
+eps 15000.00, reward -704.409, t 143.47
+Runtimes: rollout 0.194, gae 0.274, buffer 0.000, update 0.574
+eps 16000.00, reward -704.578, t 144.53
+Runtimes: rollout 0.193, gae 0.282, buffer 0.002, update 0.588
+eps 17000.00, reward -700.572, t 145.60
+Runtimes: rollout 0.204, gae 0.287, buffer 0.000, update 0.576
+eps 18000.00, reward -703.578, t 146.77
+Runtimes: rollout 0.296, gae 0.290, buffer 0.000, update 0.581
+eps 19000.00, reward -709.555, t 147.85
+Runtimes: rollout 0.208, gae 0.275, buffer 0.000, update 0.600
+eps 20000.00, reward -708.715, t 148.91
+Runtimes: rollout 0.187, gae 0.288, buffer 0.001, update 0.580
+eps 21000.00, reward -705.081, t 149.99
+Runtimes: rollout 0.230, gae 0.277, buffer 0.000, update 0.570
+eps 22000.00, reward -702.606, t 151.04
+Runtimes: rollout 0.204, gae 0.278, buffer 0.000, update 0.571
+eps 23000.00, reward -704.988, t 152.08
+Runtimes: rollout 0.194, gae 0.278, buffer 0.000, update 0.572
+eps 24000.00, reward -706.304, t 153.16
+Runtimes: rollout 0.205, gae 0.279, buffer 0.001, update 0.593
+eps 25000.00, reward -699.803, t 154.21
+Runtimes: rollout 0.189, gae 0.282, buffer 0.000, update 0.579
+eps 26000.00, reward -701.652, t 155.43
+Runtimes: rollout 0.225, gae 0.330, buffer 0.000, update 0.666
+eps 27000.00, reward -707.668, t 156.51
+Runtimes: rollout 0.179, gae 0.282, buffer 0.000, update 0.610
+eps 28000.00, reward -710.513, t 157.59
+Runtimes: rollout 0.191, gae 0.284, buffer 0.000, update 0.607
+eps 29000.00, reward -712.986, t 158.68
+Runtimes: rollout 0.187, gae 0.289, buffer 0.001, update 0.612
+eps 30000.00, reward -716.614, t 159.74
+Runtimes: rollout 0.211, gae 0.280, buffer 0.000, update 0.571
+eps 31000.00, reward -705.362, t 160.82
+Runtimes: rollout 0.208, gae 0.281, buffer 0.000, update 0.585
+eps 32000.00, reward -710.900, t 161.89
+Runtimes: rollout 0.190, gae 0.276, buffer 0.000, update 0.608
+eps 33000.00, reward -704.405, t 162.97
+Runtimes: rollout 0.220, gae 0.289, buffer 0.000, update 0.570
+eps 34000.00, reward -696.975, t 164.05
+Runtimes: rollout 0.189, gae 0.296, buffer 0.001, update 0.591
+eps 35000.00, reward -702.719, t 165.13
+Runtimes: rollout 0.200, gae 0.292, buffer 0.000, update 0.586
+eps 36000.00, reward -706.201, t 166.29
+Runtimes: rollout 0.237, gae 0.279, buffer 0.000, update 0.648
+eps 37000.00, reward -704.396, t 167.61
+Runtimes: rollout 0.234, gae 0.279, buffer 0.000, update 0.804
+eps 38000.00, reward -704.697, t 168.69
+Runtimes: rollout 0.206, gae 0.289, buffer 0.012, update 0.580
+eps 39000.00, reward -704.160, t 169.78
+Runtimes: rollout 0.231, gae 0.282, buffer 0.000, update 0.569
+eps 40000.00, reward -701.268, t 170.89
+Runtimes: rollout 0.243, gae 0.290, buffer 0.000, update 0.581
+eps 41000.00, reward -706.422, t 171.99
+Runtimes: rollout 0.237, gae 0.285, buffer 0.000, update 0.576
+eps 42000.00, reward -708.995, t 173.09
+Runtimes: rollout 0.243, gae 0.285, buffer 0.000, update 0.572
+eps 43000.00, reward -709.092, t 174.18
+Runtimes: rollout 0.235, gae 0.281, buffer 0.001, update 0.577
+eps 44000.00, reward -697.715, t 175.30
+Runtimes: rollout 0.240, gae 0.301, buffer 0.000, update 0.577
+eps 45000.00, reward -710.004, t 176.40
+Runtimes: rollout 0.255, gae 0.277, buffer 0.000, update 0.571
+eps 46000.00, reward -703.995, t 177.48
+Runtimes: rollout 0.211, gae 0.282, buffer 0.000, update 0.580
+eps 47000.00, reward -700.140, t 178.57
+Runtimes: rollout 0.226, gae 0.276, buffer 0.000, update 0.587
+eps 48000.00, reward -707.989, t 179.65
+Runtimes: rollout 0.223, gae 0.289, buffer 0.000, update 0.567
+eps 49000.00, reward -703.864, t 180.98
+Runtimes: rollout 0.215, gae 0.281, buffer 0.000, update 0.832
+eps 50000.00, reward -706.869, t 182.14
+Runtimes: rollout 0.225, gae 0.308, buffer 0.000, update 0.628
+Total time: 183.24955797195435
+✓ 19940
+
+Training 150,000 → 200,000... eps 1000.00, reward -710.510, t 185.18
+Runtimes: rollout 0.263, gae 0.297, buffer 0.000, update 0.630
+eps 2000.00, reward -711.284, t 186.37
+Runtimes: rollout 0.269, gae 0.298, buffer 0.000, update 0.621
+eps 3000.00, reward -706.782, t 187.49
+Runtimes: rollout 0.240, gae 0.293, buffer 0.000, update 0.592
+eps 4000.00, reward -708.364, t 188.61
+Runtimes: rollout 0.214, gae 0.282, buffer 0.000, update 0.619
+eps 5000.00, reward -706.920, t 189.81
+Runtimes: rollout 0.251, gae 0.330, buffer 0.000, update 0.621
+eps 6000.00, reward -707.023, t 190.90
+Runtimes: rollout 0.240, gae 0.277, buffer 0.001, update 0.575
+eps 7000.00, reward -704.494, t 191.98
+Runtimes: rollout 0.223, gae 0.286, buffer 0.000, update 0.567
+eps 8000.00, reward -707.869, t 193.09
+Runtimes: rollout 0.243, gae 0.283, buffer 0.000, update 0.587
+eps 9000.00, reward -705.100, t 194.20
+Runtimes: rollout 0.212, gae 0.299, buffer 0.000, update 0.600
+eps 10000.00, reward -700.385, t 195.30
+Runtimes: rollout 0.228, gae 0.288, buffer 0.000, update 0.585
+eps 11000.00, reward -709.369, t 196.44
+Runtimes: rollout 0.224, gae 0.280, buffer 0.000, update 0.628
+eps 12000.00, reward -704.400, t 197.51
+Runtimes: rollout 0.228, gae 0.283, buffer 0.000, update 0.566
+eps 13000.00, reward -700.980, t 198.59
+Runtimes: rollout 0.231, gae 0.277, buffer 0.000, update 0.569
+eps 14000.00, reward -708.054, t 199.92
+Runtimes: rollout 0.337, gae 0.352, buffer 0.000, update 0.635
+eps 15000.00, reward -702.719, t 201.10
+Runtimes: rollout 0.248, gae 0.313, buffer 0.000, update 0.626
+eps 16000.00, reward -705.292, t 202.23
+Runtimes: rollout 0.239, gae 0.299, buffer 0.000, update 0.584
+eps 17000.00, reward -709.850, t 203.38
+Runtimes: rollout 0.261, gae 0.282, buffer 0.000, update 0.608
+eps 18000.00, reward -697.438, t 204.52
+Runtimes: rollout 0.267, gae 0.282, buffer 0.002, update 0.589
+eps 19000.00, reward -710.773, t 205.60
+Runtimes: rollout 0.221, gae 0.290, buffer 0.001, update 0.570
+eps 20000.00, reward -699.376, t 206.72
+Runtimes: rollout 0.242, gae 0.282, buffer 0.000, update 0.592
+eps 21000.00, reward -706.727, t 207.83
+Runtimes: rollout 0.256, gae 0.276, buffer 0.000, update 0.583
+eps 22000.00, reward -717.094, t 208.92
+Runtimes: rollout 0.231, gae 0.275, buffer 0.000, update 0.579
+eps 23000.00, reward -712.282, t 210.07
+Runtimes: rollout 0.273, gae 0.289, buffer 0.000, update 0.595
+eps 24000.00, reward -709.462, t 211.15
+Runtimes: rollout 0.225, gae 0.280, buffer 0.000, update 0.573
+eps 25000.00, reward -708.215, t 212.23
+Runtimes: rollout 0.221, gae 0.280, buffer 0.000, update 0.572
+eps 26000.00, reward -713.814, t 213.39
+Runtimes: rollout 0.264, gae 0.318, buffer 0.000, update 0.577
+eps 27000.00, reward -703.141, t 214.53
+Runtimes: rollout 0.238, gae 0.298, buffer 0.000, update 0.607
+eps 28000.00, reward -701.443, t 215.65
+Runtimes: rollout 0.243, gae 0.292, buffer 0.000, update 0.584
+eps 29000.00, reward -705.425, t 216.74
+Runtimes: rollout 0.219, gae 0.284, buffer 0.001, update 0.588
+eps 30000.00, reward -697.272, t 217.81
+Runtimes: rollout 0.211, gae 0.281, buffer 0.000, update 0.580
+eps 31000.00, reward -706.759, t 218.92
+Runtimes: rollout 0.238, gae 0.284, buffer 0.001, update 0.582
+eps 32000.00, reward -697.974, t 220.00
+Runtimes: rollout 0.223, gae 0.278, buffer 0.000, update 0.581
+eps 33000.00, reward -709.732, t 221.11
+Runtimes: rollout 0.233, gae 0.285, buffer 0.000, update 0.586
+eps 34000.00, reward -710.838, t 222.23
+Runtimes: rollout 0.217, gae 0.298, buffer 0.000, update 0.614
+eps 35000.00, reward -704.156, t 223.32
+Runtimes: rollout 0.232, gae 0.276, buffer 0.000, update 0.580
+eps 36000.00, reward -702.040, t 224.44
+Runtimes: rollout 0.226, gae 0.301, buffer 0.000, update 0.588
+eps 37000.00, reward -697.011, t 225.56
+Runtimes: rollout 0.244, gae 0.279, buffer 0.000, update 0.598
+eps 38000.00, reward -700.924, t 226.73
+Runtimes: rollout 0.227, gae 0.281, buffer 0.000, update 0.657
+eps 39000.00, reward -707.527, t 227.85
+Runtimes: rollout 0.239, gae 0.304, buffer 0.000, update 0.581
+eps 40000.00, reward -705.680, t 228.96
+Runtimes: rollout 0.227, gae 0.282, buffer 0.002, update 0.598
+eps 41000.00, reward -701.285, t 230.04
+Runtimes: rollout 0.221, gae 0.285, buffer 0.000, update 0.577
+eps 42000.00, reward -700.779, t 231.12
+Runtimes: rollout 0.227, gae 0.279, buffer 0.000, update 0.569
+eps 43000.00, reward -702.945, t 232.27
+Runtimes: rollout 0.255, gae 0.282, buffer 0.001, update 0.615
+eps 44000.00, reward -707.645, t 233.37
+Runtimes: rollout 0.231, gae 0.282, buffer 0.001, update 0.579
+eps 45000.00, reward -709.112, t 234.57
+Runtimes: rollout 0.216, gae 0.356, buffer 0.000, update 0.632
+eps 46000.00, reward -707.181, t 235.68
+Runtimes: rollout 0.240, gae 0.280, buffer 0.000, update 0.585
+eps 47000.00, reward -706.380, t 236.77
+Runtimes: rollout 0.238, gae 0.276, buffer 0.000, update 0.576
+eps 48000.00, reward -706.369, t 237.85
+Runtimes: rollout 0.233, gae 0.280, buffer 0.000, update 0.568
+eps 49000.00, reward -708.752, t 238.93
+Runtimes: rollout 0.214, gae 0.287, buffer 0.000, update 0.585
+eps 50000.00, reward -707.746, t 240.05
+Runtimes: rollout 0.257, gae 0.291, buffer 0.000, update 0.572
+Total time: 241.37150263786316
+✓ 19723 ⭐ NEW BEST!
+
+Training 200,000 → 250,000... eps 1000.00, reward -707.218, t 243.23
+Runtimes: rollout 0.239, gae 0.281, buffer 0.000, update 0.604
+eps 2000.00, reward -708.712, t 244.35
+Runtimes: rollout 0.242, gae 0.283, buffer 0.000, update 0.586
+eps 3000.00, reward -714.534, t 245.52
+Runtimes: rollout 0.244, gae 0.304, buffer 0.001, update 0.626
+eps 4000.00, reward -706.202, t 246.69
+Runtimes: rollout 0.246, gae 0.315, buffer 0.001, update 0.614
+eps 5000.00, reward -701.941, t 247.84
+Runtimes: rollout 0.238, gae 0.283, buffer 0.001, update 0.621
+eps 6000.00, reward -707.547, t 249.01
+Runtimes: rollout 0.248, gae 0.283, buffer 0.000, update 0.637
+eps 7000.00, reward -709.826, t 250.15
+Runtimes: rollout 0.232, gae 0.307, buffer 0.000, update 0.600
+eps 8000.00, reward -708.586, t 251.24
+Runtimes: rollout 0.239, gae 0.284, buffer 0.000, update 0.573
+eps 9000.00, reward -712.544, t 252.34
+Runtimes: rollout 0.234, gae 0.282, buffer 0.000, update 0.581
+eps 10000.00, reward -702.521, t 253.44
+Runtimes: rollout 0.235, gae 0.279, buffer 0.000, update 0.581
+eps 11000.00, reward -707.105, t 254.54
+Runtimes: rollout 0.240, gae 0.283, buffer 0.000, update 0.585
+eps 12000.00, reward -710.158, t 255.63
+Runtimes: rollout 0.222, gae 0.274, buffer 0.002, update 0.592
+eps 13000.00, reward -714.104, t 256.82
+Runtimes: rollout 0.236, gae 0.280, buffer 0.000, update 0.672
+eps 14000.00, reward -699.897, t 257.90
+Runtimes: rollout 0.222, gae 0.282, buffer 0.000, update 0.569
+eps 15000.00, reward -716.087, t 258.97
+Runtimes: rollout 0.233, gae 0.276, buffer 0.000, update 0.566
+eps 16000.00, reward -703.682, t 260.07
+Runtimes: rollout 0.224, gae 0.283, buffer 0.001, update 0.587
+eps 17000.00, reward -705.055, t 261.14
+Runtimes: rollout 0.234, gae 0.277, buffer 0.000, update 0.566
+eps 18000.00, reward -705.834, t 262.23
+Runtimes: rollout 0.228, gae 0.287, buffer 0.000, update 0.568
+eps 19000.00, reward -707.471, t 263.32
+Runtimes: rollout 0.227, gae 0.288, buffer 0.000, update 0.578
+eps 20000.00, reward -710.400, t 264.43
+Runtimes: rollout 0.225, gae 0.292, buffer 0.000, update 0.586
+eps 21000.00, reward -709.455, t 265.50
+Runtimes: rollout 0.228, gae 0.284, buffer 0.000, update 0.566
+eps 22000.00, reward -699.593, t 266.58
+Runtimes: rollout 0.233, gae 0.278, buffer 0.002, update 0.568
+eps 23000.00, reward -704.986, t 267.68
+Runtimes: rollout 0.235, gae 0.280, buffer 0.001, update 0.576
+eps 24000.00, reward -693.479, t 268.78
+Runtimes: rollout 0.244, gae 0.287, buffer 0.000, update 0.568
+eps 25000.00, reward -705.342, t 269.93
+Runtimes: rollout 0.298, gae 0.282, buffer 0.000, update 0.579
+eps 26000.00, reward -708.555, t 271.03
+Runtimes: rollout 0.219, gae 0.282, buffer 0.001, update 0.590
+eps 27000.00, reward -703.651, t 272.12
+Runtimes: rollout 0.233, gae 0.277, buffer 0.000, update 0.582
+eps 28000.00, reward -708.029, t 273.22
+Runtimes: rollout 0.235, gae 0.282, buffer 0.001, update 0.586
+eps 29000.00, reward -710.737, t 274.34
+Runtimes: rollout 0.239, gae 0.303, buffer 0.000, update 0.579
+eps 30000.00, reward -706.370, t 275.53
+Runtimes: rollout 0.227, gae 0.295, buffer 0.000, update 0.660
+eps 31000.00, reward -710.211, t 276.63
+Runtimes: rollout 0.241, gae 0.291, buffer 0.001, update 0.576
+eps 32000.00, reward -706.733, t 277.73
+Runtimes: rollout 0.232, gae 0.283, buffer 0.000, update 0.577
+eps 33000.00, reward -700.774, t 278.83
+Runtimes: rollout 0.254, gae 0.279, buffer 0.000, update 0.575
+eps 34000.00, reward -702.858, t 279.93
+Runtimes: rollout 0.236, gae 0.281, buffer 0.000, update 0.579
+eps 35000.00, reward -709.516, t 281.03
+Runtimes: rollout 0.233, gae 0.290, buffer 0.000, update 0.576
+eps 36000.00, reward -701.388, t 282.10
+Runtimes: rollout 0.218, gae 0.278, buffer 0.000, update 0.573
+eps 37000.00, reward -704.934, t 283.19
+Runtimes: rollout 0.230, gae 0.290, buffer 0.000, update 0.567
+eps 38000.00, reward -708.338, t 284.30
+Runtimes: rollout 0.237, gae 0.290, buffer 0.000, update 0.588
+eps 39000.00, reward -708.386, t 285.41
+Runtimes: rollout 0.246, gae 0.285, buffer 0.000, update 0.573
+eps 40000.00, reward -704.433, t 286.51
+Runtimes: rollout 0.225, gae 0.289, buffer 0.001, update 0.584
+eps 41000.00, reward -714.823, t 287.66
+Runtimes: rollout 0.244, gae 0.303, buffer 0.000, update 0.605
+eps 42000.00, reward -709.148, t 288.77
+Runtimes: rollout 0.242, gae 0.293, buffer 0.000, update 0.575
+eps 43000.00, reward -700.847, t 289.91
+Runtimes: rollout 0.231, gae 0.278, buffer 0.000, update 0.634
+eps 44000.00, reward -702.849, t 291.03
+Runtimes: rollout 0.233, gae 0.284, buffer 0.001, update 0.600
+eps 45000.00, reward -704.517, t 292.22
+Runtimes: rollout 0.236, gae 0.346, buffer 0.002, update 0.602
+eps 46000.00, reward -704.747, t 293.46
+Runtimes: rollout 0.284, gae 0.330, buffer 0.000, update 0.625
+eps 47000.00, reward -701.910, t 294.64
+Runtimes: rollout 0.245, gae 0.288, buffer 0.000, update 0.647
+eps 48000.00, reward -706.592, t 295.83
+Runtimes: rollout 0.270, gae 0.314, buffer 0.000, update 0.609
+eps 49000.00, reward -712.417, t 297.01
+Runtimes: rollout 0.225, gae 0.289, buffer 0.000, update 0.662
+eps 50000.00, reward -711.341, t 298.15
+Runtimes: rollout 0.249, gae 0.291, buffer 0.002, update 0.605
+Total time: 299.27373790740967
+✓ 19612 ⭐ NEW BEST!
+
+Training 250,000 → 300,000... eps 1000.00, reward -702.421, t 302.61
+Runtimes: rollout 0.250, gae 0.374, buffer 0.000, update 1.995
+eps 2000.00, reward -705.935, t 303.94
+Runtimes: rollout 0.340, gae 0.314, buffer 0.002, update 0.676
+eps 3000.00, reward -711.223, t 305.19
+Runtimes: rollout 0.267, gae 0.295, buffer 0.000, update 0.683
+eps 4000.00, reward -705.155, t 306.39
+Runtimes: rollout 0.248, gae 0.290, buffer 0.001, update 0.660
+eps 5000.00, reward -705.185, t 307.54
+Runtimes: rollout 0.240, gae 0.303, buffer 0.001, update 0.613
+eps 6000.00, reward -713.243, t 308.68
+Runtimes: rollout 0.225, gae 0.287, buffer 0.001, update 0.617
+eps 7000.00, reward -697.953, t 309.82
+Runtimes: rollout 0.242, gae 0.280, buffer 0.000, update 0.620
+eps 8000.00, reward -710.757, t 310.97
+Runtimes: rollout 0.227, gae 0.295, buffer 0.000, update 0.632
+eps 9000.00, reward -706.213, t 312.11
+Runtimes: rollout 0.245, gae 0.285, buffer 0.000, update 0.606
+eps 10000.00, reward -709.064, t 313.23
+Runtimes: rollout 0.246, gae 0.285, buffer 0.001, update 0.586
+eps 11000.00, reward -709.293, t 314.37
+Runtimes: rollout 0.254, gae 0.289, buffer 0.001, update 0.604
+eps 12000.00, reward -703.299, t 315.49
+Runtimes: rollout 0.235, gae 0.287, buffer 0.000, update 0.592
+eps 13000.00, reward -702.509, t 316.59
+Runtimes: rollout 0.222, gae 0.295, buffer 0.001, update 0.588
+eps 14000.00, reward -706.302, t 317.79
+Runtimes: rollout 0.321, gae 0.292, buffer 0.000, update 0.585
+eps 15000.00, reward -706.983, t 318.90
+Runtimes: rollout 0.252, gae 0.279, buffer 0.000, update 0.578
+eps 16000.00, reward -698.732, t 320.01
+Runtimes: rollout 0.231, gae 0.289, buffer 0.000, update 0.585
+eps 17000.00, reward -705.950, t 321.32
+Runtimes: rollout 0.226, gae 0.323, buffer 0.006, update 0.757
+eps 18000.00, reward -707.465, t 322.43
+Runtimes: rollout 0.226, gae 0.285, buffer 0.001, update 0.597
+eps 19000.00, reward -710.410, t 323.52
+Runtimes: rollout 0.222, gae 0.290, buffer 0.000, update 0.581
+eps 20000.00, reward -707.027, t 324.65
+Runtimes: rollout 0.231, gae 0.279, buffer 0.010, update 0.604
+eps 21000.00, reward -704.153, t 325.79
+Runtimes: rollout 0.237, gae 0.293, buffer 0.001, update 0.611
+eps 22000.00, reward -703.035, t 326.94
+Runtimes: rollout 0.251, gae 0.292, buffer 0.000, update 0.605
+eps 23000.00, reward -703.543, t 328.03
+Runtimes: rollout 0.229, gae 0.285, buffer 0.000, update 0.585
+eps 24000.00, reward -710.519, t 329.13
+Runtimes: rollout 0.235, gae 0.284, buffer 0.000, update 0.571
+eps 25000.00, reward -710.444, t 330.22
+Runtimes: rollout 0.233, gae 0.282, buffer 0.001, update 0.574
+eps 26000.00, reward -704.680, t 331.31
+Runtimes: rollout 0.220, gae 0.292, buffer 0.000, update 0.581
+eps 27000.00, reward -711.985, t 332.42
+Runtimes: rollout 0.231, gae 0.284, buffer 0.000, update 0.597
+eps 28000.00, reward -700.121, t 333.51
+Runtimes: rollout 0.234, gae 0.281, buffer 0.000, update 0.573
+eps 29000.00, reward -704.046, t 334.65
+Runtimes: rollout 0.247, gae 0.286, buffer 0.000, update 0.605
+eps 30000.00, reward -705.051, t 335.76
+Runtimes: rollout 0.237, gae 0.281, buffer 0.000, update 0.589
+eps 31000.00, reward -710.257, t 336.88
+Runtimes: rollout 0.254, gae 0.285, buffer 0.000, update 0.588
+eps 32000.00, reward -707.958, t 337.99
+Runtimes: rollout 0.221, gae 0.297, buffer 0.000, update 0.584
+eps 33000.00, reward -703.316, t 339.11
+Runtimes: rollout 0.247, gae 0.289, buffer 0.000, update 0.583
+eps 34000.00, reward -711.026, t 340.23
+Runtimes: rollout 0.227, gae 0.310, buffer 0.000, update 0.582
+eps 35000.00, reward -704.093, t 341.30
+Runtimes: rollout 0.202, gae 0.296, buffer 0.000, update 0.578
+eps 36000.00, reward -706.146, t 342.38
+Runtimes: rollout 0.227, gae 0.280, buffer 0.000, update 0.569
+eps 37000.00, reward -705.694, t 343.48
+Runtimes: rollout 0.230, gae 0.289, buffer 0.000, update 0.587
+eps 38000.00, reward -708.271, t 344.60
+Runtimes: rollout 0.217, gae 0.307, buffer 0.000, update 0.587
+eps 39000.00, reward -706.773, t 345.76
+Runtimes: rollout 0.257, gae 0.279, buffer 0.000, update 0.630
+eps 40000.00, reward -697.064, t 347.03
+Runtimes: rollout 0.244, gae 0.284, buffer 0.000, update 0.743
+eps 41000.00, reward -707.893, t 348.20
+Runtimes: rollout 0.252, gae 0.291, buffer 0.002, update 0.625
+eps 42000.00, reward -707.658, t 349.34
+Runtimes: rollout 0.245, gae 0.278, buffer 0.000, update 0.607
+eps 43000.00, reward -699.949, t 350.44
+Runtimes: rollout 0.223, gae 0.287, buffer 0.001, update 0.592
+eps 44000.00, reward -703.091, t 351.57
+Runtimes: rollout 0.230, gae 0.294, buffer 0.004, update 0.601
+eps 45000.00, reward -700.112, t 352.68
+Runtimes: rollout 0.255, gae 0.281, buffer 0.002, update 0.577
+eps 46000.00, reward -706.902, t 353.85
+Runtimes: rollout 0.237, gae 0.288, buffer 0.000, update 0.648
+eps 47000.00, reward -701.314, t 354.98
+Runtimes: rollout 0.254, gae 0.289, buffer 0.000, update 0.579
+eps 48000.00, reward -704.829, t 356.08
+Runtimes: rollout 0.221, gae 0.284, buffer 0.000, update 0.596
+eps 49000.00, reward -698.949, t 357.19
+Runtimes: rollout 0.241, gae 0.284, buffer 0.000, update 0.587
+eps 50000.00, reward -709.760, t 358.30
+Runtimes: rollout 0.241, gae 0.279, buffer 0.000, update 0.587
+Total time: 359.45532488822937
+✓ 18752 ⭐ NEW BEST!
+
+Result: 18752 (8.99x vs PID)
+
+================================================================================
+TESTING: 1024 hidden units x 4 layers
+================================================================================
+Parameters: 6,307,843
+
+Training 0 → 50,000... eps 1000.00, reward -711.471, t 2.55
+Runtimes: rollout 0.572, gae 0.608, buffer 0.029, update 1.343
+eps 2000.00, reward -699.714, t 4.48
+Runtimes: rollout 0.366, gae 0.445, buffer 0.001, update 1.110
+eps 3000.00, reward -705.511, t 6.32
+Runtimes: rollout 0.323, gae 0.440, buffer 0.001, update 1.081
+eps 4000.00, reward -712.982, t 8.17
+Runtimes: rollout 0.339, gae 0.448, buffer 0.000, update 1.061
+eps 5000.00, reward -702.401, t 10.02
+Runtimes: rollout 0.308, gae 0.492, buffer 0.001, update 1.045
+eps 6000.00, reward -704.508, t 11.82
+Runtimes: rollout 0.312, gae 0.430, buffer 0.000, update 1.056
+eps 7000.00, reward -704.849, t 13.73
+Runtimes: rollout 0.320, gae 0.458, buffer 0.000, update 1.134
+eps 8000.00, reward -706.454, t 15.60
+Runtimes: rollout 0.309, gae 0.430, buffer 0.001, update 1.128
+eps 9000.00, reward -704.471, t 17.60
+Runtimes: rollout 0.325, gae 0.432, buffer 0.001, update 1.245
+eps 10000.00, reward -710.191, t 19.42
+Runtimes: rollout 0.317, gae 0.426, buffer 0.000, update 1.080
+eps 11000.00, reward -701.676, t 21.31
+Runtimes: rollout 0.330, gae 0.474, buffer 0.000, update 1.085
+eps 12000.00, reward -702.737, t 23.12
+Runtimes: rollout 0.312, gae 0.436, buffer 0.000, update 1.062
+eps 13000.00, reward -704.488, t 24.96
+Runtimes: rollout 0.315, gae 0.436, buffer 0.000, update 1.087
+eps 14000.00, reward -704.854, t 26.83
+Runtimes: rollout 0.324, gae 0.446, buffer 0.001, update 1.098
+eps 15000.00, reward -706.869, t 28.69
+Runtimes: rollout 0.355, gae 0.428, buffer 0.000, update 1.071
+eps 16000.00, reward -710.013, t 30.56
+Runtimes: rollout 0.335, gae 0.435, buffer 0.000, update 1.106
+eps 17000.00, reward -700.907, t 32.74
+Runtimes: rollout 0.480, gae 0.481, buffer 0.001, update 1.212
+eps 18000.00, reward -710.206, t 34.59
+Runtimes: rollout 0.303, gae 0.424, buffer 0.000, update 1.130
+eps 19000.00, reward -706.135, t 36.37
+Runtimes: rollout 0.323, gae 0.423, buffer 0.000, update 1.027
+eps 20000.00, reward -703.868, t 38.13
+Runtimes: rollout 0.297, gae 0.418, buffer 0.001, update 1.044
+eps 21000.00, reward -703.441, t 39.88
+Runtimes: rollout 0.304, gae 0.420, buffer 0.000, update 1.026
+eps 22000.00, reward -705.672, t 41.69
+Runtimes: rollout 0.293, gae 0.419, buffer 0.000, update 1.102
+eps 23000.00, reward -706.883, t 43.51
+Runtimes: rollout 0.310, gae 0.422, buffer 0.000, update 1.081
+eps 24000.00, reward -704.913, t 45.27
+Runtimes: rollout 0.309, gae 0.425, buffer 0.001, update 1.028
+eps 25000.00, reward -704.242, t 47.00
+Runtimes: rollout 0.302, gae 0.411, buffer 0.001, update 1.019
+eps 26000.00, reward -705.546, t 48.90
+Runtimes: rollout 0.390, gae 0.432, buffer 0.000, update 1.076
+eps 27000.00, reward -706.551, t 50.63
+Runtimes: rollout 0.307, gae 0.414, buffer 0.001, update 1.009
+eps 28000.00, reward -705.787, t 52.37
+Runtimes: rollout 0.295, gae 0.420, buffer 0.000, update 1.024
+eps 29000.00, reward -714.571, t 54.14
+Runtimes: rollout 0.316, gae 0.423, buffer 0.000, update 1.031
+eps 30000.00, reward -713.336, t 55.94
+Runtimes: rollout 0.334, gae 0.417, buffer 0.000, update 1.041
+eps 31000.00, reward -705.170, t 57.71
+Runtimes: rollout 0.317, gae 0.423, buffer 0.000, update 1.035
+eps 32000.00, reward -706.393, t 59.44
+Runtimes: rollout 0.296, gae 0.413, buffer 0.001, update 1.016
+eps 33000.00, reward -705.453, t 61.50
+Runtimes: rollout 0.309, gae 0.470, buffer 0.003, update 1.281
+eps 34000.00, reward -704.499, t 63.33
+Runtimes: rollout 0.304, gae 0.434, buffer 0.002, update 1.088
+eps 35000.00, reward -703.972, t 65.20
+Runtimes: rollout 0.339, gae 0.421, buffer 0.000, update 1.107
+eps 36000.00, reward -704.734, t 66.98
+Runtimes: rollout 0.313, gae 0.427, buffer 0.000, update 1.043
+eps 37000.00, reward -708.340, t 68.76
+Runtimes: rollout 0.319, gae 0.424, buffer 0.000, update 1.033
+eps 38000.00, reward -700.359, t 70.56
+Runtimes: rollout 0.315, gae 0.414, buffer 0.000, update 1.077
+eps 39000.00, reward -707.981, t 72.30
+Runtimes: rollout 0.295, gae 0.421, buffer 0.001, update 1.018
+eps 40000.00, reward -709.314, t 74.08
+Runtimes: rollout 0.326, gae 0.413, buffer 0.000, update 1.040
+eps 41000.00, reward -709.444, t 75.81
+Runtimes: rollout 0.286, gae 0.422, buffer 0.000, update 1.020
+eps 42000.00, reward -711.716, t 77.63
+Runtimes: rollout 0.295, gae 0.418, buffer 0.000, update 1.111
+eps 43000.00, reward -703.541, t 79.43
+Runtimes: rollout 0.307, gae 0.412, buffer 0.001, update 1.076
+eps 44000.00, reward -707.171, t 81.33
+Runtimes: rollout 0.340, gae 0.516, buffer 0.000, update 1.047
+eps 45000.00, reward -705.055, t 83.10
+Runtimes: rollout 0.306, gae 0.424, buffer 0.000, update 1.037
+eps 46000.00, reward -706.185, t 84.87
+Runtimes: rollout 0.294, gae 0.417, buffer 0.000, update 1.056
+eps 47000.00, reward -704.762, t 86.70
+Runtimes: rollout 0.306, gae 0.428, buffer 0.000, update 1.093
+eps 48000.00, reward -702.083, t 88.47
+Runtimes: rollout 0.319, gae 0.428, buffer 0.000, update 1.031
+eps 49000.00, reward -707.576, t 90.24
+Runtimes: rollout 0.307, gae 0.438, buffer 0.004, update 1.019
+eps 50000.00, reward -711.719, t 91.98
+Runtimes: rollout 0.302, gae 0.416, buffer 0.000, update 1.022
+Total time: 93.72820210456848
+✓ 8908 ⭐ NEW BEST!
+
+Training 50,000 → 100,000... eps 1000.00, reward -704.513, t 97.13
+Runtimes: rollout 0.318, gae 0.419, buffer 0.000, update 1.038
+eps 2000.00, reward -706.321, t 98.95
+Runtimes: rollout 0.333, gae 0.418, buffer 0.000, update 1.064
+eps 3000.00, reward -701.343, t 100.72
+Runtimes: rollout 0.317, gae 0.419, buffer 0.000, update 1.033
+eps 4000.00, reward -710.578, t 102.45
+Runtimes: rollout 0.291, gae 0.415, buffer 0.001, update 1.020
+eps 5000.00, reward -702.327, t 104.25
+Runtimes: rollout 0.313, gae 0.414, buffer 0.000, update 1.077
+eps 6000.00, reward -712.621, t 106.02
+Runtimes: rollout 0.307, gae 0.429, buffer 0.000, update 1.032
+eps 7000.00, reward -702.427, t 107.91
+Runtimes: rollout 0.343, gae 0.426, buffer 0.001, update 1.123
+eps 8000.00, reward -711.378, t 109.71
+Runtimes: rollout 0.317, gae 0.419, buffer 0.001, update 1.060
+eps 9000.00, reward -708.174, t 111.48
+Runtimes: rollout 0.301, gae 0.428, buffer 0.001, update 1.044
+eps 10000.00, reward -704.094, t 113.24
+Runtimes: rollout 0.289, gae 0.421, buffer 0.000, update 1.047
+eps 11000.00, reward -708.816, t 115.06
+Runtimes: rollout 0.311, gae 0.413, buffer 0.000, update 1.092
+eps 12000.00, reward -697.649, t 116.87
+Runtimes: rollout 0.348, gae 0.419, buffer 0.000, update 1.042
+eps 13000.00, reward -705.979, t 118.70
+Runtimes: rollout 0.369, gae 0.419, buffer 0.001, update 1.047
+eps 14000.00, reward -699.503, t 120.67
+Runtimes: rollout 0.308, gae 0.419, buffer 0.000, update 1.240
+eps 15000.00, reward -702.821, t 122.64
+Runtimes: rollout 0.340, gae 0.432, buffer 0.000, update 1.197
+eps 16000.00, reward -701.033, t 124.40
+Runtimes: rollout 0.305, gae 0.417, buffer 0.001, update 1.036
+eps 17000.00, reward -713.120, t 126.23
+Runtimes: rollout 0.311, gae 0.424, buffer 0.003, update 1.090
+eps 18000.00, reward -708.482, t 128.02
+Runtimes: rollout 0.322, gae 0.425, buffer 0.000, update 1.043
+eps 19000.00, reward -708.188, t 129.84
+Runtimes: rollout 0.298, gae 0.419, buffer 0.001, update 1.097
+eps 20000.00, reward -708.179, t 131.67
+Runtimes: rollout 0.308, gae 0.473, buffer 0.000, update 1.053
+eps 21000.00, reward -706.856, t 133.43
+Runtimes: rollout 0.299, gae 0.432, buffer 0.000, update 1.027
+eps 22000.00, reward -704.273, t 135.19
+Runtimes: rollout 0.297, gae 0.417, buffer 0.001, update 1.044
+eps 23000.00, reward -704.210, t 136.94
+Runtimes: rollout 0.307, gae 0.418, buffer 0.000, update 1.025
+eps 24000.00, reward -709.412, t 138.92
+Runtimes: rollout 0.288, gae 0.526, buffer 0.001, update 1.165
+eps 25000.00, reward -712.655, t 140.72
+Runtimes: rollout 0.308, gae 0.418, buffer 0.001, update 1.079
+eps 26000.00, reward -704.774, t 142.56
+Runtimes: rollout 0.327, gae 0.418, buffer 0.001, update 1.083
+eps 27000.00, reward -709.439, t 144.35
+Runtimes: rollout 0.337, gae 0.415, buffer 0.000, update 1.042
+eps 28000.00, reward -700.240, t 146.12
+Runtimes: rollout 0.335, gae 0.423, buffer 0.000, update 1.014
+eps 29000.00, reward -705.899, t 147.93
+Runtimes: rollout 0.316, gae 0.430, buffer 0.000, update 1.055
+eps 30000.00, reward -708.815, t 149.69
+Runtimes: rollout 0.302, gae 0.421, buffer 0.000, update 1.037
+eps 31000.00, reward -708.517, t 151.43
+Runtimes: rollout 0.298, gae 0.424, buffer 0.000, update 1.022
+eps 32000.00, reward -701.731, t 153.17
+Runtimes: rollout 0.301, gae 0.416, buffer 0.000, update 1.021
+eps 33000.00, reward -703.189, t 155.00
+Runtimes: rollout 0.306, gae 0.428, buffer 0.000, update 1.098
+eps 34000.00, reward -701.528, t 156.75
+Runtimes: rollout 0.293, gae 0.425, buffer 0.001, update 1.033
+eps 35000.00, reward -712.424, t 158.55
+Runtimes: rollout 0.339, gae 0.433, buffer 0.001, update 1.020
+eps 36000.00, reward -706.621, t 160.31
+Runtimes: rollout 0.296, gae 0.426, buffer 0.000, update 1.038
+eps 37000.00, reward -710.119, t 162.14
+Runtimes: rollout 0.306, gae 0.477, buffer 0.000, update 1.045
+eps 38000.00, reward -702.726, t 163.96
+Runtimes: rollout 0.291, gae 0.412, buffer 0.001, update 1.116
+eps 39000.00, reward -705.882, t 165.87
+Runtimes: rollout 0.403, gae 0.430, buffer 0.000, update 1.075
+eps 40000.00, reward -702.972, t 167.63
+Runtimes: rollout 0.303, gae 0.436, buffer 0.001, update 1.022
+eps 41000.00, reward -701.512, t 169.50
+Runtimes: rollout 0.400, gae 0.417, buffer 0.000, update 1.049
+eps 42000.00, reward -709.214, t 171.28
+Runtimes: rollout 0.306, gae 0.421, buffer 0.000, update 1.056
+eps 43000.00, reward -713.550, t 173.05
+Runtimes: rollout 0.297, gae 0.422, buffer 0.002, update 1.054
+eps 44000.00, reward -709.664, t 174.84
+Runtimes: rollout 0.323, gae 0.416, buffer 0.001, update 1.046
+eps 45000.00, reward -701.400, t 176.68
+Runtimes: rollout 0.296, gae 0.436, buffer 0.001, update 1.106
+eps 46000.00, reward -700.297, t 178.52
+Runtimes: rollout 0.325, gae 0.434, buffer 0.001, update 1.078
+eps 47000.00, reward -704.321, t 180.42
+Runtimes: rollout 0.297, gae 0.415, buffer 0.001, update 1.188
+eps 48000.00, reward -704.471, t 182.47
+Runtimes: rollout 0.402, gae 0.429, buffer 0.001, update 1.223
+eps 49000.00, reward -704.947, t 184.33
+Runtimes: rollout 0.339, gae 0.424, buffer 0.001, update 1.094
+eps 50000.00, reward -706.699, t 186.16
+Runtimes: rollout 0.313, gae 0.431, buffer 0.000, update 1.082
+Total time: 187.93181228637695
+✓ 18462
+
+Training 100,000 → 150,000... eps 1000.00, reward -708.784, t 191.38
+Runtimes: rollout 0.292, gae 0.412, buffer 0.000, update 1.083
+eps 2000.00, reward -702.530, t 193.29
+Runtimes: rollout 0.299, gae 0.485, buffer 0.000, update 1.125
+eps 3000.00, reward -704.061, t 195.13
+Runtimes: rollout 0.339, gae 0.449, buffer 0.000, update 1.048
+eps 4000.00, reward -701.785, t 196.94
+Runtimes: rollout 0.312, gae 0.424, buffer 0.001, update 1.072
+eps 5000.00, reward -705.337, t 198.85
+Runtimes: rollout 0.297, gae 0.427, buffer 0.000, update 1.187
+eps 6000.00, reward -706.116, t 200.60
+Runtimes: rollout 0.307, gae 0.421, buffer 0.001, update 1.021
+eps 7000.00, reward -700.750, t 202.38
+Runtimes: rollout 0.302, gae 0.416, buffer 0.000, update 1.061
+eps 8000.00, reward -712.823, t 204.12
+Runtimes: rollout 0.306, gae 0.414, buffer 0.000, update 1.021
+eps 9000.00, reward -715.200, t 205.96
+Runtimes: rollout 0.307, gae 0.449, buffer 0.000, update 1.084
+eps 10000.00, reward -707.872, t 207.79
+Runtimes: rollout 0.306, gae 0.424, buffer 0.002, update 1.100
+eps 11000.00, reward -700.642, t 209.58
+Runtimes: rollout 0.327, gae 0.420, buffer 0.001, update 1.044
+eps 12000.00, reward -706.579, t 211.37
+Runtimes: rollout 0.322, gae 0.429, buffer 0.001, update 1.036
+eps 13000.00, reward -712.592, t 213.12
+Runtimes: rollout 0.306, gae 0.424, buffer 0.001, update 1.019
+eps 14000.00, reward -706.994, t 214.91
+Runtimes: rollout 0.321, gae 0.427, buffer 0.000, update 1.043
+eps 15000.00, reward -703.241, t 216.69
+Runtimes: rollout 0.319, gae 0.425, buffer 0.001, update 1.029
+eps 16000.00, reward -704.391, t 218.43
+Runtimes: rollout 0.310, gae 0.415, buffer 0.000, update 1.019
+eps 17000.00, reward -706.544, t 220.17
+Runtimes: rollout 0.302, gae 0.415, buffer 0.000, update 1.018
+eps 18000.00, reward -711.127, t 221.90
+Runtimes: rollout 0.284, gae 0.420, buffer 0.000, update 1.028
+eps 19000.00, reward -705.719, t 223.67
+Runtimes: rollout 0.300, gae 0.413, buffer 0.001, update 1.049
+eps 20000.00, reward -710.106, t 225.45
+Runtimes: rollout 0.320, gae 0.431, buffer 0.000, update 1.037
+eps 21000.00, reward -711.404, t 227.19
+Runtimes: rollout 0.296, gae 0.415, buffer 0.000, update 1.023
+eps 22000.00, reward -701.305, t 229.13
+Runtimes: rollout 0.339, gae 0.422, buffer 0.001, update 1.183
+eps 23000.00, reward -707.248, t 230.91
+Runtimes: rollout 0.306, gae 0.412, buffer 0.001, update 1.058
+eps 24000.00, reward -704.544, t 232.67
+Runtimes: rollout 0.324, gae 0.411, buffer 0.000, update 1.023
+eps 25000.00, reward -706.379, t 234.39
+Runtimes: rollout 0.291, gae 0.411, buffer 0.000, update 1.022
+eps 26000.00, reward -704.020, t 236.14
+Runtimes: rollout 0.293, gae 0.416, buffer 0.001, update 1.036
+eps 27000.00, reward -707.488, t 237.89
+Runtimes: rollout 0.313, gae 0.419, buffer 0.001, update 1.021
+eps 28000.00, reward -705.408, t 239.63
+Runtimes: rollout 0.303, gae 0.411, buffer 0.001, update 1.017
+eps 29000.00, reward -705.778, t 241.96
+Runtimes: rollout 0.304, gae 0.693, buffer 0.002, update 1.331
+eps 30000.00, reward -707.784, t 243.88
+Runtimes: rollout 0.397, gae 0.454, buffer 0.000, update 1.071
+eps 31000.00, reward -702.337, t 245.67
+Runtimes: rollout 0.310, gae 0.437, buffer 0.001, update 1.040
+eps 32000.00, reward -704.472, t 247.46
+Runtimes: rollout 0.313, gae 0.443, buffer 0.000, update 1.034
+eps 33000.00, reward -706.556, t 249.25
+Runtimes: rollout 0.293, gae 0.415, buffer 0.001, update 1.084
+eps 34000.00, reward -702.748, t 251.04
+Runtimes: rollout 0.355, gae 0.416, buffer 0.001, update 1.014
+eps 35000.00, reward -709.565, t 252.77
+Runtimes: rollout 0.288, gae 0.419, buffer 0.000, update 1.021
+eps 36000.00, reward -701.815, t 254.51
+Runtimes: rollout 0.304, gae 0.416, buffer 0.000, update 1.018
+eps 37000.00, reward -705.822, t 256.26
+Runtimes: rollout 0.317, gae 0.419, buffer 0.000, update 1.023
+eps 38000.00, reward -701.408, t 257.99
+Runtimes: rollout 0.302, gae 0.419, buffer 0.001, update 1.008
+eps 39000.00, reward -701.331, t 259.97
+Runtimes: rollout 0.395, gae 0.432, buffer 0.000, update 1.147
+eps 40000.00, reward -702.412, t 261.72
+Runtimes: rollout 0.296, gae 0.420, buffer 0.000, update 1.037
+eps 41000.00, reward -702.108, t 263.49
+Runtimes: rollout 0.305, gae 0.423, buffer 0.001, update 1.043
+eps 42000.00, reward -704.830, t 265.25
+Runtimes: rollout 0.302, gae 0.419, buffer 0.000, update 1.038
+eps 43000.00, reward -706.274, t 267.01
+Runtimes: rollout 0.297, gae 0.417, buffer 0.000, update 1.040
+eps 44000.00, reward -704.229, t 268.74
+Runtimes: rollout 0.298, gae 0.413, buffer 0.001, update 1.021
+eps 45000.00, reward -706.119, t 270.50
+Runtimes: rollout 0.332, gae 0.411, buffer 0.000, update 1.014
+eps 46000.00, reward -708.946, t 272.28
+Runtimes: rollout 0.305, gae 0.418, buffer 0.000, update 1.059
+eps 47000.00, reward -707.079, t 274.02
+Runtimes: rollout 0.294, gae 0.419, buffer 0.000, update 1.023
+eps 48000.00, reward -707.179, t 275.78
+Runtimes: rollout 0.308, gae 0.417, buffer 0.000, update 1.038
+eps 49000.00, reward -705.554, t 277.51
+Runtimes: rollout 0.294, gae 0.415, buffer 0.000, update 1.018
+eps 50000.00, reward -699.315, t 279.24
+Runtimes: rollout 0.298, gae 0.416, buffer 0.001, update 1.013
+Total time: 280.95736503601074
+✓ 19369
+
+Training 150,000 → 200,000... eps 1000.00, reward -705.389, t 284.33
+Runtimes: rollout 0.293, gae 0.432, buffer 0.000, update 1.026
+eps 2000.00, reward -707.106, t 286.05
+Runtimes: rollout 0.292, gae 0.412, buffer 0.000, update 1.021
+eps 3000.00, reward -708.745, t 287.80
+Runtimes: rollout 0.303, gae 0.413, buffer 0.000, update 1.030
+eps 4000.00, reward -694.445, t 289.66
+Runtimes: rollout 0.295, gae 0.504, buffer 0.001, update 1.057
+eps 5000.00, reward -713.332, t 291.47
+Runtimes: rollout 0.315, gae 0.410, buffer 0.000, update 1.082
+eps 6000.00, reward -701.963, t 293.26
+Runtimes: rollout 0.308, gae 0.413, buffer 0.001, update 1.069
+eps 7000.00, reward -707.652, t 295.01
+Runtimes: rollout 0.288, gae 0.412, buffer 0.000, update 1.049
+eps 8000.00, reward -698.991, t 296.72
+Runtimes: rollout 0.283, gae 0.410, buffer 0.000, update 1.022
+eps 9000.00, reward -706.495, t 298.48
+Runtimes: rollout 0.313, gae 0.417, buffer 0.001, update 1.027
+eps 10000.00, reward -708.238, t 300.38
+Runtimes: rollout 0.315, gae 0.414, buffer 0.000, update 1.174
+eps 11000.00, reward -715.096, t 302.67
+Runtimes: rollout 0.535, gae 0.464, buffer 0.001, update 1.283
+eps 12000.00, reward -705.754, t 304.50
+Runtimes: rollout 0.324, gae 0.451, buffer 0.001, update 1.060
+eps 13000.00, reward -696.076, t 306.27
+Runtimes: rollout 0.315, gae 0.431, buffer 0.000, update 1.015
+eps 14000.00, reward -708.119, t 308.01
+Runtimes: rollout 0.293, gae 0.410, buffer 0.000, update 1.041
+eps 15000.00, reward -703.861, t 309.75
+Runtimes: rollout 0.291, gae 0.409, buffer 0.000, update 1.033
+eps 16000.00, reward -711.105, t 311.47
+Runtimes: rollout 0.299, gae 0.409, buffer 0.001, update 1.014
+eps 17000.00, reward -715.351, t 313.19
+Runtimes: rollout 0.288, gae 0.412, buffer 0.000, update 1.012
+eps 18000.00, reward -699.330, t 314.92
+Runtimes: rollout 0.302, gae 0.408, buffer 0.001, update 1.020
+eps 19000.00, reward -703.563, t 316.66
+Runtimes: rollout 0.313, gae 0.415, buffer 0.000, update 1.005
+eps 20000.00, reward -698.436, t 318.38
+Runtimes: rollout 0.295, gae 0.418, buffer 0.001, update 1.008
+eps 21000.00, reward -707.548, t 320.31
+Runtimes: rollout 0.394, gae 0.412, buffer 0.000, update 1.127
+eps 22000.00, reward -704.137, t 322.05
+Runtimes: rollout 0.299, gae 0.411, buffer 0.000, update 1.023
+eps 23000.00, reward -702.174, t 323.88
+Runtimes: rollout 0.308, gae 0.416, buffer 0.000, update 1.107
+eps 24000.00, reward -699.997, t 325.84
+Runtimes: rollout 0.337, gae 0.465, buffer 0.001, update 1.149
+eps 25000.00, reward -702.664, t 327.61
+Runtimes: rollout 0.334, gae 0.411, buffer 0.000, update 1.027
+eps 26000.00, reward -704.694, t 329.35
+Runtimes: rollout 0.290, gae 0.416, buffer 0.000, update 1.038
+eps 27000.00, reward -701.234, t 331.13
+Runtimes: rollout 0.292, gae 0.427, buffer 0.000, update 1.052
+eps 28000.00, reward -711.121, t 333.09
+Runtimes: rollout 0.343, gae 0.455, buffer 0.000, update 1.163
+eps 29000.00, reward -703.958, t 334.92
+Runtimes: rollout 0.331, gae 0.429, buffer 0.001, update 1.072
+eps 30000.00, reward -701.470, t 336.82
+Runtimes: rollout 0.328, gae 0.435, buffer 0.001, update 1.134
+eps 31000.00, reward -702.529, t 339.94
+Runtimes: rollout 0.390, gae 0.434, buffer 0.001, update 2.294
+eps 32000.00, reward -708.048, t 342.18
+Runtimes: rollout 0.451, gae 0.477, buffer 0.002, update 1.309
+eps 33000.00, reward -706.475, t 344.32
+Runtimes: rollout 0.452, gae 0.468, buffer 0.001, update 1.213
+eps 34000.00, reward -706.138, t 346.27
+Runtimes: rollout 0.407, gae 0.475, buffer 0.000, update 1.072
+eps 35000.00, reward -709.956, t 348.09
+Runtimes: rollout 0.318, gae 0.438, buffer 0.000, update 1.063
+eps 36000.00, reward -709.285, t 350.01
+Runtimes: rollout 0.359, gae 0.513, buffer 0.000, update 1.046
+eps 37000.00, reward -702.395, t 351.85
+Runtimes: rollout 0.346, gae 0.435, buffer 0.001, update 1.055
+eps 38000.00, reward -710.128, t 353.66
+Runtimes: rollout 0.322, gae 0.432, buffer 0.001, update 1.054
+eps 39000.00, reward -706.624, t 355.65
+Runtimes: rollout 0.327, gae 0.491, buffer 0.001, update 1.175
+eps 40000.00, reward -709.289, t 357.65
+Runtimes: rollout 0.381, gae 0.451, buffer 0.000, update 1.164
+eps 41000.00, reward -705.380, t 359.63
+Runtimes: rollout 0.353, gae 0.443, buffer 0.001, update 1.178
+eps 42000.00, reward -703.005, t 361.81
+Runtimes: rollout 0.368, gae 0.511, buffer 0.001, update 1.298
+eps 43000.00, reward -708.418, t 363.77
+Runtimes: rollout 0.326, gae 0.446, buffer 0.001, update 1.191
+eps 44000.00, reward -706.286, t 365.76
+Runtimes: rollout 0.331, gae 0.480, buffer 0.000, update 1.181
+eps 45000.00, reward -707.394, t 367.68
+Runtimes: rollout 0.357, gae 0.443, buffer 0.000, update 1.117
+eps 46000.00, reward -707.740, t 369.64
+Runtimes: rollout 0.358, gae 0.442, buffer 0.001, update 1.154
+eps 47000.00, reward -702.657, t 371.52
+Runtimes: rollout 0.355, gae 0.457, buffer 0.001, update 1.073
+eps 48000.00, reward -707.092, t 373.45
+Runtimes: rollout 0.362, gae 0.455, buffer 0.000, update 1.110
+eps 49000.00, reward -710.030, t 375.30
+Runtimes: rollout 0.321, gae 0.439, buffer 0.000, update 1.087
+eps 50000.00, reward -710.771, t 377.20
+Runtimes: rollout 0.320, gae 0.430, buffer 0.002, update 1.149
+Total time: 379.29571413993835
+✓ 19826
+
+Training 200,000 → 250,000... eps 1000.00, reward -717.232, t 383.00
+Runtimes: rollout 0.355, gae 0.427, buffer 0.000, update 1.129
+eps 2000.00, reward -711.958, t 384.82
+Runtimes: rollout 0.326, gae 0.431, buffer 0.000, update 1.062
+eps 3000.00, reward -705.271, t 386.65
+Runtimes: rollout 0.339, gae 0.444, buffer 0.000, update 1.050
+eps 4000.00, reward -706.804, t 388.52
+Runtimes: rollout 0.321, gae 0.440, buffer 0.001, update 1.106
+eps 5000.00, reward -703.679, t 390.39
+Runtimes: rollout 0.358, gae 0.432, buffer 0.000, update 1.075
+eps 6000.00, reward -707.684, t 392.18
+Runtimes: rollout 0.315, gae 0.435, buffer 0.000, update 1.047
+eps 7000.00, reward -707.410, t 394.00
+Runtimes: rollout 0.347, gae 0.427, buffer 0.001, update 1.043
+eps 8000.00, reward -704.713, t 396.02
+Runtimes: rollout 0.457, gae 0.469, buffer 0.001, update 1.090
+eps 9000.00, reward -710.724, t 397.88
+Runtimes: rollout 0.324, gae 0.432, buffer 0.001, update 1.106
+eps 10000.00, reward -708.691, t 399.81
+Runtimes: rollout 0.361, gae 0.453, buffer 0.000, update 1.112
+eps 11000.00, reward -707.017, t 401.67
+Runtimes: rollout 0.356, gae 0.459, buffer 0.000, update 1.042
+eps 12000.00, reward -706.852, t 403.56
+Runtimes: rollout 0.316, gae 0.447, buffer 0.000, update 1.130
+eps 13000.00, reward -702.934, t 405.45
+Runtimes: rollout 0.331, gae 0.431, buffer 0.001, update 1.130
+eps 14000.00, reward -708.562, t 407.28
+Runtimes: rollout 0.338, gae 0.433, buffer 0.001, update 1.049
+eps 15000.00, reward -710.770, t 409.20
+Runtimes: rollout 0.353, gae 0.434, buffer 0.000, update 1.140
+eps 16000.00, reward -709.920, t 411.09
+Runtimes: rollout 0.346, gae 0.433, buffer 0.001, update 1.111
+eps 17000.00, reward -704.437, t 412.95
+Runtimes: rollout 0.341, gae 0.442, buffer 0.000, update 1.068
+eps 18000.00, reward -703.459, t 414.81
+Runtimes: rollout 0.330, gae 0.436, buffer 0.000, update 1.101
+eps 19000.00, reward -705.276, t 416.66
+Runtimes: rollout 0.324, gae 0.430, buffer 0.000, update 1.096
+eps 20000.00, reward -698.985, t 418.50
+Runtimes: rollout 0.325, gae 0.432, buffer 0.001, update 1.080
+eps 21000.00, reward -706.640, t 420.45
+Runtimes: rollout 0.387, gae 0.427, buffer 0.001, update 1.130
+eps 22000.00, reward -712.031, t 422.61
+Runtimes: rollout 0.486, gae 0.475, buffer 0.004, update 1.194
+eps 23000.00, reward -699.081, t 424.51
+Runtimes: rollout 0.350, gae 0.431, buffer 0.000, update 1.127
+eps 24000.00, reward -703.072, t 426.45
+Runtimes: rollout 0.338, gae 0.447, buffer 0.000, update 1.151
+eps 25000.00, reward -711.147, t 428.29
+Runtimes: rollout 0.339, gae 0.436, buffer 0.000, update 1.067
+eps 26000.00, reward -705.994, t 430.12
+Runtimes: rollout 0.318, gae 0.436, buffer 0.002, update 1.072
+eps 27000.00, reward -708.694, t 431.97
+Runtimes: rollout 0.313, gae 0.437, buffer 0.000, update 1.096
+eps 28000.00, reward -709.041, t 433.78
+Runtimes: rollout 0.324, gae 0.432, buffer 0.000, update 1.051
+eps 29000.00, reward -710.966, t 435.63
+Runtimes: rollout 0.336, gae 0.447, buffer 0.003, update 1.064
+eps 30000.00, reward -703.461, t 437.46
+Runtimes: rollout 0.339, gae 0.442, buffer 0.001, update 1.054
+eps 31000.00, reward -708.416, t 439.34
+Runtimes: rollout 0.320, gae 0.437, buffer 0.000, update 1.115
+eps 32000.00, reward -702.184, t 441.23
+Runtimes: rollout 0.343, gae 0.443, buffer 0.000, update 1.103
+eps 33000.00, reward -698.324, t 443.04
+Runtimes: rollout 0.332, gae 0.431, buffer 0.001, update 1.046
+eps 34000.00, reward -708.636, t 444.82
+Runtimes: rollout 0.321, gae 0.426, buffer 0.001, update 1.033
+eps 35000.00, reward -704.712, t 446.68
+Runtimes: rollout 0.360, gae 0.430, buffer 0.000, update 1.067
+eps 36000.00, reward -709.530, t 448.51
+Runtimes: rollout 0.314, gae 0.435, buffer 0.001, update 1.079
+eps 37000.00, reward -712.680, t 450.41
+Runtimes: rollout 0.322, gae 0.438, buffer 0.001, update 1.145
+eps 38000.00, reward -703.500, t 452.27
+Runtimes: rollout 0.339, gae 0.437, buffer 0.000, update 1.081
+eps 39000.00, reward -703.453, t 454.07
+Runtimes: rollout 0.314, gae 0.437, buffer 0.000, update 1.052
+eps 40000.00, reward -708.353, t 455.99
+Runtimes: rollout 0.373, gae 0.439, buffer 0.001, update 1.100
+eps 41000.00, reward -708.077, t 457.90
+Runtimes: rollout 0.371, gae 0.428, buffer 0.000, update 1.112
+eps 42000.00, reward -706.979, t 459.77
+Runtimes: rollout 0.314, gae 0.453, buffer 0.001, update 1.106
+eps 43000.00, reward -704.685, t 461.59
+Runtimes: rollout 0.312, gae 0.433, buffer 0.000, update 1.076
+eps 44000.00, reward -713.433, t 463.40
+Runtimes: rollout 0.315, gae 0.441, buffer 0.000, update 1.051
+eps 45000.00, reward -704.596, t 465.30
+Runtimes: rollout 0.363, gae 0.429, buffer 0.001, update 1.103
+eps 46000.00, reward -707.342, t 467.11
+Runtimes: rollout 0.331, gae 0.431, buffer 0.000, update 1.049
+eps 47000.00, reward -709.060, t 468.98
+Runtimes: rollout 0.367, gae 0.438, buffer 0.001, update 1.064
+eps 48000.00, reward -705.175, t 470.90
+Runtimes: rollout 0.333, gae 0.508, buffer 0.000, update 1.076
+eps 49000.00, reward -713.594, t 472.71
+Runtimes: rollout 0.329, gae 0.439, buffer 0.001, update 1.047
+eps 50000.00, reward -707.627, t 474.50
+Runtimes: rollout 0.303, gae 0.427, buffer 0.000, update 1.055
+Total time: 476.2894971370697
+✓ 19641
+
+Training 250,000 → 300,000... eps 1000.00, reward -711.218, t 479.98
+Runtimes: rollout 0.342, gae 0.428, buffer 0.000, update 1.144
+eps 2000.00, reward -709.049, t 482.13
+Runtimes: rollout 0.387, gae 0.567, buffer 0.000, update 1.197
+eps 3000.00, reward -708.124, t 483.99
+Runtimes: rollout 0.333, gae 0.428, buffer 0.000, update 1.099
+eps 4000.00, reward -711.425, t 485.84
+Runtimes: rollout 0.323, gae 0.439, buffer 0.000, update 1.085
+eps 5000.00, reward -704.184, t 487.71
+Runtimes: rollout 0.338, gae 0.432, buffer 0.000, update 1.097
+eps 6000.00, reward -704.049, t 489.52
+Runtimes: rollout 0.340, gae 0.427, buffer 0.000, update 1.040
+eps 7000.00, reward -698.863, t 491.46
+Runtimes: rollout 0.376, gae 0.438, buffer 0.006, update 1.118
+eps 8000.00, reward -703.291, t 493.32
+Runtimes: rollout 0.335, gae 0.428, buffer 0.000, update 1.098
+eps 9000.00, reward -701.570, t 495.19
+Runtimes: rollout 0.376, gae 0.442, buffer 0.000, update 1.059
+eps 10000.00, reward -702.719, t 497.03
+Runtimes: rollout 0.312, gae 0.437, buffer 0.000, update 1.084
+eps 11000.00, reward -709.971, t 498.85
+Runtimes: rollout 0.321, gae 0.426, buffer 0.000, update 1.079
+eps 12000.00, reward -699.477, t 500.81
+Runtimes: rollout 0.325, gae 0.531, buffer 0.004, update 1.100
+eps 13000.00, reward -706.254, t 502.68
+Runtimes: rollout 0.321, gae 0.430, buffer 0.001, update 1.111
+eps 14000.00, reward -702.901, t 504.57
+Runtimes: rollout 0.357, gae 0.455, buffer 0.001, update 1.082
+eps 15000.00, reward -699.307, t 506.46
+Runtimes: rollout 0.361, gae 0.472, buffer 0.000, update 1.049
+eps 16000.00, reward -707.574, t 508.47
+Runtimes: rollout 0.364, gae 0.532, buffer 0.000, update 1.120
+eps 17000.00, reward -700.641, t 510.39
+Runtimes: rollout 0.410, gae 0.439, buffer 0.000, update 1.067
+eps 18000.00, reward -716.409, t 512.22
+Runtimes: rollout 0.338, gae 0.438, buffer 0.001, update 1.052
+eps 19000.00, reward -706.338, t 514.01
+Runtimes: rollout 0.314, gae 0.431, buffer 0.000, update 1.049
+eps 20000.00, reward -703.212, t 515.88
+Runtimes: rollout 0.329, gae 0.431, buffer 0.000, update 1.110
+eps 21000.00, reward -705.620, t 517.71
+Runtimes: rollout 0.332, gae 0.426, buffer 0.000, update 1.063
+eps 22000.00, reward -703.723, t 519.60
+Runtimes: rollout 0.332, gae 0.458, buffer 0.001, update 1.103
+eps 23000.00, reward -708.951, t 521.52
+Runtimes: rollout 0.422, gae 0.434, buffer 0.000, update 1.062
+eps 24000.00, reward -706.249, t 523.33
+Runtimes: rollout 0.320, gae 0.430, buffer 0.001, update 1.055
+eps 25000.00, reward -706.559, t 525.22
+Runtimes: rollout 0.342, gae 0.440, buffer 0.001, update 1.112
+eps 26000.00, reward -702.179, t 527.15
+Runtimes: rollout 0.362, gae 0.443, buffer 0.000, update 1.124
+eps 27000.00, reward -698.457, t 529.05
+Runtimes: rollout 0.363, gae 0.430, buffer 0.001, update 1.106
+eps 28000.00, reward -707.779, t 531.11
+Runtimes: rollout 0.344, gae 0.561, buffer 0.001, update 1.157
+eps 29000.00, reward -711.175, t 532.94
+Runtimes: rollout 0.320, gae 0.429, buffer 0.001, update 1.081
+eps 30000.00, reward -710.765, t 534.81
+Runtimes: rollout 0.334, gae 0.428, buffer 0.001, update 1.101
+eps 31000.00, reward -710.089, t 536.64
+Runtimes: rollout 0.335, gae 0.438, buffer 0.000, update 1.060
+eps 32000.00, reward -711.350, t 538.48
+Runtimes: rollout 0.319, gae 0.435, buffer 0.000, update 1.081
+eps 33000.00, reward -711.376, t 540.38
+Runtimes: rollout 0.342, gae 0.435, buffer 0.002, update 1.119
+eps 34000.00, reward -710.826, t 542.50
+Runtimes: rollout 0.453, gae 0.497, buffer 0.001, update 1.173
+eps 35000.00, reward -705.912, t 544.60
+Runtimes: rollout 0.342, gae 0.439, buffer 0.000, update 1.322
+eps 36000.00, reward -705.501, t 546.56
+Runtimes: rollout 0.354, gae 0.445, buffer 0.002, update 1.156
+eps 37000.00, reward -707.583, t 548.43
+Runtimes: rollout 0.347, gae 0.442, buffer 0.001, update 1.074
+eps 38000.00, reward -703.617, t 550.27
+Runtimes: rollout 0.319, gae 0.428, buffer 0.000, update 1.095
+eps 39000.00, reward -705.288, t 552.12
+Runtimes: rollout 0.326, gae 0.436, buffer 0.000, update 1.085
+eps 40000.00, reward -701.342, t 553.94
+Runtimes: rollout 0.327, gae 0.442, buffer 0.000, update 1.054
+eps 41000.00, reward -708.654, t 555.78
+Runtimes: rollout 0.326, gae 0.441, buffer 0.000, update 1.072
+eps 42000.00, reward -706.982, t 557.58
+Runtimes: rollout 0.313, gae 0.429, buffer 0.000, update 1.059
+eps 43000.00, reward -703.608, t 559.41
+Runtimes: rollout 0.335, gae 0.435, buffer 0.000, update 1.053
+eps 44000.00, reward -702.207, t 561.36
+Runtimes: rollout 0.309, gae 0.532, buffer 0.001, update 1.110
+eps 45000.00, reward -704.562, t 563.17
+Runtimes: rollout 0.326, gae 0.431, buffer 0.001, update 1.051
+eps 46000.00, reward -711.746, t 564.96
+Runtimes: rollout 0.310, gae 0.429, buffer 0.000, update 1.053
+eps 47000.00, reward -703.125, t 566.81
+Runtimes: rollout 0.343, gae 0.427, buffer 0.000, update 1.083
+eps 48000.00, reward -708.554, t 568.65
+Runtimes: rollout 0.321, gae 0.427, buffer 0.001, update 1.088
+eps 49000.00, reward -707.640, t 570.52
+Runtimes: rollout 0.370, gae 0.431, buffer 0.000, update 1.069
+eps 50000.00, reward -702.423, t 572.33
+Runtimes: rollout 0.311, gae 0.444, buffer 0.001, update 1.055
+Total time: 574.1362981796265
+✓ 19795
+
+Result: 8908 (4.27x vs PID)
+
+================================================================================
+TESTING: 1024 hidden units x 6 layers
+================================================================================
+Parameters: 10,506,243
+
+Training 0 → 50,000... 

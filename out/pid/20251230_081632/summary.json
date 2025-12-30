@@ -1,0 +1,12 @@
+{
+  "controller": "pid",
+  "avg_reward": -42.86267608974818,
+  "std_reward": 21.63813443447714,
+  "position_mse": 7.831442671304416,
+  "n_episodes": 10,
+  "params": {
+    "p": 1.0,
+    "i": 0.01,
+    "d": 0.3
+  }
+}
