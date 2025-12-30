@@ -15,6 +15,10 @@ class PPO:
   def __init__(self, env, model, lr=1e-1, gamma=0.99, lam=0.95, clip_range=0.2, epochs=1, n_steps=30, ent_coeff=0.01, bs=30, env_bs=1, device='cuda', debug=False):
     self.env = env
     self.env_bs = env_bs
+    # Fallback to CPU if CUDA unavailable
+    if device == 'cuda' and not torch.cuda.is_available():
+      device = 'cpu'
+      print("CUDA not available, using CPU")
     self.model = model.to(device)
     self.gamma = gamma
     self.lam = lam
@@ -163,7 +167,7 @@ if __name__ == "__main__":
   print(f"rolling out best model") 
   start = time.time()
   env = gym.make("CartLatAccel-v1", noise_mode=args.noise_mode, env_bs=1, render_mode=args.render)
-  states, actions, rewards, dones, next_state= ppo.rollout(env, best_model, max_steps=200, deterministic=True)
+  states, actions, rewards, dones, next_state= ppo.rollout(env, best_model, max_steps=200, deterministic=True, device=ppo.device)
   rollout_time = time.time() - start
   print(f"reward {sum(rewards)}")
   print(f"mean action {np.mean(abs(np.array(actions)))}")
