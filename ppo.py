@@ -151,14 +151,14 @@ if __name__ == "__main__":
   parser.add_argument("--max_evals", type=int, default=30000)
   parser.add_argument("--env_bs", type=int, default=1000)
   parser.add_argument("--save_model", default=False)
-  parser.add_argument("--noise_mode", default=None)
+  parser.add_argument("--noise", type=float, default=0.5, help="Noise level 0-1")
   parser.add_argument("--render", type=str, default="human")
   parser.add_argument("--debug", default=False)
   args = parser.parse_args()
 
   print(f"training ppo with max_evals {args.max_evals}") 
   start = time.time()
-  env = gym.make("CartLatAccel-v1", noise_mode=args.noise_mode, env_bs=args.env_bs)
+  env = gym.make("CartLatAccel-v1", noise=args.noise, env_bs=args.env_bs)
   model = ActorCritic(env.observation_space.shape[-1], {"pi": [32], "vf": [32]}, env.action_space.shape[-1])
   ppo = PPO(env, model, env_bs=args.env_bs, debug=args.debug)
   best_model, hist = ppo.train(args.max_evals)
@@ -166,7 +166,7 @@ if __name__ == "__main__":
 
   print(f"rolling out best model") 
   start = time.time()
-  env = gym.make("CartLatAccel-v1", noise_mode=args.noise_mode, env_bs=1, render_mode=args.render)
+  env = gym.make("CartLatAccel-v1", noise=args.noise, env_bs=1, render_mode=args.render)
   states, actions, rewards, dones, next_state= ppo.rollout(env, best_model, max_steps=200, deterministic=True, device=ppo.device)
   rollout_time = time.time() - start
   print(f"reward {sum(rewards)}")
@@ -174,5 +174,5 @@ if __name__ == "__main__":
   print(f"train time {train_time}, rollout {rollout_time}")
 
   if args.save_model:
-    os.makedirs('out', exist_ok=True)
-    torch.save(best_model, 'out/best.pt')
+    os.makedirs('models', exist_ok=True)
+    torch.save(best_model, 'models/best.pt')

@@ -22,7 +22,7 @@ class CartLatAccelEnv(gym.Env):
     "render_fps": 50,
   }
 
-  def __init__(self, render_mode: str = None, noise_mode: str = None, moving_target: bool = True, env_bs: int = 1):
+  def __init__(self, render_mode: str = None, noise: float = 0.5, moving_target: bool = True, env_bs: int = 1):
     self.force_mag = 50.0 # steer -> accel
     self.tau = 0.02  # Time step
     self.max_u = 1.0 # steer/action
@@ -51,19 +51,54 @@ class CartLatAccelEnv(gym.Env):
 
     self.max_episode_steps = 500
     self.curr_step = 0
-    self.noise_mode = noise_mode
+    self.noise = noise
     self.moving_target = moving_target
 
-    self.noise_model = SimNoise(self.max_episode_steps, 1/self.tau, self.noise_mode, seed=42)
+    self.noise_model = SimNoise(self.max_episode_steps, 1/self.tau, self.noise, seed=42)
     np.random.seed(42)
 
   def generate_traj(self, n_traj=1, n_points=10):
-    # generates smooth curve using cubic interpolation
-    t_control = np.linspace(0, self.max_episode_steps - 1, n_points)
-    control_points = np.random.uniform(-2, 2, (n_traj, n_points)) # slightly less than max x
-    f = interp1d(t_control, control_points, kind='cubic')
-    t = np.arange(self.max_episode_steps)
-    return f(t)
+    """
+    Generate trajectory by simulating cart dynamics with smooth actions.
+    Trajectory is always moving (never flat) to match real-world behavior
+    where target position is always slightly changing.
+    """
+    n_steps = self.max_episode_steps
+    safe_bound = self.max_x * 0.4  # stay within ±4
+    
+    # Generate smooth action sequence - always non-zero to keep moving
+    t_control = np.linspace(0, n_steps - 1, n_points)
+    action_control = np.random.uniform(-0.12, 0.12, (n_traj, n_points))
+    
+    # Add slow sine wave to ensure trajectory never stops
+    base_action = 0.03 * np.sin(2 * np.pi * t_control / n_steps)
+    action_control = action_control + base_action
+    
+    f = interp1d(t_control, action_control, kind='cubic')
+    t = np.arange(n_steps)
+    actions = f(t)
+    
+    # Simulate cart dynamics
+    pos = np.zeros(n_traj)
+    vel = np.zeros(n_traj)
+    trajectory = np.zeros((n_traj, n_steps))
+    
+    for step in range(n_steps):
+      trajectory[:, step] = pos
+      
+      accel = actions[:, step] * self.force_mag
+      
+      # Soft boundary: steer back toward center near edges
+      for i in range(n_traj):
+        if pos[i] > safe_bound:
+          accel[i] = -abs(accel[i]) - vel[i] * 2
+        elif pos[i] < -safe_bound:
+          accel[i] = abs(accel[i]) - vel[i] * 2
+      
+      pos = pos + vel * self.tau + 0.5 * accel * self.tau**2
+      vel = vel + accel * self.tau
+    
+    return trajectory
 
   def reset(self, seed=None, options=None):
     super().reset(seed=seed)

@@ -1,3 +1,4 @@
+#deprecated use env_v1.py instead
 import pygame
 import numpy as np
 import gymnasium as gym
